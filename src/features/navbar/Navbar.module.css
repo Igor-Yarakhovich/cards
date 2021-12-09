@@ -5,12 +5,14 @@
     grid-area: nav;
     background-color: #819dff;
     border-radius: 25px;
+    min-height: 330px;
 }
-.item a{
+.item {
     color: white;
     text-decoration: none;
 }
 
-.item a.activeLink {
+.activeStyle{
     color: gold;
+    text-decoration: none;
 }
