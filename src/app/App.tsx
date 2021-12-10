@@ -3,6 +3,8 @@ import './App.css';
 import {Main} from "../features/main/Main";
 import {Navbar} from "../features/navbar/Navbar";
 
+//test
+
 const App = () => {
     return (
         <div className="App">
