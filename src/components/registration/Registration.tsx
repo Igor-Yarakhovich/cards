@@ -7,3 +7,4 @@ export const Registration: React.FC = () => {
         </div>
     )
 }
+//////test
