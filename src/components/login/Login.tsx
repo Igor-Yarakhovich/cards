@@ -2,13 +2,16 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {loginTC} from "./loginReducer";
+import {ErrorType, loginTC, RequestStatusType} from "./loginReducer";
 import {Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
+import {Preloader} from "./Preloader";
 
 export const Login: React.FC = () => {
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const status = useSelector<AppRootStateType, string>(state => state.login.status)
+    const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -20,7 +23,7 @@ export const Login: React.FC = () => {
             const errors: Partial<FormikErrorType> = {};
             if (!values.password) {
                 errors.password = 'Required';
-            } else if (values.password.length>15) {
+            } else if (values.password.length > 15) {
                 errors.password = 'Your password should be not longer then 15 characters';
             }
             if (!values.email) {
@@ -43,6 +46,7 @@ export const Login: React.FC = () => {
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
+            {error ? error : (status === 'loading') && <Preloader/>}
             <form onSubmit={formik.handleSubmit}>
                 <div>
                     <input type={"email"} placeholder={'email'}
@@ -61,7 +65,7 @@ export const Login: React.FC = () => {
                 </div>
                 <a href={'#/registration'}> passwordRecovery</a>
                 <div>
-                    <button type={'submit'}>login</button>
+                    <button type={'submit'} disabled={status === 'loading'}>login</button>
                 </div>
                 <a href={'#/passwordRecovery'}> Sign up</a>
             </form>
