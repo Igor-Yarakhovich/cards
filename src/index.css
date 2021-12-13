@@ -17,3 +17,49 @@ code {
   padding: 0;
   box-sizing: border-box;
 }
+
+
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: local('PoppinsMedium'), url(./fonts/Poppins/Poppins-Medium.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PoppinsSemiBold';
+  src: local('PoppinsSemiBold'), url(./fonts/Poppins/Poppins-SemiBold.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SFUIDisplayRegular';
+  src: local('SFUIDisplayRegular'), url(./fonts/SFUIDisplay/SFUIDisplay-Regular.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SFUIDisplayMedium';
+  src: local('SFUIDisplayMedium'), url(./fonts/SFUIDisplay/SFUIDisplay-Medium.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SFUIDisplayBold';
+  src: local('SFUIDisplayBold'), url(./fonts/SFUIDisplay/SFUIDisplay-Bold.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SFUIDisplaySemibold';
+  src: local('SFUIDisplaySemibold'), url(./fonts/SFUIDisplay/SFUIDisplay-Semibold.ttf) format('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LatoRegular';
+  src: local('LatoRegular'), url(./fonts/Lato/Lato-Regular.ttf) format('ttf');
+  font-display: swap;
+}
+
+
+
