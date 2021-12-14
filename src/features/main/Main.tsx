@@ -1,6 +1,6 @@
 import React from "react";
 import {Navigate, Route, Routes } from 'react-router-dom';
-import {PasswordNew} from "../../components/passwordNew/PasswordNew";
+import {SetPassword} from "../../components/setPassword/setPassword";
 import {Profile} from "../../components/profile/Profile";
 import {PasswordRecovery} from "../../components/passwordRecovery/PasswordRecovery";
 import {Registration} from "../../components/registration/Registration";
@@ -22,7 +22,7 @@ export const Main: React.FC = () => {
 
                 <Route path='/registration' element={<Registration/>}/>
                 <Route path='/passwordRecovery' element={<PasswordRecovery/>}/>
-                <Route path='/passwordNew' element={<PasswordNew/>}/>
+                <Route path='/setPassword' element={<SetPassword/>}/>
                 <Route path='/superComponents' element={<SuperComponents/>}/>
 
                 <Route path='404' element={<Page404/>}/>
