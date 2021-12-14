@@ -5,7 +5,7 @@ import {loginReducer} from "../components/login/loginReducer";
 import {registrationReducer} from "../components/registration/registrationReducer";
 import {profileReducer} from "../components/profile/profileReducer";
 import {page404Reducer} from "../components/page404/page404Reducer";
-import {passwordNewReducer} from "../components/passwordNew/passwordNewReducer";
+import {setPasswordReducer} from "../components/setPassword/setPasswordReducer";
 import {passwordRecoveryReducer} from "../components/passwordRecovery/passwordRecoveryReducer";
 
 const rootReducer = combineReducers({
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     page404: page404Reducer,
     passwordRecovery: passwordRecoveryReducer,
-    passwordNew: passwordNewReducer,
+    setPassword: setPasswordReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
