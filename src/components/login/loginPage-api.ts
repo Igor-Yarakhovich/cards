@@ -7,8 +7,8 @@ const instance = axios.create({
 
 // api
 export const authAPI = {
-    login(data: FormikErrorType) {
-        return instance.post <FormikErrorType, AxiosResponse<ResponseType>>('auth/login', data)
+    login(dat: FormikErrorType) {
+        return instance.post <FormikErrorType, AxiosResponse<ResponseType>>('auth/login', dat)
     }
 }
 export type FormikErrorType = {
@@ -17,7 +17,6 @@ export type FormikErrorType = {
     rememberMe: boolean
 }
 export type ResponseType = {
-
     _id: string;
     email: string;
     name: string;
