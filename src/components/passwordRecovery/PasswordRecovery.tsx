@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {passwordRecoveryError, recoveryPassword, recoveryStatusType} from "./passwordRecoveryReducer";
 import {Dispatch} from "redux";
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 export const PasswordRecovery: React.FC = () => {
@@ -31,11 +31,7 @@ export const PasswordRecovery: React.FC = () => {
     if (status === "succeeded") {
 
         dispatch(passwordRecoveryError(''))
-        return <Navigate to={{
-            pathname: '/setPassword',
-            state: {email: data.email}
-        }}
-        />
+        return <h2>Check your email and follow the link</h2>
     }
 
     // if (status === "loading") {
