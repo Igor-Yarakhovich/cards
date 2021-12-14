@@ -22,7 +22,7 @@ export const Main: React.FC = () => {
 
                 <Route path='/registration' element={<Registration/>}/>
                 <Route path='/passwordRecovery' element={<PasswordRecovery/>}/>
-                <Route path='/passwordNew' element={<SetPassword/>}/>
+                <Route path='/setPassword' element={<SetPassword/>}/>
                 <Route path='/superComponents' element={<SuperComponents/>}/>
 
                 <Route path='404' element={<Page404/>}/>
