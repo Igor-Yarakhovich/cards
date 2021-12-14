@@ -31,11 +31,7 @@ export const PasswordRecovery: React.FC = () => {
     if (status === "succeeded") {
 
         dispatch(passwordRecoveryError(''))
-        return <Navigate to={{
-            pathname: '/setPassword',
-            state: {email: data.email}
-        }}
-        />
+        return <h2>Check your email and follow the link</h2>
     }
 
     // if (status === "loading") {
