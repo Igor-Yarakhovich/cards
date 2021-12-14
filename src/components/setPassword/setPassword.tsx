@@ -43,7 +43,7 @@ export const SetPassword: React.FC = () => {
     return (
         <div>
             <h1> IT-incubator</h1>
-            <h2>Enter new password</h2>
+            <h2>Create new password</h2>
             <form onSubmit={handleSubmit}>
                 <SuperInputText
                     type="password"
