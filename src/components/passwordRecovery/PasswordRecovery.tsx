@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {passwordRecoveryError, recoveryPassword, recoveryStatusType} from "./passwordRecoveryReducer";
 import {Dispatch} from "redux";
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 export const PasswordRecovery: React.FC = () => {
