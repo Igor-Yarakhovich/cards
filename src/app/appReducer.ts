@@ -17,3 +17,5 @@ const setAppStatusAC = () => ({type: "APP/SET-STATUS"} as const)
 // types
 type InitialStateType = typeof initialState;
 export type AppActionType = ReturnType<typeof setAppStatusAC>
+
+export type StatusType = "idle" | "loading" | "succeeded" | "failed";
