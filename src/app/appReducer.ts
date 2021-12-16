@@ -13,7 +13,7 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
 const setAppStatusAC = () => ({type: "APP/SET-STATUS"} as const)
 
 // thunks
-
+//new thunk
 // types
 type InitialStateType = typeof initialState;
 export type AppActionType = ReturnType<typeof setAppStatusAC>
