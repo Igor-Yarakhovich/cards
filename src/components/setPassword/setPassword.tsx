@@ -31,6 +31,7 @@ export const SetPassword: React.FC = () => {
     };
 
     const {token} = useParams<string>();
+    console.log(token)
 
     if (status === "succeeded") {
         dispatch(setPasswordError(''))
