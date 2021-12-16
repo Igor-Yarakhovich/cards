@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+
+};
 
 export const appReducer = (state: InitialStateType = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {

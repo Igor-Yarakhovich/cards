@@ -13,7 +13,9 @@ export const PasswordRecovery: React.FC = () => {
         email: '',
         from: 'test-front-admin <ai73a@yandex.by>',
         message: `<div style="background-color: lime; padding: 15px;">
+
         <a href='https://igor-yarakhovich.github.io/cards/#/setPassword/$token$'>
+
         Password recover link
         </a></div>`
     });
