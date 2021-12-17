@@ -45,23 +45,36 @@ export const Registration: React.FC = () => {
     }
 
     return (
-        <div className={style.main}>
-            <div><h2>It-incubator</h2></div>
-            <div><h3>Sign-up</h3></div>
-            <div><input type="" placeholder={'Email'} value={email} onChange={onChangeEmailHandler}/></div>
-            <div><input type={hidePassword} placeholder={'Password'} value={password}
-                        onChange={onChangePasswordHandler}/>
-                <button onClick={onClickHidePasswordHandler}>глаз</button>
-            </div>
-            <div><input type={hideConfirmPassword} placeholder={'Confirm password'} value={confirmPassword}
-                        onChange={onChangeConfirmPasswordHandler}/>
-                <button onClick={onClickHideConfirmPasswordHandler}>глаз</button>
-            </div>
-            <div>
+        <div className={style.registration}>             
+            <div className={style.registrationWrapper}>
+                <h2 className={style.registrationTitle}>It-incubator</h2>
+                <h3 className={style.registrationSubTitle}>Sign Up</h3>
 
-                <button disabled={false}>Cancel</button>
-                <button disabled={false}>Register</button>
+                <form>
+                    <div className={style.registrationEmailWrap}>
+                        <label className={style.registrationLabel}>Email</label>
+                        <input className={style.registrationInput} type="" value={email} onChange={onChangeEmailHandler}/>
+                    </div>
+                    <div className={style.registrationPasswordWrap}>
+                        <label className={style.registrationLabel}>Password</label>
+                        <input className={style.registrationInput} type={hidePassword} placeholder={''} value={password} 
+                        onChange={onChangePasswordHandler}/>
+                        <button className={style.registrationPasswordControl} onClick={onClickHidePasswordHandler}></button>
+                    </div>
+                    <div className={style.registrationPasswordWrap}>
+                        <label className={style.registrationLabel}>Confirm password</label>
+                        <input className={style.registrationInput} type={hideConfirmPassword} placeholder={''} value={confirmPassword}
+                        onChange={onChangeConfirmPasswordHandler}/>
+                        <button className={style.registrationPasswordControl} onClick={onClickHideConfirmPasswordHandler}></button>
+                    </div>
+                </form>
+                
+                <div className={style.registrationBtnBox}>
+                    <button className={style.registrationBtnCancel} disabled={false}>Cancel</button>
+                    <button className={style.registrationBtnReg} disabled={false}>Register</button>
+                </div>
             </div>
+            <div className={style.registrationOverlay}></div>
         </div>
     )
 }
