@@ -1,3 +1,5 @@
 .App {
   display: flex;
+  background:linear-gradient( #E6D4DE 0%, #9890C7 100%);
+  min-height: 100vh;
 }
