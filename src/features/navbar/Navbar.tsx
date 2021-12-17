@@ -25,16 +25,6 @@ export const Navbar: React.FC = () => {
                      className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
             >PasswordRecovery</NavLink>
         </div>
-        <div>
-            <NavLink to='/superComponents'
-                     className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
-            >SuperComponents</NavLink>
-        </div>
-        <div>
-            <NavLink to='/404'
-                     className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
-            >Page404</NavLink>
-        </div>
     </nav>
 
 }
