@@ -49,7 +49,6 @@ export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>
     dispatch(setStatusAC('loading'))
     authAPI.login(dat)
         .then(res => {
-            debugger
             if (res.data) {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setStatusAC('succeeded'))
