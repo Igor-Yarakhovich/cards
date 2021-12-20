@@ -30,7 +30,7 @@ export const Profile: React.FC = () => {
     const logOutHandler = () => {
         dispatch(logOutTC())
     }
-    if (!initialised && isLoggedIn) {
+    if (!initialised) {
         return <Preloader/>
     }
 
@@ -38,18 +38,10 @@ export const Profile: React.FC = () => {
         return <Navigate to='/login'/>
     }
 
-    /*useEffect(()=>{
-        if(error){
-            setTimeout(()=>{
-                setAppErrorAC(null)
-            },500)
-        }
-    },[error])*/
-
     return (
         <div>
             <h1>Personal information</h1>
-            {error && initialised ? error : (status === 'loading') && <Preloader/>}
+            {error ? error : (status === 'loading') && <Preloader/>}
             <div> {photo ? photo : <img src={gomer}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>

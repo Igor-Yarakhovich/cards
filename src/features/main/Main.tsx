@@ -1,5 +1,5 @@
 import React from "react";
-import {Navigate, Route, Routes } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {SetPassword} from "../../components/setPassword/setPassword";
 import {Profile} from "../../components/profile/Profile";
 import {PasswordRecovery} from "../../components/passwordRecovery/PasswordRecovery";
@@ -8,6 +8,7 @@ import {Login} from "../../components/login/Login";
 import {SuperComponents} from "../../components/superComponents/SuperComponents";
 import {Page404} from "../../components/page404/Page404";
 import styles from './Main.module.css'
+import {Packs} from "../../components/packs/Packs";
 
 
 export const Main: React.FC = () => {
@@ -24,7 +25,7 @@ export const Main: React.FC = () => {
                 <Route path='/passwordRecovery' element={<PasswordRecovery/>}/>
                 <Route path='/setPassword/:token/*' element={<SetPassword/>}/>
                 <Route path='/superComponents' element={<SuperComponents/>}/>
-
+                <Route path='/packs' element={<Packs/>}/>
                 <Route path='404' element={<Page404/>}/>
                 <Route path='*' element={<Navigate to='/404'/>}/>
             </Routes>

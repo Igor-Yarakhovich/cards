@@ -44,6 +44,7 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
                 dispatch(setStatusAC('succeeded'))
                 dispatch(setDataAC(res.data))
                 dispatch(isInitialisedAC(true))
+                dispatch(setAppErrorAC(null))
             }
         })
         .catch(e => {
@@ -51,9 +52,11 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
+
         })
         .finally(() => {
                 dispatch(setStatusAC('idle'))
+
             }
         )
 }
@@ -92,7 +95,7 @@ export const logOutTC = () => (dispatch: Dispatch<ActionType>) => {
             dispatch(setAppErrorAC(error))
         })
         .finally(() => {
-                dispatch(setStatusAC('succeeded'))
+                dispatch(setStatusAC('idle'))
             }
         )
 }

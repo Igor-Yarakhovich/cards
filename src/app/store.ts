@@ -7,6 +7,7 @@ import {profileReducer} from "../components/profile/profileReducer";
 import {page404Reducer} from "../components/page404/page404Reducer";
 import {setPasswordReducer} from "../components/setPassword/setPasswordReducer";
 import {passwordRecoveryReducer} from "../components/passwordRecovery/passwordRecoveryReducer";
+import {packsReducer} from "../components/packs/packsReducer";
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     page404: page404Reducer,
     passwordRecovery: passwordRecoveryReducer,
     setPassword: setPasswordReducer,
+    packs:packsReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

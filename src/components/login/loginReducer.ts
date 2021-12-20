@@ -49,16 +49,18 @@ export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>
     dispatch(setStatusAC('loading'))
     authAPI.login(dat)
         .then(res => {
-            if (res.data) {
-                dispatch(setIsLoggedInAC(true))
-                dispatch(setStatusAC('succeeded'))
-                dispatch(setDataAC(res.data))
-            }
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setStatusAC('succeeded'))
+            dispatch(setDataAC(res.data))
         })
         .catch(e => {
             const error = e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
+        })
+        .finally(() => {
+            dispatch(setStatusAC('idle'))
+            dispatch(setAppErrorAC(null))
         })
 }

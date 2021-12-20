@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {ErrorType, loginTC} from "./loginReducer";
+import {ErrorType, loginTC, setAppErrorAC} from "./loginReducer";
 import {Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "./Preloader";
@@ -36,13 +36,21 @@ export const Login: React.FC = () => {
         onSubmit: values => {
             formik.resetForm();
             dispatch(loginTC(values))
+
         }
     })
 
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
-      return (
+    /*useEffect(()=>{
+        if(error){
+            setTimeout(()=>{
+                setAppErrorAC(null)
+            },500)
+        }
+    },[error])*/
+    return (
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
