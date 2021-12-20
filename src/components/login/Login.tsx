@@ -5,7 +5,7 @@ import {FormikErrorType} from "./loginPage-api";
 import {ErrorType, loginTC} from "./loginReducer";
 import {Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
-import {Preloader} from "./Preloader";
+import {Preloader} from "../../assets/Preloader/Preloader";
 
 export const Login: React.FC = () => {
 

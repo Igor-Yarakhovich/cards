@@ -3,8 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import gomer from "../login/gomer.jpg"
 import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
+
 import {Preloader} from "../login/Preloader";
 import {ErrorType, setAppErrorAC} from "../login/loginReducer";
+
 import {EditableSpan} from "./editableSpan";
 import {Navigate} from "react-router-dom";
 
