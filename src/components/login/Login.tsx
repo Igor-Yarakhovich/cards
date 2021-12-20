@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
 import {ErrorType, loginTC} from "./loginReducer";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
+import styles from "../../features/navbar/Navbar.module.css";
 
 export const Login: React.FC = () => {
 
@@ -63,11 +64,11 @@ export const Login: React.FC = () => {
                 <div>
                     <input type={'checkbox'}/> Remember me
                 </div>
-                <a href={'#/passwordRecovery'}> passwordRecovery</a>
+                <NavLink to='/passwordRecovery'>Forgot password</NavLink>
                 <div>
                     <button type={'submit'} disabled={status === 'loading'}>login</button>
                 </div>
-                <a href={'#/registration'}> Sign up</a>
+                <NavLink to='/registration'>Sign up</NavLink>
             </form>
         </div>
     )
