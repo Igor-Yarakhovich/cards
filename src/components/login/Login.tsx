@@ -6,7 +6,6 @@ import {ErrorType, loginTC} from "./loginReducer";
 import {Navigate, NavLink} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
-import styles from "../../features/navbar/Navbar.module.css";
 
 export const Login: React.FC = () => {
 

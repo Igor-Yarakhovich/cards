@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import gomer from "../login/gomer.jpg"
+import avatar from "../../assets/images/avatar.png"
 import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
@@ -22,7 +22,7 @@ export const Profile: React.FC = () => {
 
     useEffect(() => {
         dispatch(initialiseTC())
-    }, [])
+    }, [dispatch])
 
 
     const startValueHandler = useCallback((title: string) => {
@@ -52,7 +52,7 @@ export const Profile: React.FC = () => {
         <div>
             <h1>Personal information</h1>
             {error && initialised ? error : (status === 'loading') && <Preloader/>}
-            <div> {photo ? <img src={photo}/> : <img src={gomer}/>}</div>
+            <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
             <button onClick={logOutHandler}>LogOut</button>
