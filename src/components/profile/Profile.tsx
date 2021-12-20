@@ -1,8 +1,8 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
-import {logOutTC, newNameTC} from "./profileReducer";
+import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
 import {ErrorType} from "../login/loginReducer";
@@ -11,7 +11,13 @@ import {EditableSpan} from "./editableSpan";
 import {Login} from "../login/Login";
 
 export const Profile: React.FC = () => {
+
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(initialiseTC())
+    }, [dispatch])
+
     const email = useSelector<AppRootStateType, string>(state => state.profile.data.email)
     const photo = useSelector<AppRootStateType, string | undefined>(state => state.profile.data.avatar)
     const name = useSelector<AppRootStateType, string>(state => state.profile.data.name)

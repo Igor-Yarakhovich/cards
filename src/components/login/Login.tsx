@@ -3,15 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
 import {ErrorType, loginTC} from "./loginReducer";
-import {NavLink} from "react-router-dom";
+import {NavLink, Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
 
 export const Login: React.FC = () => {
 
-    // const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const status = useSelector<AppRootStateType, string>(state => state.login.status)
     const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -39,9 +39,9 @@ export const Login: React.FC = () => {
         }
     })
 
-    // if (isLoggedIn) {
-    //     return <Navigate to='/profile'/>
-    // }
+    if (isLoggedIn) {
+        return <Navigate to='/profile'/>
+    }
     return (
         <div>
             <h1> IT-incubator</h1>
