@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
-      return (
+    return (
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
