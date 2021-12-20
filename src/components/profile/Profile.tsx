@@ -5,10 +5,10 @@ import gomer from "../login/gomer.jpg"
 import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
-import {ErrorType, setAppErrorAC} from "../login/loginReducer";
+import {ErrorType} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
-import {Navigate} from "react-router-dom";
+import {Login} from "../login/Login";
 
 export const Profile: React.FC = () => {
     const dispatch = useDispatch()
@@ -37,7 +37,7 @@ export const Profile: React.FC = () => {
     }
 
     if (!isLoggedIn) {
-        return <Navigate to='/login'/>
+        return <Login/>
     }
 
     /*useEffect(()=>{
@@ -52,7 +52,7 @@ export const Profile: React.FC = () => {
         <div>
             <h1>Personal information</h1>
             {error && initialised ? error : (status === 'loading') && <Preloader/>}
-            <div> {photo ? photo : <img src={gomer}/>}</div>
+            <div> {photo ? <img src={photo}/> : <img src={gomer}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
             <button onClick={logOutHandler}>LogOut</button>
