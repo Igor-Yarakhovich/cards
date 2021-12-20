@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
-import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
+import {logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
 import {ErrorType} from "../login/loginReducer";

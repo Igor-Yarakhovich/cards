@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {authAPI, FormikErrorType} from "./loginPage-api";
 import {setDataAC, SetDataType} from "../profile/profileReducer";
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded'
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | "failed"
 
 const initialState = {
     isLoggedIn: false,
@@ -60,6 +60,7 @@ export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
+            dispatch(setStatusAC('failed'))
         })
 
 }
