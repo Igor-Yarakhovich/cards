@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import gomer from "../login/gomer.jpg"
-import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
+import avatar from "../../assets/images/avatar.png"
+import {logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
 import {ErrorType} from "../login/loginReducer";
@@ -19,11 +19,6 @@ export const Profile: React.FC = () => {
     const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const initialised = useSelector<AppRootStateType, boolean>(state => state.profile.initialised)
-
-    useEffect(() => {
-        dispatch(initialiseTC())
-    }, [])
-
 
     const startValueHandler = useCallback((title: string) => {
         dispatch(newNameTC(title))
@@ -52,7 +47,7 @@ export const Profile: React.FC = () => {
         <div>
             <h1>Personal information</h1>
             {error && initialised ? error : (status === 'loading') && <Preloader/>}
-            <div> {photo ? <img src={photo}/> : <img src={gomer}/>}</div>
+            <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
             <button onClick={logOutHandler}>LogOut</button>

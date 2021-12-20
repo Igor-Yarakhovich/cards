@@ -21,16 +21,21 @@ export const PasswordRecovery: React.FC = () => {
     });
 
     const status = useSelector<AppRootStateType, recoveryStatusType>(state => state.passwordRecovery.status)
-    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError);
+    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError)
 
     const dispatch = useDispatch();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         dispatch(recoveryPassword(data));
         e.preventDefault();
+        data.email = ''
     };
 
     const errorClass = error ? styles.error : ''
+
+    const setDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setData({...data, email: e.target.value})
+    }
 
     if (status === "succeeded") {
 
@@ -54,7 +59,7 @@ export const PasswordRecovery: React.FC = () => {
                     type="email"
                     id="email"
                     value={data.email}
-                    onChange={e => setData({...data, email: e.target.value})}
+                    onChange={setDataHandler}
                 />
                 <button
                     color='dark-blue'
