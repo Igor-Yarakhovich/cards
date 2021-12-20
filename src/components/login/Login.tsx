@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {ErrorType, loginTC, RequestStatusType} from "./loginReducer";
+import {ErrorType, loginTC} from "./loginReducer";
 import {Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
@@ -17,7 +17,7 @@ export const Login: React.FC = () => {
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
         },
         validate: (values) => {
             const errors: Partial<FormikErrorType> = {};
@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
-    return (
+      return (
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
@@ -63,11 +63,11 @@ export const Login: React.FC = () => {
                 <div>
                     <input type={'checkbox'}/> Remember me
                 </div>
-                <a href={'#/registration'}> passwordRecovery</a>
+                <a href={'#/passwordRecovery'}> passwordRecovery</a>
                 <div>
                     <button type={'submit'} disabled={status === 'loading'}>login</button>
                 </div>
-                <a href={'#/passwordRecovery'}> Sign up</a>
+                <a href={'#/registration'}> Sign up</a>
             </form>
         </div>
     )

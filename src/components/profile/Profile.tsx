@@ -3,8 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import gomer from "../login/gomer.jpg"
 import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
-import {Preloader} from "../../assets/Preloader/Preloader";
-import {ErrorType} from "../login/loginReducer";
+
+import {Preloader} from "../login/Preloader";
+import {ErrorType, setAppErrorAC} from "../login/loginReducer";
+
 import {EditableSpan} from "./editableSpan";
 import {Navigate} from "react-router-dom";
 
@@ -30,7 +32,7 @@ export const Profile: React.FC = () => {
     const logOutHandler = () => {
         dispatch(logOutTC())
     }
-    if (!initialised) {
+    if (!initialised && isLoggedIn) {
         return <Preloader/>
     }
 
@@ -38,10 +40,18 @@ export const Profile: React.FC = () => {
         return <Navigate to='/login'/>
     }
 
+    /*useEffect(()=>{
+        if(error){
+            setTimeout(()=>{
+                setAppErrorAC(null)
+            },500)
+        }
+    },[error])*/
+
     return (
         <div>
             <h1>Personal information</h1>
-            {error ? error : (status === 'loading') && <Preloader/>}
+            {error && initialised ? error : (status === 'loading') && <Preloader/>}
             <div> {photo ? photo : <img src={gomer}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
