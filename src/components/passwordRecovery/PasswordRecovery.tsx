@@ -21,7 +21,7 @@ export const PasswordRecovery: React.FC = () => {
     });
 
     const status = useSelector<AppRootStateType, recoveryStatusType>(state => state.passwordRecovery.status)
-    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError);
+    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError)
 
     const dispatch = useDispatch();
 
