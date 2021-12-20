@@ -20,11 +20,6 @@ export const Profile: React.FC = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const initialised = useSelector<AppRootStateType, boolean>(state => state.profile.initialised)
 
-    useEffect(() => {
-        dispatch(initialiseTC())
-    }, [dispatch])
-
-
     const startValueHandler = useCallback((title: string) => {
         dispatch(newNameTC(title))
     }, [dispatch])
