@@ -30,6 +30,8 @@ export const PasswordRecovery: React.FC = () => {
         e.preventDefault();
     };
 
+    const errorClass = error ? styles.error : ''
+
     if (status === "succeeded") {
 
         dispatch(passwordRecoveryError(''))
@@ -62,7 +64,7 @@ export const PasswordRecovery: React.FC = () => {
                 </button>
             </form>
             <p>Enter your email address and we will send you further instructions</p>
-            <div>{error}</div>
+            <div className={errorClass}>{error}</div>
             <NavLink to={'/login'}>Try logging in</NavLink>
         </div>
     )
