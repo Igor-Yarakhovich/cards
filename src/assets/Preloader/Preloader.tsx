@@ -1,5 +1,5 @@
 import React from "react";
-import spinner from "./Fidget-spinner.gif"
+import spinner from "./preloader.gif"
 
 export let Preloader = ( )=>{
 

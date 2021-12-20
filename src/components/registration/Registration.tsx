@@ -90,12 +90,13 @@ export const Registration = () => {
                         <input className={style.registrationInput} type={hideConfirmPassword} placeholder={''} value={confirmPassword}
                         onChange={onChangeConfirmPasswordHandler}/>
                         <button className={style.registrationPasswordControl} onClick={onClickHideConfirmPasswordHandler}></button>
+                        {error}
                     </div>
                 </form>
                 
                 <div className={style.registrationBtnBox}>
-                    <button className={style.registrationBtnCancel} disabled={false}>Cancel</button>
-                    <button className={style.registrationBtnReg} disabled={false}>Register</button>
+                    <button className={style.registrationBtnCancel} disabled={false} onClick={OnClickCancelHandler}>Cancel</button>
+                    <button className={style.registrationBtnReg} disabled={false} onClick={OnClickRegistrationHandler}>Register</button>
                 </div>
 
             </div>
