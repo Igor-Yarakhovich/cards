@@ -2,10 +2,10 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {ErrorType, loginTC, setAppErrorAC} from "./loginReducer";
-import {Navigate} from "react-router-dom";
+import {ErrorType, loginTC} from "./loginReducer";
+import {NavLink, Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
-import {Preloader} from "./Preloader";
+import {Preloader} from "../../assets/Preloader/Preloader";
 
 export const Login: React.FC = () => {
 
@@ -36,21 +36,13 @@ export const Login: React.FC = () => {
         onSubmit: values => {
             formik.resetForm();
             dispatch(loginTC(values))
-
         }
     })
 
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
-    /*useEffect(()=>{
-        if(error){
-            setTimeout(()=>{
-                setAppErrorAC(null)
-            },500)
-        }
-    },[error])*/
-    return (
+      return (
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
@@ -71,11 +63,11 @@ export const Login: React.FC = () => {
                 <div>
                     <input type={'checkbox'}/> Remember me
                 </div>
-                <a href={'#/passwordRecovery'}> passwordRecovery</a>
+                <NavLink to='/passwordRecovery'>Forgot password</NavLink>
                 <div>
                     <button type={'submit'} disabled={status === 'loading'}>login</button>
                 </div>
-                <a href={'#/registration'}> Sign up</a>
+                <NavLink to='/registration'>Sign up</NavLink>
             </form>
         </div>
     )
