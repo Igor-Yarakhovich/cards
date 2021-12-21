@@ -52,12 +52,15 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
         })
+        .finally(() => {
+                dispatch(setStatusAC('idle'))
+            }
+        )
 }
 export const newNameTC = (name: string) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))
     meAPI.setNewName(name)
         .then(res => {
-            debugger
             if (res.data) {
                 dispatch(setStatusAC('succeeded'))
                 dispatch(setNameAC(res.data.updatedUser.name))
@@ -69,6 +72,10 @@ export const newNameTC = (name: string) => (dispatch: Dispatch<ActionType>) => {
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
         })
+        .finally(() => {
+                dispatch(setStatusAC('idle'))
+            }
+        )
 }
 export const logOutTC = () => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))

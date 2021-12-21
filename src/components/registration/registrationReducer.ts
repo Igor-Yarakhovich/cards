@@ -1,3 +1,7 @@
+import {RegisterDataType, registrationAPI} from './registrationApi';
+import {Dispatch} from 'redux';
+
+
 type InitialStateType = typeof initialState;
 export type AppActionType =
     ReturnType<typeof setEmail>
@@ -7,12 +11,15 @@ export type AppActionType =
     | ReturnType<typeof setIsLoading>
     | ReturnType<typeof setHidePassword>
     | ReturnType<typeof setHideConfirmPassword>
+    | ReturnType<typeof setIsRegistration>
+
 const initialState = {
     email: '',
     password: '',
     confirmPassword: '',
     error: '',
     isLoading: false,
+    isRegistration: false,
     hidePassword: 'text',
     hideConfirmPassword: 'text'
 };
@@ -52,6 +59,11 @@ export const registrationReducer = (state: InitialStateType = initialState, acti
         case 'Registration/SET-HideConfirmPassword': {
             const copyState = {...state}
             copyState.hideConfirmPassword = action.payload.hideConfirmPassword
+            return copyState
+        }
+        case 'Registration/SET-Registration': {
+            const copyState = {...state}
+            copyState.isRegistration = action.payload.isRegistration
             return copyState
         }
         default:
@@ -102,3 +114,32 @@ export const setHideConfirmPassword = (hideConfirmPassword: string) => ({
         hideConfirmPassword
     }
 } as const)
+export const setIsRegistration = (isRegistration: boolean) => ({
+    type: 'Registration/SET-Registration',
+    payload: {
+        isRegistration
+    }
+} as const)
+
+export const getRegistration = (data: RegisterDataType) => async (dispatch: Dispatch) => {
+
+    try {
+
+        dispatch(setError(''))
+        dispatch(setIsLoading(true));
+        await registrationAPI.register(data)
+        dispatch(setIsLoading(false));
+        dispatch(setIsRegistration(true))
+        dispatch(setEmail(''))
+        dispatch(setPassword(''))
+        dispatch(setConfirmPassword(''))
+        dispatch(setIsRegistration(false))
+
+
+    } catch (e: any) {
+        dispatch(setIsLoading(false))
+        dispatch(setError(e.response?.data.error))
+        dispatch(setIsRegistration(false))
+
+    }
+}

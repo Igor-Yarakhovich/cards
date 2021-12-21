@@ -2,35 +2,41 @@ import React, {ChangeEvent} from 'react';
 import style from './Registration.module.css'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {
+    getRegistration,
     setConfirmPassword,
-    setEmail,
+    setEmail, setError,
     setHideConfirmPassword,
-    setHidePassword,
+    setHidePassword, setIsRegistration,
     setPassword
 } from './registrationReducer';
 import {AppRootStateType} from '../../app/store';
+import {useNavigate} from 'react-router-dom';
 
 
-export const Registration: React.FC = () => {
+export const Registration = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
     const {
         email,
         password,
         confirmPassword,
         hidePassword,
-        hideConfirmPassword
+        hideConfirmPassword, error, isLoading, isRegistration
     } = useAppSelector(state => state.registration)
 
 
     const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setEmail(e.currentTarget.value))
+        dispatch(setError(''))
     }
     const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setPassword(e.currentTarget.value))
+        dispatch(setError(''))
     }
     const onChangeConfirmPasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setConfirmPassword(e.currentTarget.value))
+        dispatch(setError(''))
     }
     const onClickHidePasswordHandler = () => {
         if (hidePassword === 'password')
@@ -43,7 +49,24 @@ export const Registration: React.FC = () => {
             dispatch(setHideConfirmPassword('text'))
         else dispatch(setHideConfirmPassword('password'))
     }
-
+    const OnClickCancelHandler = () => {
+        dispatch(setIsRegistration(false))
+        dispatch(setError(''))
+        dispatch(setEmail(''))
+        dispatch(setPassword(''))
+        dispatch(setConfirmPassword(''))
+        return navigate('/login')
+    }
+    const OnClickRegistrationHandler = () => {
+        if (email && password && password === confirmPassword) {
+            dispatch(getRegistration({email, password: confirmPassword}))
+        } else {
+            dispatch(setError('not valid email/password '))
+        }
+    }
+    if (isRegistration) {
+        navigate('/login')
+    }
     return (
         <div className={style.registration}>             
             <div className={style.registrationWrapper}>
@@ -59,6 +82,7 @@ export const Registration: React.FC = () => {
                         <label className={style.registrationLabel}>Password</label>
                         <input className={style.registrationInput} type={hidePassword} placeholder={''} value={password} 
                         onChange={onChangePasswordHandler}/>
+
                         <button className={style.registrationPasswordControl} onClick={onClickHidePasswordHandler}></button>
                     </div>
                     <div className={style.registrationPasswordWrap}>
@@ -73,9 +97,16 @@ export const Registration: React.FC = () => {
                     <button className={style.registrationBtnCancel} disabled={false}>Cancel</button>
                     <button className={style.registrationBtnReg} disabled={false}>Register</button>
                 </div>
+
             </div>
             <div className={style.registrationOverlay}></div>
         </div>
     )
 }
+
+
+
+
+
+
 

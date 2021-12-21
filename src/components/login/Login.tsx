@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from './Login.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {ErrorType, loginTC, RequestStatusType} from "./loginReducer";
+import {ErrorType, loginTC} from "./loginReducer";
 import {Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "./Preloader";
@@ -18,7 +18,7 @@ export const Login: React.FC = () => {
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
         },
         validate: (values) => {
             const errors: Partial<FormikErrorType> = {};
@@ -43,6 +43,7 @@ export const Login: React.FC = () => {
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
+
     return (
         <div className={s.login}>
             <div className={s.loginWrapper}>
@@ -70,23 +71,18 @@ export const Login: React.FC = () => {
                         <label>Remember me</label>
                         
                     </div> */}
-                    </form>
+                </form>
 
-                    <a className={s.loginLinkForgot} href="">Forgot Password</a>
-                    {/* <a href={'#/registration'}> passwordRecovery</a> */}
+                <a className={s.loginLinkForgot} href="">Forgot Password</a>
+                {/* <a href={'#/passwordRecovery'}> passwordRecovery</a> */}
 
-                    <div className={s.loginBottom}>
-                        <button className={s.loginBtn} type={'submit'} disabled={status === 'loading'}>Login</button>
-                    
-                        <p className={s.loginText}>Don’t have an account?</p>
-                        <a className={s.loginLinkSignUp} href={'#/passwordRecovery'}>Sign Up</a>
-                    </div>
-                    
-                    
-                    
+                <div className={s.loginBottom}>
+                    <button className={s.loginBtn} type={'submit'} disabled={status === 'loading'}>Login</button>
                 
+                    <p className={s.loginText}>Don’t have an account?</p>
+                    <a className={s.loginLinkSignUp} href={'#/registration'}>Sign Up</a>
+                </div>
             </div>
-            
         </div>
     )
 }
