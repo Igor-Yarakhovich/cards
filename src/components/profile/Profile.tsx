@@ -41,7 +41,7 @@ export const Profile: React.FC = () => {
     const logOutHandler = () => {
         dispatch(logOutTC())
     }
-    if (!initialised && isLoggedIn) {
+    if (!initialised ) {
         return <Preloader/>
     }
 

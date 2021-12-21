@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
@@ -10,9 +10,9 @@ import {Profile} from "../profile/Profile";
 
 export const Login: React.FC = () => {
 
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const status = useSelector<AppRootStateType, string>(state => state.login.status)
     const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -44,7 +44,7 @@ export const Login: React.FC = () => {
     if (isLoggedIn) {
         return <Profile/>
     }
-    return (
+      return (
         <div>
             <h1> IT-incubator</h1>
             <p>Sign in</p>
