@@ -1,4 +1,5 @@
 import React, {FormEvent, useState} from "react";
+import style from './PasswordRecovery.module.css';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 import SuperButton from "../superComponents/superButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -41,24 +42,34 @@ export const PasswordRecovery: React.FC = () => {
     // }
 
     return (
-        <div>
-            <h1> IT-incubator</h1>
-            <h2>Forgot your password?</h2>
+            <div className={style.passwordRecovery}>             
+            <div className={style.passwordRecoveryWrapper}>
+                <h2 className={style.passwordRecoveryTitle}>IT-incubator</h2>
+                <h3 className={style.passwordRecoverySubTitle}>Forgot your password?</h3>
             <form onSubmit={handleSubmit}>
                 <SuperInputText
+                    className={style.passwordRecoveryEmail}
                     type="email"
                     id="email"
+                    placeholder="Email"
                     value={data.email}
                     onChange={e => setData({...data, email: e.target.value})}/>
+                <p className={style.passwordRecoveryText}>Enter your email address and we will send you further instructions</p>
+                
+            </form>
+            <div className={style.passwordRecoveryBottom}>
                 <SuperButton
+                    className={style.passwordRecoveryButton}
                     color='dark-blue'
                     type={"submit"}>
-                    send
+                    Send Instructions
                 </SuperButton>
-            </form>
-            <p>Enter your email address and we will send you further instructions</p>
-            <div>{error}</div>
-            <NavLink to={'/login'}>Try logging in</NavLink>
+                <p className={style.passwordRecoveryTextButtom}>Did you remember your password?</p>
+                <div>{error}</div>
+                <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
+            </div>
+           
+        </div>
         </div>
     )
 
