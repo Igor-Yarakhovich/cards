@@ -3,7 +3,8 @@ import {recoveryAPI} from "../passwordRecovery/passwordRecovery-api";
 
 const initialState = {
     setPasswordError: '',
-    status: 'idle'
+    status: 'idle',
+    passwordValidate: ''
 } as setPasswordType;
 
 export const setPasswordReducer = (state: InitialStateType = initialState, action: AppActionType): setPasswordType => {
@@ -12,6 +13,8 @@ export const setPasswordReducer = (state: InitialStateType = initialState, actio
             return {...state, setPasswordError: action.value};
         case "SET-PASSWORD/SET-STATUS":
             return {...state, status: action.value};
+            case "SET-PASSWORD/PASSWORD_VALIDATE":
+            return {...state, passwordValidate: action.value};
         default:
             return state;
     }
@@ -20,12 +23,13 @@ export const setPasswordReducer = (state: InitialStateType = initialState, actio
 // actions
 export const setPasswordError = (value: string) => ({type: "SET-PASSWORD/SET-ERROR", value} as const)
 export const setStatus = (value: setStatusType) => ({type: "SET-PASSWORD/SET-STATUS", value} as const)
+export const setPasswordValidate = (value: string) => ({type: "SET-PASSWORD/PASSWORD_VALIDATE", value} as const)
 
 // thunks
 export const getPassword = (data: any) => async (dispatch: Dispatch) => {
     try {
         dispatch(setStatus("loading"));
-        let res = await recoveryAPI.setNewPassword(data);
+         await recoveryAPI.setNewPassword(data);
         dispatch(setStatus("succeeded"));
     } catch (e: any) {
         dispatch(setStatus("failed"));
@@ -39,11 +43,13 @@ export const getPassword = (data: any) => async (dispatch: Dispatch) => {
 export type setPasswordType = {
     setPasswordError: string
     status: setStatusType
+    passwordValidate: string
 };
 
 type InitialStateType = typeof initialState;
 
 export type AppActionType = ReturnType<typeof setPasswordError>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof setPasswordValidate>
 
 export type setStatusType = "idle" | "loading" | "succeeded" | "failed";

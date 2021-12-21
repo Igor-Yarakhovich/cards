@@ -1,11 +1,17 @@
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {passwordRecoveryError, recoveryPassword, recoveryStatusType} from "./passwordRecoveryReducer";
+import {
+    passwordRecoveryEmailValidate,
+    passwordRecoveryError,
+    recoveryPassword,
+    recoveryStatusType
+} from "./passwordRecoveryReducer";
 import {NavLink} from "react-router-dom";
 import email from './../../assets/images/email.png'
 import {Preloader} from "../../assets/Preloader/Preloader";
 import styles from './PasswordRecovery.module.css'
+import {SetPassword} from "../setPassword/setPassword";
 
 
 export const PasswordRecovery: React.FC = () => {
@@ -22,16 +28,46 @@ export const PasswordRecovery: React.FC = () => {
 
     const status = useSelector<AppRootStateType, recoveryStatusType>(state => state.passwordRecovery.status)
     const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError)
-
+    const emailValidate = useSelector<AppRootStateType, string>(state => state.passwordRecovery.emailValidate)
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                dispatch(passwordRecoveryError(''))
+            }, 4000)
+        }
+        if (emailValidate) {
+            setTimeout(() => {
+                dispatch(passwordRecoveryEmailValidate(''))
+            }, 4000)
+        }
+    }, [emailValidate, error, dispatch])
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        dispatch(recoveryPassword(data));
-        e.preventDefault();
-        data.email = ''
+        const isValidate = validateEmail()
+        if (isValidate) {
+            dispatch(recoveryPassword(data));
+            e.preventDefault();
+        } else {
+            setData({...data, email: ''})
+        }
     };
 
-    const errorClass = error ? styles.error : ''
+    const validateEmail = () => {
+        if (!data.email) {
+            dispatch(passwordRecoveryEmailValidate('Required email'))
+            return false
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+            dispatch(passwordRecoveryEmailValidate('Invalid email address'))
+            return false
+        } else {
+            dispatch(passwordRecoveryEmailValidate(''))
+            return true
+        }
+    }
+
+    const errorClass = error ? styles.error : '' || emailValidate ? styles.error : ''
 
     const setDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setData({...data, email: e.target.value})
@@ -56,7 +92,6 @@ export const PasswordRecovery: React.FC = () => {
             <h2>Forgot your password?</h2>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="email"
                     id="email"
                     value={data.email}
                     onChange={setDataHandler}
@@ -70,7 +105,10 @@ export const PasswordRecovery: React.FC = () => {
             </form>
             <p>Enter your email address and we will send you further instructions</p>
             <div className={errorClass}>{error}</div>
+            <div className={errorClass}>{emailValidate}</div>
+
             <NavLink to={'/login'}>Try logging in</NavLink>
+
         </div>
     )
 }

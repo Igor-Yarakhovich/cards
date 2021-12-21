@@ -6,6 +6,7 @@ import {ErrorType, loginTC} from "./loginReducer";
 import {NavLink, Navigate} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
+import {Profile} from "../profile/Profile";
 
 export const Login: React.FC = () => {
 
@@ -36,11 +37,12 @@ export const Login: React.FC = () => {
         onSubmit: values => {
             formik.resetForm();
             dispatch(loginTC(values))
+
         }
     })
 
     if (isLoggedIn) {
-        return <Navigate to='/profile'/>
+        return <Profile/>
     }
     return (
         <div>
