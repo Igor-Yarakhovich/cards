@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getPacksTC} from "./packsReducer";
 import {AppRootStateType} from "../../app/store";
 import {PacksResponseType} from "./packsPage-api";
-import {Preloader} from "../login/Preloader";
+
 import s from "./Packs.module.css"
 import {Navigate} from "react-router-dom";
+import {Preloader} from "../../assets/Preloader/Preloader";
 
 
 export const Packs = React.memo(() => {
