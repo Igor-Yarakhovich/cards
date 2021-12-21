@@ -1,34 +1,33 @@
-
-.registration{
+.login{
     background:#F9F9FE;
     border: 8px solid transparent;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-    padding: 5px;
     border-radius: 8px;
     width: 41%;
     max-width: 413px;
     position: fixed;
     left: 34%;
-    top: 12%;
-    display: flex;
+    top: 8%;
 }
 
-.registrationWrapper{
+.loginWrapper{
     max-width: 347px;
     margin: 0 auto;
-    z-index:2;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
-.registrationTitle{
+.loginTitle{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 26px;
     line-height: 39px;
-    margin: 13px 0 30px;
+    margin: 20px 0 30px;
     text-align: center;
 }
 
-.registrationSubTitle{
+.loginSubtitle{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 22px;
@@ -37,7 +36,7 @@
     text-align: center;
 }
 
-.registrationInput{
+.loginInput{
     border:none;
     border-bottom: 1.5px solid rgba(36, 37, 74, 0.2);
     cursor: pointer;
@@ -46,7 +45,12 @@
     background:#F9F9FE;
 }
 
-.registrationLabel{
+.loginInput:focus{
+    border:none;
+    border-bottom:1.5px solid rgba(36, 37, 74, 0.2);   
+}
+
+.loginLabel{
     margin-top: 24px;
     font-family: 'SFUIDisplayRegular', sans-serif;
     font-weight: 400;
@@ -54,21 +58,26 @@
     color:rgba(36, 37, 74, 0.5);
 }
 
-.registrationInput:focus{
-    border:none;
-    border-bottom:1.5px solid rgba(36, 37, 74, 0.2);   
+.loginCheckbox{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color:rgba(36, 37, 74, 0.5);
 }
 
-.registrationPasswordWrap{
+.loginEmailWrap{
+    margin-bottom: 19px;
+}
+.loginPasswordWrap{
+    margin-bottom: 48px;
     position: relative;
-    margin-top: 22px;
 }
 
-.registrationPasswordControl{
+.loginPasswordControl{
     border:none;
     cursor: pointer;
     position: absolute;
-	top: 16px;
+	top: 22px;
     right: 14px;
 	display: inline-block;
 	width: 24px;
@@ -76,36 +85,31 @@
 	background: url(./../../assets/images/eye.svg) 0 0 no-repeat;
 }
 
-.registrationPasswordControl:active {
+.loginPasswordControl:active {
 	background: url(./../../assets/images/no-view.svg) 0 0 no-repeat;
 }
 
-.registrationBtnBox{
-    margin: 84px 0 60px;
+.loginLinkForgot{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color:#2D2E46;
+    text-decoration: none;
+    margin-bottom: 92px;
+    display: block;
+    margin-left: 230px;
+}
+
+
+.loginBottom{
     display: flex;
+    flex-direction: column;
+    align-items:center;
 }
 
-.registrationBtnCancel{
-    width: 124px;
-    height: 36px;
-    background-color: #D7D8EF;
-    border:none;
-    border-radius:30px;
-    -webkit-border-radius:30px;
-    -moz-border-radius:30px;
-    -ms-border-radius:30px;
-    -o-border-radius:30px;
-    font-family: 'SFUIDisplayMedium', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color:#21268F;
-    text-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
-    margin-right: 36px;
-}
-
-.registrationBtnReg{
-    width: 187px;
+.loginBtn{
+    width: 266px;
     height: 36px;
     background-color: #21268F;
     border:none;
@@ -120,11 +124,28 @@
     -ms-border-radius:30px;
     -o-border-radius:30px;
     box-shadow: 0 4px 18px 0 rgba(33, 38, 143, 0.35);
+    margin-bottom: 34px;
+    text-transform: capitalize;
 }
 
-/* .registrationOverlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    z-index:1;
-} */
+.loginText{
+    font-family: 'SFUIDisplaySemibold', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color:rgba(36, 37, 74, 0.5);
+    margin-bottom: 11px;
+    text-align: center;
+}
+
+.loginLinkSignUp{
+    font-family: 'SFUIDisplaySemibold', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #21268F;
+    margin-bottom: 22px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: capitalize;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import s from './Login.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
@@ -43,32 +44,49 @@ export const Login: React.FC = () => {
         return <Navigate to='/profile'/>
     }
     return (
-        <div>
-            <h1> IT-incubator</h1>
-            <p>Sign in</p>
-            {error ? error : (status === 'loading') && <Preloader/>}
-            <form onSubmit={formik.handleSubmit}>
-                <div>
-                    <input type={"email"} placeholder={'email'}
-                           {...formik.getFieldProps('email')}/>
-                </div>
-                {formik.touched.email &&
-                formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
-                <div>
-                    <input type={"password"} placeholder={'password'}
-                           {...formik.getFieldProps('password')}/>
-                </div>
-                {formik.touched.password &&
-                formik.errors.password && <div style={{color: 'red'}}>{formik.errors.password}</div>}
-                <div>
-                    <input type={'checkbox'}/> Remember me
-                </div>
-                <a href={'#/registration'}> passwordRecovery</a>
-                <div>
-                    <button type={'submit'} disabled={status === 'loading'}>login</button>
-                </div>
-                <a href={'#/passwordRecovery'}> Sign up</a>
-            </form>
+        <div className={s.login}>
+            <div className={s.loginWrapper}>
+                <h2 className={s.loginTitle}>It-incubator</h2>
+                <h3 className={s.loginSubtitle}>Sign In</h3>
+                {error ? error : (status === 'loading') && <Preloader/>}
+                <form onSubmit={formik.handleSubmit}>
+                    <div className={s.loginEmailWrap}>
+                        <label className={s.loginLabel}>Email</label>
+                        <input className={s.loginInput} type={"email"} placeholder={''}
+                            {...formik.getFieldProps('email')}/>
+                    </div>
+                    {formik.touched.email &&
+                    formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                    <div className={s.loginPasswordWrap}>
+                        <label className={s.loginLabel}>Password</label>
+                        <input className={s.loginInput} type={"password"} placeholder={''}
+                            {...formik.getFieldProps('password')}/>
+                        <button className={s.loginPasswordControl}></button>
+                    </div>
+                    {formik.touched.password &&
+                    formik.errors.password && <div style={{color: 'red'}}>{formik.errors.password}</div>}
+                    {/* <div className={s.loginCheckbox}>
+                        <input type={'checkbox'}/>
+                        <label>Remember me</label>
+                        
+                    </div> */}
+                    </form>
+
+                    <a className={s.loginLinkForgot} href="">Forgot Password</a>
+                    {/* <a href={'#/registration'}> passwordRecovery</a> */}
+
+                    <div className={s.loginBottom}>
+                        <button className={s.loginBtn} type={'submit'} disabled={status === 'loading'}>Login</button>
+                    
+                        <p className={s.loginText}>Don’t have an account?</p>
+                        <a className={s.loginLinkSignUp} href={'#/passwordRecovery'}>Sign Up</a>
+                    </div>
+                    
+                    
+                    
+                
+            </div>
+            
         </div>
     )
 }
