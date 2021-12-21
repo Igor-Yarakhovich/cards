@@ -83,24 +83,25 @@ export const Registration = () => {
                         <input className={style.registrationInput} type={hidePassword} placeholder={''} value={password} 
                         onChange={onChangePasswordHandler}/>
 
-                        <button className={style.registrationPasswordControl} onClick={onClickHidePasswordHandler}></button>
+                        <button className={style.registrationPasswordControl} onClick={onClickHidePasswordHandler}> </button>
                     </div>
                     <div className={style.registrationPasswordWrap}>
                         <label className={style.registrationLabel}>Confirm password</label>
                         <input className={style.registrationInput} type={hideConfirmPassword} placeholder={''} value={confirmPassword}
                         onChange={onChangeConfirmPasswordHandler}/>
-                        <button className={style.registrationPasswordControl} onClick={onClickHideConfirmPasswordHandler}></button>
-                        {error}
+                        <button className={style.registrationPasswordControl} onClick={onClickHideConfirmPasswordHandler}> </button>
+                        <div style={{color: 'red'}}>{error}</div>
+                        {isLoading && <div>загрузка....</div>}
                     </div>
                 </form>
                 
                 <div className={style.registrationBtnBox}>
-                    <button className={style.registrationBtnCancel} disabled={false} onClick={OnClickCancelHandler}>Cancel</button>
-                    <button className={style.registrationBtnReg} disabled={false} onClick={OnClickRegistrationHandler}>Register</button>
+                    <button className={style.registrationBtnCancel} disabled={isLoading} onClick={OnClickCancelHandler}>Cancel</button>
+                    <button className={style.registrationBtnReg} disabled={isLoading} onClick={OnClickRegistrationHandler}>Register</button>
                 </div>
 
             </div>
-            <div className={style.registrationOverlay}></div>
+            <div className={style.registrationOverlay}> </div>
         </div>
     )
 }
