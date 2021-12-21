@@ -5,7 +5,7 @@ import avatar from "../../assets/images/avatar.png"
 import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
 
 import {Preloader} from "../../assets/Preloader/Preloader";
-import {ErrorType} from "../login/loginReducer";
+import {ErrorType, setAppErrorAC} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
 import {Login} from "../login/Login";
@@ -30,6 +30,14 @@ export const Profile: React.FC = () => {
         dispatch(newNameTC(title))
     }, [dispatch])
 
+    useEffect(()=>{
+        if(error){
+            setTimeout(()=>{
+                setAppErrorAC(null)
+            },4000)
+        }
+    },[error])
+
     const logOutHandler = () => {
         dispatch(logOutTC())
     }
@@ -41,18 +49,10 @@ export const Profile: React.FC = () => {
         return <Login/>
     }
 
-    /*useEffect(()=>{
-        if(error){
-            setTimeout(()=>{
-                setAppErrorAC(null)
-            },500)
-        }
-    },[error])*/
-
     return (
         <div>
             <h1>Personal information</h1>
-            {error && initialised ? error : (status === 'loading') && <Preloader/>}
+            {error && initialised ? error : (status === 'loading') }
             <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
