@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios'
+import axios from 'axios'
 
 const instance = axios.create({
     baseURL: 'https://neko-back.herokuapp.com/2.0/',
@@ -8,12 +8,12 @@ const instance = axios.create({
 // api
 
 export const packAPI = {
-    getPack() {
-        return instance.get<PacksResponseType>('cards/pack')
+    getPack(userId?: string) {
+        return instance.get<PacksResponseType>('cards/pack', {params: {user_id: (userId ? userId : '')}})
     },
 
-    createPack(newCard: CardsPackType) {
-        return instance.post<CardsPackType>('cards/pack',{newCard})
+    createPack() {
+        return instance.post<NewCardsPackType>('cards/pack', {cardsPack:{name:'4oKavoNaNa'}})
     }
 }
 
@@ -27,24 +27,27 @@ export type CardsPackType = {
     private?: boolean // если не отправить будет такой
     type?: string // если не отправить будет таким
 }
-
+export type NewCardsPackType ={
+    newCardsPack: PackUserType
+    token: string,
+    tokenDeathTime: number
+}
+export type PackUserType = {
+    _id: string
+    user_id: string
+    name: string
+    path: string // папка
+    cardsCount: number
+    grade: number // средняя оценка карточек
+    shots: number // количество попыток
+    rating: number // лайки
+    type: string // ещё будет "folder" (папка)
+    created: string
+    updated: string
+    __v: number
+}
 export type PacksResponseType = {
-    cardPacks: [
-        {
-            _id: string
-            user_id: string
-            name: string
-            path: string // папка
-            cardsCount: number
-            grade: number // средняя оценка карточек
-            shots: number // количество попыток
-            rating: number // лайки
-            type: string // ещё будет "folder" (папка)
-            created: string
-            updated: string
-            __v: number
-        },
-    ]
+    cardPacks: Array<PackUserType>,
     cardPacksTotalCount: number // количество колод
     maxCardsCount: number
     minCardsCount: number
