@@ -1,9 +1,7 @@
 .nav {
-    padding: 15px 25px;
     grid-area: nav;
     background-color: #EBE0E9;
-    min-height: 40px;
-    
+    min-height: 60px;
 }
 .container{
     max-width: 1220px;
@@ -26,15 +24,44 @@
 .navRight{
     display: flex;
 }
+
+.navTabs{
+    display: flex;
+}
+
+.navTabsItem{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.40px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.navTabsImg{
+    margin-right: 18px;
+    fill: rgba(45, 46, 70, 0.4);
+}
+
+.navTabsImg:active{
+    fill: #2D2E46;
+}
 .item {
-    color: #2D2E46;
+    color: rgba(45, 46, 70, 0.4);
     text-decoration: none;
     margin-right: 50px;
 }
 
 
 .activeStyle{
-    color: gold;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: #DCCCDB;
+    color: #2D2E46;
     text-decoration: none;
     margin-right: 50px;
+    border-bottom: 3px solid #21268F ;
+    height: 60px;
+    width: 173px;
 }
