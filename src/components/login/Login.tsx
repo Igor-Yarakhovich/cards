@@ -1,12 +1,15 @@
+
 import React, {useEffect} from "react";
 import s from './Login.module.css';
+
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
 import {ErrorType, loginTC} from "./loginReducer";
-import {Navigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
-import {Preloader} from "./Preloader";
+import {Preloader} from "../../assets/Preloader/Preloader";
+import {Profile} from "../profile/Profile";
 
 export const Login: React.FC = () => {
 
@@ -37,11 +40,12 @@ export const Login: React.FC = () => {
         onSubmit: values => {
             formik.resetForm();
             dispatch(loginTC(values))
+
         }
     })
 
     if (isLoggedIn) {
-        return <Navigate to='/profile'/>
+        return <Profile/>
     }
 
     return (

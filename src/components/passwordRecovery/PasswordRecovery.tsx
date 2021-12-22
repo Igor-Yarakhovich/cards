@@ -1,12 +1,22 @@
+
 import React, {FormEvent, useState} from "react";
 import style from './PasswordRecovery.module.css';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 import SuperButton from "../superComponents/superButton/SuperButton";
+
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {passwordRecoveryError, recoveryPassword, recoveryStatusType} from "./passwordRecoveryReducer";
-import {Dispatch} from "redux";
+import {
+    passwordRecoveryEmailValidate,
+    passwordRecoveryError,
+    recoveryPassword,
+    recoveryStatusType
+} from "./passwordRecoveryReducer";
 import {NavLink} from "react-router-dom";
+import email from './../../assets/images/email.png'
+import {Preloader} from "../../assets/Preloader/Preloader";
+import styles from './PasswordRecovery.module.css'
+import {SetPassword} from "../setPassword/setPassword";
 
 
 export const PasswordRecovery: React.FC = () => {
@@ -22,24 +32,64 @@ export const PasswordRecovery: React.FC = () => {
     });
 
     const status = useSelector<AppRootStateType, recoveryStatusType>(state => state.passwordRecovery.status)
-    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError);
+    const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError)
+    const emailValidate = useSelector<AppRootStateType, string>(state => state.passwordRecovery.emailValidate)
+    const dispatch = useDispatch();
 
-    const dispatch: Dispatch<any> = useDispatch();
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                dispatch(passwordRecoveryError(''))
+            }, 4000)
+        }
+        if (emailValidate) {
+            setTimeout(() => {
+                dispatch(passwordRecoveryEmailValidate(''))
+            }, 4000)
+        }
+    }, [emailValidate, error, dispatch])
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        dispatch(recoveryPassword(data));
-        e.preventDefault();
+        const isValidate = validateEmail()
+        if (isValidate) {
+            dispatch(recoveryPassword(data));
+            e.preventDefault();
+        } else {
+            setData({...data, email: ''})
+        }
     };
+
+    const validateEmail = () => {
+        if (!data.email) {
+            dispatch(passwordRecoveryEmailValidate('Required email'))
+            return false
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+            dispatch(passwordRecoveryEmailValidate('Invalid email address'))
+            return false
+        } else {
+            dispatch(passwordRecoveryEmailValidate(''))
+            return true
+        }
+    }
+
+    const errorClass = error ? styles.error : '' || emailValidate ? styles.error : ''
+
+    const setDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setData({...data, email: e.target.value})
+    }
 
     if (status === "succeeded") {
 
         dispatch(passwordRecoveryError(''))
-        return <h2>Check your email and follow the link</h2>
+        return <div className={styles.email}>
+            <h2>Check your email and follow the link</h2>
+            <img alt='' className={styles.emailPhoto} src={email}/>
+        </div>
     }
 
-    // if (status === "loading") {
-    //     return <Preloader/>
-    // }
+    if (status === "loading") {
+        return <Preloader/>
+    }
 
     return (
             <div className={style.passwordRecovery}>             
@@ -50,6 +100,7 @@ export const PasswordRecovery: React.FC = () => {
                 <SuperInputText
                     className={style.passwordRecoveryEmail}
                     type="email"
+
                     id="email"
                     placeholder="Email"
                     value={data.email}
@@ -70,7 +121,7 @@ export const PasswordRecovery: React.FC = () => {
             </div>
            
         </div>
+
         </div>
     )
-
 }

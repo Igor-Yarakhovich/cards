@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 export const Navbar: React.FC = () => {
 
     return <nav className={styles.nav}>
+
                 <div className={styles.container}>
                     <div className={styles.navWrapper}>
 
@@ -37,5 +38,6 @@ export const Navbar: React.FC = () => {
                     </div>
                 </div>
             </nav>
+
 
 }
