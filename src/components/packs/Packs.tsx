@@ -15,14 +15,17 @@ export const Packs = React.memo(() => {
 
     const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getPacksTC())
     }, [dispatch])
+
     const addCardsPacKHandler = useCallback(() => {
         dispatch(getPacksTC())
-
     }, [dispatch])
+
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
     }
@@ -34,6 +37,7 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
+
         <input type="checkbox" //checked={setUserId}
                onChange={addCardsPacKHandler}/> My packs
         <div className={s.header}>
@@ -64,7 +68,9 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
+
         <TablePagination/>
+
     </div>
 })
 

@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {CardsPackType, packAPI, PacksResponseType} from "./packsPage-api";
+import {packAPI, PacksResponseType} from "./packsPage-api";
 import {setStatusAC, SetStatusType} from "../login/loginReducer";
 
 

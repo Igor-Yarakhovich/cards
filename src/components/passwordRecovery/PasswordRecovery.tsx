@@ -1,4 +1,9 @@
-import React, {FormEvent, useEffect, useState} from "react";
+
+import React, {FormEvent, useState, useEffect} from "react";
+import style from './PasswordRecovery.module.css';
+import SuperInputText from "../superComponents/superInputText/SuperInputText";
+import SuperButton from "../superComponents/superButton/SuperButton";
+
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {
@@ -87,27 +92,35 @@ export const PasswordRecovery: React.FC = () => {
     }
 
     return (
-        <div>
-            <h1> IT-incubator</h1>
-            <h2>Forgot your password?</h2>
+            <div className={style.passwordRecovery}>             
+            <div className={style.passwordRecoveryWrapper}>
+                <h2 className={style.passwordRecoveryTitle}>IT-incubator</h2>
+                <h3 className={style.passwordRecoverySubTitle}>Forgot your password?</h3>
             <form onSubmit={handleSubmit}>
-                <input
-                    id="email"
-                    value={data.email}
-                    onChange={setDataHandler}
-                />
-                <button
-                    color='dark-blue'
-                    type={"submit"}
-                >
-                    send
-                </button>
-            </form>
-            <p>Enter your email address and we will send you further instructions</p>
-            <div className={errorClass}>{error}</div>
-            <div className={errorClass}>{emailValidate}</div>
+                <SuperInputText
+                    className={style.passwordRecoveryEmail}
+                    type="email"
 
-            <NavLink to={'/login'}>Try logging in</NavLink>
+                    id="email"
+                    placeholder="Email"
+                    value={data.email}
+                    onChange={setDataHandler}/>
+                <p className={style.passwordRecoveryText}>Enter your email address and we will send you further instructions</p>
+                
+            </form>
+            <div className={style.passwordRecoveryBottom}>
+                <SuperButton
+                    className={style.passwordRecoveryButton}
+                    color='dark-blue'
+                    type={"submit"}>
+                    Send Instructions
+                </SuperButton>
+                <p className={style.passwordRecoveryTextButton}>Did you remember your password?</p>
+                <div>{error}</div>
+                <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
+            </div>
+           
+        </div>
 
         </div>
     )
