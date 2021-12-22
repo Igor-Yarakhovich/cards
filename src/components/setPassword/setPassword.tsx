@@ -1,15 +1,17 @@
 
-import React, {FormEvent, useState} from "react";
-import style from './SetPassword.module.css';
+import React, {FormEvent, useState, useEffect} from "react";
+import style from './setPassword.module.css';
 
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {StatusType} from "../../app/appReducer";
 import {getPassword, setPasswordError, setPasswordValidate} from "./setPasswordReducer";
 import {Navigate, useParams} from "react-router-dom";
-import styles from "../setPassword/setPassword.module.css";
+import styles from "./setPassword.module.css";
+import SuperInputText from "../superComponents/superInputText/SuperInputText";
+import SuperButton from "../superComponents/superButton/SuperButton";
 
-type UseStateType = {
+type UseStateType ={
     password: string,
     resetPasswordToken: string | undefined
 }

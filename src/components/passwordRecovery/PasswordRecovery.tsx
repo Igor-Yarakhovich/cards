@@ -1,5 +1,5 @@
 
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useState, useEffect} from "react";
 import style from './PasswordRecovery.module.css';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 import SuperButton from "../superComponents/superButton/SuperButton";
@@ -104,7 +104,7 @@ export const PasswordRecovery: React.FC = () => {
                     id="email"
                     placeholder="Email"
                     value={data.email}
-                    onChange={e => setData({...data, email: e.target.value})}/>
+                    onChange={setDataHandler}/>
                 <p className={style.passwordRecoveryText}>Enter your email address and we will send you further instructions</p>
                 
             </form>
@@ -115,7 +115,7 @@ export const PasswordRecovery: React.FC = () => {
                     type={"submit"}>
                     Send Instructions
                 </SuperButton>
-                <p className={style.passwordRecoveryTextButtom}>Did you remember your password?</p>
+                <p className={style.passwordRecoveryTextButton}>Did you remember your password?</p>
                 <div>{error}</div>
                 <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
             </div>
