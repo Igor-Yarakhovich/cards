@@ -23,6 +23,9 @@ export const Packs = React.memo(() => {
         dispatch(getMyPacksTC(''))
     }, [dispatch])
 
+    const addCardsPacKHandler = useCallback(() => {
+        dispatch(getPacksTC())
+
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? "" : userId))
@@ -35,7 +38,7 @@ export const Packs = React.memo(() => {
 
 
     if (!isLoggedIn) {
-        return <Login/>
+        return <Navigate to='/login'/>
     }
 
     if (!data) {
@@ -44,9 +47,6 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
-
-
-        return <div>
         <input type="checkbox" checked={myUserId}
                onChange={addMyPacksHandler}/> My packs
 
@@ -61,6 +61,19 @@ export const Packs = React.memo(() => {
 
             </div>
         </div>
+    return <div className={s.main}>
+        <SearchProduct/>
+        <input type="checkbox" //checked={setUserId}
+               onChange={addCardsPacKHandler}/> My packs
+        <div className={s.header}>
+            <div>name</div>
+            <div>cardsCount</div>
+            <div>created</div>
+            <div>updated</div>
+            <div>
+                <button onClick={addCardsPacKHandler}>add</button>
+            </div>
+        </div>
 
         <div className={s.table}>
             {
@@ -70,7 +83,6 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].cardsCount}</div>
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
-
                         <div>
                             <button>del</button>
                             <button>update</button>
@@ -81,8 +93,7 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
-
-    </div>
+        <TablePagination/>
     </div>
 })
 

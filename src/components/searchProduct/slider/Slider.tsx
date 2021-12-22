@@ -21,7 +21,6 @@ export default function RangeSlider() {
 
             <Box sx={{ width: 196, paddingLeft:3, paddingRight:3}}>
                 <Slider
-
                 getAriaLabel={() => 'Temperature range'}
                 value={value}
                 onChange={handleChange}
