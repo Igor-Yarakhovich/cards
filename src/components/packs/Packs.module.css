@@ -1,4 +1,9 @@
 
+.main{
+      width: 1280px;
+}
+
+
 .header {
     border: 1px solid red;
     width: 100%;
@@ -10,11 +15,11 @@
 }
 
 .table {
-    border: 1px solid green;
 
+    border: 1px solid green;
     display: flex;
     flex-flow: row;
-    align-items: center;
+    align-items: inherit;
     justify-content: space-between;
     flex-direction: column;
 
