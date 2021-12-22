@@ -1,4 +1,5 @@
 import React, {FormEvent, useState} from "react";
+import style from './SetPassword.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {StatusType} from "../../app/appReducer";
@@ -42,25 +43,34 @@ export const SetPassword: React.FC = () => {
     }
 
     return (
-        <div>
-            <h1> IT-incubator</h1>
-            <h2>Create new password</h2>
-            <form onSubmit={handleSubmit}>
-                <SuperInputText
-                    type="password"
-                    id="password"
-                    value={data.password}
-                    onChange={e => setData({resetPasswordToken: token, password: e.target.value})}
-                />
-                <SuperButton
-                    color='dark-blue'
-                    type={"submit"}>
-                    send
-                </SuperButton>
-                <p>Create new password and we will send you further instructions to email</p>
+        <div className={style.setPassword}>            
+            <div className={style.setPasswordWrapper}>
+                <h2 className={style.setPasswordTitle}> IT-incubator</h2>
+                <h3 className={style.setPasswordSubTitle}>Create new password</h3>
+                <form onSubmit={handleSubmit}>
+                    
+                    <SuperInputText
+                        className={style.passwordRecoveryPassword}
+                        placeholder="Password"
+                        type="password"
+                        id="password"
+                        value={data.password}
+                        onChange={e => setData({resetPasswordToken: token, password: e.target.value})}
+                    />
+                     
+                    <p className={style.setPasswordText}>Create new password and we will send you further instructions to email</p>
+
+                    <SuperButton
+                        className={style.setPasswordBtn}
+                        color='dark-blue'
+                        type={"submit"}>
+                        Create new password
+                    </SuperButton>
+                
                 <div>{error}</div>
 
             </form>
+        </div>
         </div>
     )
 }
