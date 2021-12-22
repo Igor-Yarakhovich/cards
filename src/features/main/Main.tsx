@@ -28,6 +28,7 @@ export const Main: React.FC = () => {
                 <Route path='/packs' element={<Packs/>}/>
                 <Route path='404' element={<Page404/>}/>
                 <Route path='*' element={<Navigate to='/404'/>}/>
+
             </Routes>
         </div>
     )

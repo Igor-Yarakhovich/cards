@@ -1,82 +1,114 @@
-
-.passwordRecovery{
+.login{
     background:#F9F9FE;
     border: 8px solid transparent;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-    padding: 5px;
     border-radius: 8px;
-
     width: 41%;
     max-width: 413px;
     position: fixed;
     left: 34%;
-    top: 12%;
-    display: flex;
+    top: 8%;
 }
 
-.passwordRecoveryWrapper{
+.loginWrapper{
     max-width: 347px;
     margin: 0 auto;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
-.passwordRecoveryTitle{
+.loginTitle{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 26px;
     line-height: 39px;
-    margin: 13px 0 30px;
+    margin: 20px 0 30px;
     text-align: center;
 }
 
-.passwordRecoverySubTitle{
+.loginSubtitle{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 22px;
     line-height: 33px;
-    margin-bottom: 57px;
+    margin-bottom: 35px;
     text-align: center;
 }
 
-
-.passwordRecoveryEmail{
+.loginInput{
     border:none;
     border-bottom: 1.5px solid rgba(36, 37, 74, 0.2);
     cursor: pointer;
     height: 26px;
     width: 100%;
     background:#F9F9FE;
-    margin: 0 0 32px 0;
 }
 
-
-.passwordRecoveryEmail:focus{
+.loginInput:focus{
     border:none;
     border-bottom:1.5px solid rgba(36, 37, 74, 0.2);   
 }
 
-.passwordRecoveryEmail::placeholder{
+.loginLabel{
     margin-top: 24px;
-    font-family: 'SFUIDisplayMedium', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color:rgba(36, 37, 74, 0.5);
-}
-.passwordRecoveryText{
     font-family: 'SFUIDisplayRegular', sans-serif;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 13px;
     color:rgba(36, 37, 74, 0.5);
-    margin-bottom: 80px;
 }
 
-.passwordRecoveryBottom{
+.loginCheckbox{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color:rgba(36, 37, 74, 0.5);
+}
+
+.loginEmailWrap{
+    margin-bottom: 19px;
+}
+.loginPasswordWrap{
+    margin-bottom: 48px;
+    position: relative;
+}
+
+.loginPasswordControl{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+	top: 22px;
+    right: 14px;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background: url(./../../assets/images/eye.svg) 0 0 no-repeat;
+}
+
+.loginPasswordControl:active {
+	background: url(./../../assets/images/no-view.svg) 0 0 no-repeat;
+}
+
+.loginLinkForgot{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color:#2D2E46;
+    text-decoration: none;
+    margin-bottom: 92px;
+    display: block;
+    margin-left: 230px;
+}
+
+
+.loginBottom{
     display: flex;
     flex-direction: column;
     align-items:center;
 }
-.passwordRecoveryButton{
+
+.loginBtn{
     width: 266px;
     height: 36px;
     background-color: #21268F;
@@ -92,18 +124,21 @@
     -ms-border-radius:30px;
     -o-border-radius:30px;
     box-shadow: 0 4px 18px 0 rgba(33, 38, 143, 0.35);
-    margin-bottom: 30px;
+    margin-bottom: 34px;
+    text-transform: capitalize;
 }
-.passwordRecoveryTextButtom{
-    font-family: 'SFUIDisplayRegular', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
+
+.loginText{
+    font-family: 'SFUIDisplaySemibold', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
     line-height: 24px;
     color:rgba(36, 37, 74, 0.5);
     margin-bottom: 11px;
     text-align: center;
 }
-.passwordRecoveryLink{
+
+.loginLinkSignUp{
     font-family: 'SFUIDisplaySemibold', sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -111,7 +146,6 @@
     color: #21268F;
     margin-bottom: 22px;
     text-decoration: none;
-    display: block;
+    text-align: center;
     text-transform: capitalize;
-    margin-bottom: 18px;
 }

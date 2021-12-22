@@ -1,4 +1,6 @@
 .registration{
+    background:#F9F9FE;
+
     border: 8px solid transparent;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
     padding: 5px;
@@ -7,8 +9,8 @@
     width: 41%;
     max-width: 413px;
     position: fixed;
-    left: 43%;
-    top: 15%;
+    left: 34%;
+    top: 12%;
     display: flex;
 }
 
@@ -75,8 +77,8 @@
 	background: url(./../../assets/images/eye.svg) 0 0 no-repeat;
 }
 
-.registrationPasswordControl {
-	background: url(./../../assets/images/eye.svg) 0 0 no-repeat;
+.registrationPasswordControl:active {
+	background: url(./../../assets/images/no-view.svg) 0 0 no-repeat;
 }
 
 .registrationBtnBox{
@@ -127,4 +129,3 @@
     height:100%;
     z-index:1;
 } */
-

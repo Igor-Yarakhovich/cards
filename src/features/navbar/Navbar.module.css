@@ -1,18 +1,40 @@
 .nav {
     padding: 15px 25px;
-    margin-top: 7px;
-    margin-right: 7px;
     grid-area: nav;
-    background-color: #819dff;
-    border-radius: 25px;
-    min-height: 330px;
+    background-color: #EBE0E9;
+    min-height: 40px;
+    
+}
+.container{
+    max-width: 1220px;
+    margin: 0 auto;
+}
+
+.navWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navLogo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color:#2D2E46;
+}
+.navRight{
+    display: flex;
 }
 .item {
-    color: white;
+    color: #2D2E46;
     text-decoration: none;
+    margin-right: 50px;
 }
+
 
 .activeStyle{
     color: gold;
     text-decoration: none;
+    margin-right: 50px;
 }
