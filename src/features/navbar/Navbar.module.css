@@ -1,18 +1,67 @@
 .nav {
-    padding: 15px 25px;
-    margin-top: 7px;
-    margin-right: 7px;
     grid-area: nav;
-    background-color: #819dff;
-    border-radius: 25px;
-    min-height: 330px;
+    background-color: #EBE0E9;
+    min-height: 60px;
 }
-.item {
-    color: white;
-    text-decoration: none;
+.container{
+    max-width: 1220px;
+    margin: 0 auto;
 }
 
-.activeStyle{
-    color: gold;
+.navWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navLogo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color:#2D2E46;
+}
+.navRight{
+    display: flex;
+}
+
+.navTabs{
+    display: flex;
+}
+
+.navTabsItem{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.40px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.navTabsImg{
+    margin-right: 18px;
+    fill: rgba(45, 46, 70, 0.4);
+}
+
+.navTabsImg:active{
+    fill: #2D2E46;
+}
+.item {
+    color: rgba(45, 46, 70, 0.4);
     text-decoration: none;
+    margin-right: 50px;
+}
+
+
+.activeStyle{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: #DCCCDB;
+    color: #2D2E46;
+    text-decoration: none;
+    margin-right: 50px;
+    border-bottom: 3px solid #21268F ;
+    height: 60px;
+    width: 173px;
 }

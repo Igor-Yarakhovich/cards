@@ -12,6 +12,7 @@ export const packAPI = {
         return instance.get<PacksResponseType>('cards/pack', {params: {user_id: (userId ? userId : '')}})
     },
 
+
     createPack() {
         return instance.post<NewCardsPackType>('cards/pack', {cardsPack:{name:'4oKavoNaNa'}})
     }
