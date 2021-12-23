@@ -8,7 +8,6 @@ import {Preloader} from "../../assets/Preloader/Preloader";
 import {ErrorType, setAppErrorAC} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
-import {Login} from "../login/Login";
 import {Navigate} from "react-router-dom";
 
 export const Profile: React.FC = () => {
@@ -31,13 +30,13 @@ export const Profile: React.FC = () => {
         dispatch(newNameTC(title))
     }, [dispatch])
 
-    useEffect(()=>{
-        if(error){
-            setTimeout(()=>{
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
                 setAppErrorAC(null)
-            },4000)
+            }, 4000)
         }
-    },[error])
+    }, [error])
 
     const logOutHandler = () => {
         dispatch(logOutTC())
@@ -47,14 +46,14 @@ export const Profile: React.FC = () => {
         return <Navigate to='/login'/>
     }
 
-    if (!initialised ) {
+    if (!initialised) {
         return <Preloader/>
     }
 
     return (
         <div>
             <h1>Personal information</h1>
-            {error && initialised ? error : (status === 'loading') }
+            {error && initialised ? error : (status === 'loading')}
             <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
             <div>email: {email}  </div>
             <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
