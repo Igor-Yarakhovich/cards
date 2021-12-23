@@ -8,6 +8,7 @@ import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "./Packs.module.css"
 import {Navigate} from "react-router-dom";
+import SearchProduct from "../searchProduct/SearchProduct";
 
 
 
@@ -85,6 +86,7 @@ export const Packs = React.memo(() => {
             }
         </div>
 
+    </div>
     </div>
 })
 
