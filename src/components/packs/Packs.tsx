@@ -1,13 +1,12 @@
-import React from "react";
-import {ChangeEvent, useCallback, useEffect, useState} from "react";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addPacksTC, getMyPacksTC, setPackUserIdAC} from "./packsReducer";
 import {AppRootStateType} from "../../app/store";
 import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "./Packs.module.css"
-import {Navigate} from "react-router-dom";
 import SearchProduct from "../searchProduct/SearchProduct";
+import {Login} from "../login/Login";
 
 
 export const Packs = React.memo(() => {
@@ -20,11 +19,9 @@ export const Packs = React.memo(() => {
 
     const [myUserId, setMyUserId] = useState(false)
 
-
     useEffect(() => {
         dispatch(getMyPacksTC(''))
     }, [dispatch])
-
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
@@ -38,13 +35,12 @@ export const Packs = React.memo(() => {
 
 
     if (!isLoggedIn) {
-        return <Navigate to="/login"/>
+        return <Login/>
     }
 
     if (!data) {
         return <Preloader/>
     }
-
 
     return <div className={s.main}>
         <SearchProduct/>

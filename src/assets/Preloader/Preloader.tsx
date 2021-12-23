@@ -5,6 +5,5 @@ export let Preloader = ( )=>{
 
     return <div>
         <img src={spinner}/>
-
     </div>
 }

@@ -8,7 +8,7 @@ import {Preloader} from "../../assets/Preloader/Preloader";
 import {ErrorType, setAppErrorAC} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
-import {Navigate} from "react-router-dom";
+import {Login} from "../login/Login";
 
 export const Profile: React.FC = () => {
 
@@ -41,9 +41,10 @@ export const Profile: React.FC = () => {
     const logOutHandler = () => {
         dispatch(logOutTC())
     }
+    console.log('initialised: ', initialised )
 
     if (!isLoggedIn) {
-        return <Navigate to='/login'/>
+        return <Login/>
     }
 
     if (!initialised) {
