@@ -1,4 +1,3 @@
-
 import React from "react";
 import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,7 +7,7 @@ import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "./Packs.module.css"
 import {Navigate} from "react-router-dom";
-
+import SearchProduct from "../searchProduct/SearchProduct";
 
 
 export const Packs = React.memo(() => {
@@ -19,7 +18,7 @@ export const Packs = React.memo(() => {
 
     const dispatch = useDispatch();
 
-    const [myUserId, setMyUserId]= useState(false)
+    const [myUserId, setMyUserId] = useState(false)
 
 
     useEffect(() => {
@@ -31,11 +30,11 @@ export const Packs = React.memo(() => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? "" : userId))
         dispatch(setPackUserIdAC(myUserId ? "" : userId));
-    }, [dispatch, setMyUserId, myUserId, userId ])
+    }, [dispatch, setMyUserId, myUserId, userId])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
-    }, [dispatch ])
+    }, [dispatch])
 
 
     if (!isLoggedIn) {
@@ -51,9 +50,9 @@ export const Packs = React.memo(() => {
         <SearchProduct/>
 
 
-    return <div>
+        return <div>
         <input type="checkbox" checked={myUserId}
-               onChange={addMyPacksHandler} /> My packs
+               onChange={addMyPacksHandler}/> My packs
 
         <div className={s.header}>
             <div>name</div>
@@ -76,8 +75,10 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
 
-                        <div> <button >del</button>
-                            <button >update</button></div>
+                        <div>
+                            <button>del</button>
+                            <button>update</button>
+                        </div>
 
                     </div>
 
@@ -85,6 +86,7 @@ export const Packs = React.memo(() => {
             }
         </div>
 
+    </div>
     </div>
 })
 
