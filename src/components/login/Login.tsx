@@ -77,7 +77,7 @@ export const Login: React.FC = () => {
                     </div> */}
                 </form>
 
-                <a className={s.loginLinkForgot} href="">Forgot Password</a>
+                <a className={s.loginLinkForgot} href={'#/passwordRecovery'}>Forgot Password</a>
                 {/* <a href={'#/passwordRecovery'}> passwordRecovery</a> */}
 
                 <div className={s.loginBottom}>
