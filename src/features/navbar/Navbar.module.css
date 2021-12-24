@@ -23,6 +23,7 @@
 }
 .navRight{
     display: flex;
+    /* display: none;      после авторизации блок должен стать невидимым*/
 }
 
 .navTabs{
