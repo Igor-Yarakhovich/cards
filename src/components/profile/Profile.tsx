@@ -13,6 +13,8 @@ import {Login} from "../login/Login";
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
+import { Style } from "@mui/icons-material";
+// import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
 
@@ -79,17 +81,33 @@ export const Profile: React.FC = () => {
 
                         </div>
                     </div>
-                    <div className={style.profileRightBox}></div>
+                    <div className={style.profileRightBox}>
+                        <h2>My packs list</h2>
+                        <form action="">
+                            <input type="search" name="" id="" />
+                        </form>
+                        Таблица
+                    Pagination
+                    </div>
                 </div>
 
             </div>
            
                 <section className={style.profilePersonal}>
                     <h2 className={style.profilePersonalTitle}>Personal information</h2>
+
                     {error && initialised ? error : (status === 'loading')}
+                    
                     <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
-                    <div>email: {email}  </div>
+
+
                     <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
+                    <div>email: {email}  </div>
+
+                    <div className={style.profileBtnBox}>
+                        <button className={style.profileBtnCancel}>Cancel</button>
+                        <button className={style.profileBtnSave}>Save</button>
+                    </div>
                     <button onClick={logOutHandler}>LogOut</button>
                 </section>
                 
