@@ -6,7 +6,8 @@ import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "./Packs.module.css"
 import SearchProduct from "../searchProduct/SearchProduct";
-import {Login} from "../login/Login";
+import TablePaginationDemo from "../pagination/Pagination";
+import {Navigate} from 'react-router-dom'
 
 
 export const Packs = React.memo(() => {
@@ -24,8 +25,8 @@ export const Packs = React.memo(() => {
     }, [dispatch])
 
     const addCardsPacKHandler = useCallback(() => {
-        dispatch(getPacksTC())
-
+        dispatch(getMyPacksTC(''))
+    }, [])
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? "" : userId))
@@ -47,23 +48,7 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
-        <input type="checkbox" checked={myUserId}
-               onChange={addMyPacksHandler}/> My packs
-
-        <div className={s.header}>
-            <div>name</div>
-            <div>cardsCount</div>
-            <div>created</div>
-            <div>updated</div>
-            <div>
-
-                <button onClick={addNewPackHandler}>add</button>
-
-            </div>
-        </div>
-    return <div className={s.main}>
-        <SearchProduct/>
-        <input type="checkbox" //checked={setUserId}
+        <input type="checkbox"
                onChange={addCardsPacKHandler}/> My packs
         <div className={s.header}>
             <div>name</div>
@@ -93,7 +78,8 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
-        <TablePagination/>
+        <TablePaginationDemo/>
     </div>
 })
+
 
