@@ -53,14 +53,14 @@ export const Login: React.FC = () => {
                     <div className={s.loginEmailWrap}>
                         <label className={s.loginLabel}>Email</label>
                         <input className={s.loginInput} type={"email"} placeholder={''}
-                               {...formik.getFieldProps('email')}/>
+                        {...formik.getFieldProps('email')}/>
                     </div>
                     {formik.touched.email &&
                     formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     <div className={s.loginPasswordWrap}>
                         <label className={s.loginLabel}>Password</label>
                         <input className={s.loginInput} type={"password"} placeholder={''}
-                               {...formik.getFieldProps('password')}/>
+                        {...formik.getFieldProps('password')}/>
                         <button className={s.loginPasswordControl}></button>
 
                     </div>

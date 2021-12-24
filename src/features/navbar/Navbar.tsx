@@ -15,27 +15,26 @@ export const Navbar: React.FC = () => {
                         <div>
                             <h2 className={styles.navLogo}>It-incubator</h2>
                         </div>
+
                         <div className={styles.navTabs}>
-                           
                             <div className={styles.navTabsItem}>
-                                <img className={styles.navTabsImg} src={img1} alt="" />
                                 <NavLink
                                     to='/packs'
-                                    className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
-                                >Packs list</NavLink>
+                                    className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}>
+                                        <img className={styles.navTabsImg} src={img1} alt="" />
+                                        Packs list
+                                </NavLink>
                             </div>
                            <div className={styles.navTabsItem}>
-                                <img className={styles.navTabsImg} src={img2} alt="" />
                                 <NavLink
-                                        to='/profile'
-                                        className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
-                                    >Profile</NavLink>
+                                    to='/profile'
+                                    className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}>
+                                        <img className={styles.navTabsImg} src={img2} alt="" />
+                                        Profile
+                                </NavLink>
                            </div>
-                           
-                            
-
-
                         </div>
+                        
                         <div className={styles.navRight}>
                             
                             <div className={styles.navTabsItem}>
