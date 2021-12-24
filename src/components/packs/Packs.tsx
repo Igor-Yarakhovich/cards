@@ -1,52 +1,64 @@
-import React, {useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getPacksTC} from './packsReducer';
-import {AppRootStateType} from '../../app/store';
-import {PacksResponseType} from './packsPage-api';
-
-import s from './Packs.module.css'
-import {Navigate} from 'react-router-dom';
-import {Preloader} from '../../assets/Preloader/Preloader';
-import TablePagination from '../pagination/Pagination';
-import SearchProduct from '../searchProduct/SearchProduct';
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addPacksTC, getMyPacksTC, setPackUserIdAC} from "./packsReducer";
+import {AppRootStateType} from "../../app/store";
+import {PacksResponseType} from "./packsPage-api";
+import {Preloader} from "../../assets/Preloader/Preloader";
+import s from "./Packs.module.css"
+import SearchProduct from "../searchProduct/SearchProduct";
+import {Login} from "../login/Login";
 
 
 export const Packs = React.memo(() => {
 
     const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
+    const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
     const dispatch = useDispatch();
 
+    const [myUserId, setMyUserId] = useState(false)
+
     useEffect(() => {
-        dispatch(getPacksTC())
+        dispatch(getMyPacksTC(''))
     }, [dispatch])
 
-    const addCardsPacKHandler = useCallback(() => {
-        dispatch(getPacksTC())
+    const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setMyUserId(e.currentTarget.checked)
+        dispatch(getMyPacksTC(myUserId ? "" : userId))
+        dispatch(setPackUserIdAC(myUserId ? "" : userId));
+    }, [dispatch, setMyUserId, myUserId, userId])
+
+    const addNewPackHandler = useCallback(() => {
+        dispatch(addPacksTC())
     }, [dispatch])
+
 
     if (!isLoggedIn) {
-        return <Navigate to="/login"/>
+        return <Login/>
     }
 
     if (!data) {
         return <Preloader/>
     }
 
-
     return <div className={s.main}>
         <SearchProduct/>
 
-        <input type="checkbox" //checked={setUserId}
-               onChange={addCardsPacKHandler}/> My packs
+
+        return <div>
+        <input type="checkbox" checked={myUserId}
+               onChange={addMyPacksHandler}/> My packs
+
         <div className={s.header}>
             <div>name</div>
             <div>cardsCount</div>
             <div>created</div>
             <div>updated</div>
             <div>
-                <button onClick={addCardsPacKHandler}>add</button>
+
+                <button onClick={addNewPackHandler}>add</button>
+
             </div>
         </div>
 
@@ -58,6 +70,7 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].cardsCount}</div>
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
+
                         <div>
                             <button>del</button>
                             <button>update</button>
@@ -69,8 +82,7 @@ export const Packs = React.memo(() => {
             }
         </div>
 
-        <TablePagination/>
-
+    </div>
     </div>
 })
 
