@@ -6,7 +6,8 @@ import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "./Packs.module.css"
 import SearchProduct from "../searchProduct/SearchProduct";
-import {Login} from "../login/Login";
+import TablePaginationDemo from "../pagination/Pagination";
+import {Navigate} from 'react-router-dom'
 
 
 export const Packs = React.memo(() => {
@@ -23,6 +24,9 @@ export const Packs = React.memo(() => {
         dispatch(getMyPacksTC(''))
     }, [dispatch])
 
+    const addCardsPacKHandler = useCallback(() => {
+        dispatch(getMyPacksTC(''))
+    }, [])
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? "" : userId))
@@ -35,7 +39,7 @@ export const Packs = React.memo(() => {
 
 
     if (!isLoggedIn) {
-        return <Login/>
+        return <Navigate to='/login'/>
     }
 
     if (!data) {
@@ -44,21 +48,15 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
-
-
-        return <div>
-        <input type="checkbox" checked={myUserId}
-               onChange={addMyPacksHandler}/> My packs
-
+        <input type="checkbox"
+               onChange={addCardsPacKHandler}/> My packs
         <div className={s.header}>
             <div>name</div>
             <div>cardsCount</div>
             <div>created</div>
             <div>updated</div>
             <div>
-
-                <button onClick={addNewPackHandler}>add</button>
-
+                <button onClick={addCardsPacKHandler}>add</button>
             </div>
         </div>
 
@@ -70,7 +68,6 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].cardsCount}</div>
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
-
                         <div>
                             <button>del</button>
                             <button>update</button>
@@ -81,8 +78,8 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
-
-    </div>
+        <TablePaginationDemo/>
     </div>
 })
+
 
