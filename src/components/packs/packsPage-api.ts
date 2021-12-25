@@ -1,10 +1,4 @@
-import axios from 'axios'
-
-const instance = axios.create({
-    // baseURL: 'https://neko-back.herokuapp.com/2.0/',
-    baseURL: 'http://localhost:7542/2.0/',
-    withCredentials: true,
-})
+import {instance} from "../../app/instance";
 
 // api
 
@@ -13,9 +7,9 @@ export const packAPI = {
         return instance.get<PacksResponseType>('cards/pack', {params: {userId}})
     },
     createPack() {
-        return instance.post<NewCardsPackType>('cards/pack', {cardsPack:{name:'4oKavoNaNa'}})
+        return instance.post<NewCardsPackType>('cards/pack', {cardsPack: {name: '4oKavoNaNa'}})
     },
-    deletePack(packId: string){
+    deletePack(packId: string) {
         return instance.delete<PacksResponseType>('cards/pack', {params: {id: packId}})
     }
 }
@@ -30,7 +24,7 @@ export type CardsPackType = {
     private?: boolean // если не отправить будет такой
     type?: string // если не отправить будет таким
 }
-export type NewCardsPackType ={
+export type NewCardsPackType = {
     newCardsPack: PackUserType
     token: string,
     tokenDeathTime: number

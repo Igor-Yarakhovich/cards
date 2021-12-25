@@ -1,10 +1,6 @@
-import axios, {AxiosResponse} from 'axios'
+import {AxiosResponse} from 'axios'
+import {instance} from "../../app/instance";
 
-const instance = axios.create({
-    // baseURL: 'https://neko-back.herokuapp.com/2.0/',
-    baseURL: 'http://localhost:7542/2.0/',
-    withCredentials: true,
-})
 
 // api
 export const meAPI = {
