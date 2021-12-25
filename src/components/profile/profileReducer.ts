@@ -83,9 +83,7 @@ export const logOutTC = () => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))
     meAPI.logOut()
         .then(res => {
-            if (res.data) {
                 dispatch(setIsLoggedInAC(false))
-            }
         })
         .catch(e => {
             const error = e.response

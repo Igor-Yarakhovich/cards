@@ -17,10 +17,10 @@ export const Navbar: React.FC = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
     const loginHandler = isLoggedIn
-        ? <NavLink to=''
+        ? <span
                    onClick={logOutHandler}
-                   className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
-        >LogOut</NavLink>
+                   className={styles.item}
+        >LogOut</span>
         : <NavLink to='/login'
                    className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
         >Login</NavLink>

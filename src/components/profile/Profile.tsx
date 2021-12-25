@@ -13,6 +13,7 @@ import {Login} from "../login/Login";
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
+import {Navigate} from "react-router-dom";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
@@ -44,14 +45,8 @@ export const Profile: React.FC = () => {
     }, [error])
 
 
-    console.log('initialised: ', initialised)
-
     if (!isLoggedIn) {
-        return <Login/>
-    }
-
-    if (!initialised) {
-        return <Preloader/>
+        return <Navigate to='/login'/>
     }
 
     return (
@@ -91,22 +86,22 @@ export const Profile: React.FC = () => {
 
             </div>
 
-            {/*<section className={style.profilePersonal}>*/}
-            {/*    <h2 className={style.profilePersonalTitle}>Personal information</h2>*/}
+            <section className={style.profilePersonal}>
+                <h2 className={style.profilePersonalTitle}>Personal information</h2>
 
-            {/*    {error && initialised ? error : (status === 'loading')}*/}
+                {error && initialised ? error : (status === 'loading')}
 
-            {/*    <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>*/}
+                <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
 
 
-            {/*    <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>*/}
-            {/*    <div>email: {email}  </div>*/}
+                <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
+                <div>email: {email}  </div>
 
-            {/*    <div className={style.profileBtnBox}>*/}
-            {/*        <button className={style.profileBtnCancel}>Cancel</button>*/}
-            {/*        <button className={style.profileBtnSave}>Save</button>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
+                <div className={style.profileBtnBox}>
+                    <button className={style.profileBtnCancel}>Cancel</button>
+                    <button className={style.profileBtnSave}>Save</button>
+                </div>
+            </section>
 
 
         </section>
