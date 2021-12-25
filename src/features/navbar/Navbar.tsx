@@ -4,8 +4,14 @@ import {NavLink} from "react-router-dom";
 
 import img1 from '../../assets/images/packsList.svg';
 import img2 from '../../assets/images/profileIcon.svg';
+import {logOutTC} from "../../components/profile/profileReducer";
+import {useDispatch} from "react-redux";
 
 export const Navbar: React.FC = () => {
+    const dispatch = useDispatch()
+    const logOutHandler = () => {
+        dispatch(logOutTC())
+    }
 
     return <nav className={styles.nav}>
 
@@ -51,6 +57,11 @@ export const Navbar: React.FC = () => {
                                 <NavLink to='/passwordRecovery'
                                         className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
                                 >PasswordRecovery</NavLink>
+                            </div>
+                            <div className={styles.navTabsItem} >
+                                <button onClick={logOutHandler}>
+                                LogOut
+                                </button>
                             </div>
                         </div>
                     </div>
