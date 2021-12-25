@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
-import {authAPI, FormikErrorType, ResponseType} from "./loginPage-api";
+import {authAPI, FormikErrorType} from "./loginPage-api";
 import {isInitialisedAC, setDataAC, SetDataType, SetInitialisedType} from "../profile/profileReducer";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded'
 
 const initialState = {
+    hidePassword: 'text',
     isLoggedIn: false,
     status: 'idle',
     error: null as ErrorType,
@@ -23,6 +24,11 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             return {...state, isLoggedIn: action.value}
         case 'APP/SET-ERROR':
             return {...state, error: action.error}
+        case 'APP/SET-HidePassword': {
+            const copyState = {...state}
+            copyState.hidePassword = action.payload.hidePassword
+            return copyState
+        }
         default:
             return state;
     }
@@ -38,12 +44,20 @@ export const setStatusAC = (status: RequestStatusType) =>
     ({type: 'login/SET-STATUS', status} as const)
 export const setAppErrorAC = (error: string | null) =>
     ({type: 'APP/SET-ERROR', error} as const)
+export const setHidePasswordAC = (hidePassword: string) => ({
+    type: 'APP/SET-HidePassword',
+    payload: {
+        hidePassword
+    }
+} as const)
+
 // types
 export type SetIsLoggedInType = ReturnType<typeof setIsLoggedInAC>
 export type SetStatusType = ReturnType<typeof setStatusAC>
 /*export type SetDataType = ReturnType<typeof setDataAC>*/
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export type ActionType = SetDataType | SetIsLoggedInType | SetStatusType | SetAppErrorActionType | SetInitialisedType
+export type SetHidePasswordActionType = ReturnType<typeof setHidePasswordAC>
+export type ActionType = SetDataType | SetIsLoggedInType | SetStatusType | SetAppErrorActionType | SetInitialisedType|SetHidePasswordActionType
 // thunks
 export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))
