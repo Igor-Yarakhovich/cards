@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
@@ -13,6 +13,8 @@ import {Login} from "../login/Login";
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
+import {Navigate} from "react-router-dom";
+import Modal from "../../assets/modal/Modal";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
@@ -31,6 +33,8 @@ export const Profile: React.FC = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const initialised = useSelector<AppRootStateType, boolean>(state => state.profile.initialised)
 
+    const [show, setShow] = useState(false);
+
     const startValueHandler = useCallback((title: string) => {
         dispatch(newNameTC(title))
     }, [dispatch])
@@ -44,15 +48,10 @@ export const Profile: React.FC = () => {
     }, [error])
 
 
-    console.log('initialised: ', initialised)
-
     if (!isLoggedIn) {
-        return <Login/>
+        return <Navigate to='/login'/>
     }
 
-    if (!initialised) {
-        return <Preloader/>
-    }
 
     return (
         <section className={style.profile}>
@@ -69,14 +68,14 @@ export const Profile: React.FC = () => {
                             <SuperButton
                                 className={style.profilePersonalBtn}
                                 color='white'
-                                type={"submit"}>
+                                type={"submit"}
+                                onClick={() => setShow(true)}
+                            >
                                 Edit profile
                             </SuperButton>
                         </div>
                         <div className={style.profileLeftBottom}>
-
                             <Slider/>
-
                         </div>
                     </div>
                     <div className={style.profileRightBox}>
@@ -108,6 +107,36 @@ export const Profile: React.FC = () => {
             {/*    </div>*/}
             {/*</section>*/}
 
+            <>
+                <Modal
+                    enableBackground={true}
+                    backgroundOnClick={() => setShow(false)}
+
+                    width={300}
+                    height={200}
+                    modalOnClick={() => setShow(false)}
+
+                    show={show}
+                >
+                    <section className={style.profilePersonal}>
+                        <h2 className={style.profilePersonalTitle}>Personal information</h2>
+
+                        {error && initialised ? error : (status === 'loading')}
+
+                        <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
+
+
+                        <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
+                        <div>email: {email}  </div>
+
+                        <div className={style.profileBtnBox}>
+                            <button className={style.profileBtnCancel}>Cancel</button>
+                            <button className={style.profileBtnSave}>Save</button>
+                        </div>
+                    </section>
+                    <button onClick={() => setShow(false)}>Close</button>
+                </Modal>
+            </>
 
         </section>
     )
