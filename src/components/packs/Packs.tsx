@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addPacksTC, getMyPacksTC, setPackUserIdAC} from "./packsReducer";
+import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from "./packsReducer";
 import {AppRootStateType} from "../../app/store";
 import {PacksResponseType} from "./packsPage-api";
 import {Preloader} from "../../assets/Preloader/Preloader";
@@ -22,13 +22,15 @@ export const Packs = React.memo(() => {
 
     const [myUserId, setMyUserId] = useState(false)
 
+
     useEffect(() => {
         dispatch(getMyPacksTC(''))
     }, [dispatch])
 
-    const addCardsPacKHandler = useCallback(() => {
-        dispatch(getMyPacksTC(''))
-    }, [])
+    // const addCardsPacKHandler = useCallback(() => {
+    //     dispatch(getMyPacksTC(''))
+    // }, [dispatch])
+
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? "" : userId))
@@ -39,6 +41,11 @@ export const Packs = React.memo(() => {
         dispatch(addPacksTC())
     }, [dispatch])
 
+    const deleteMyPackHandler = useCallback(() => {
+        if (data) {
+            dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
+        }
+    }, [dispatch, data])
 
     if (!isLoggedIn) {
         return <Navigate to='/login'/>
@@ -51,14 +58,16 @@ export const Packs = React.memo(() => {
     return <div className={s.main}>
         <SearchProduct/>
         <input type="checkbox"
-               onChange={addCardsPacKHandler}/> My packs
+               onChange={addMyPacksHandler}/> My packs
         <div className={s.header}>
             <div className={s.sortBlock}>name <span className={s.sort}><SortButton/></span></div>
             <div className={s.sortBlock} >cardsCount <span className={s.sort}><SortButton/></span></div>
             <div className={s.sortBlock} >created <span className={s.sort}><SortButton/></span></div>
             <div className={s.sortBlock} >updated <span className={s.sort}><SortButton/></span></div>
             <div>
-                <button onClick={addCardsPacKHandler} >add</button>
+
+                <button onClick={addNewPackHandler}>add</button>
+
             </div>
         </div>
 
@@ -72,8 +81,8 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].updated}</div>
                         <div>
 
-                            <button>del</button>
-                            <button  >update</button>
+                            <button onClick={deleteMyPackHandler}>del</button>
+                            <button>update</button>
 
                         </div>
 

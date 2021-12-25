@@ -7,7 +7,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded'
 const initialState = {
     hidePassword: 'text',
     isLoggedIn: false,
-    status: 'idle',
+    status: 'loading' as RequestStatusType,
     error: null as ErrorType,
     /*data: {} as ResponseType*/
 };

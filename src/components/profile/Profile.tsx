@@ -20,9 +20,9 @@ export const Profile: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(initialiseTC())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(initialiseTC())
+    // }, [dispatch])
 
     const email = useSelector<AppRootStateType, string>(state => state.profile.data.email)
     const photo = useSelector<AppRootStateType, string | undefined>(state => state.profile.data.avatar)
