@@ -43,7 +43,6 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setStatusAC('succeeded'))
                 dispatch(setDataAC(res.data))
-                dispatch(isInitialisedAC(true))
                 dispatch(setAppErrorAC(null))
             }
         })
@@ -56,6 +55,7 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
         })
         .finally(() => {
                 dispatch(setStatusAC('idle'))
+                dispatch(isInitialisedAC(true))
             }
         )
 }

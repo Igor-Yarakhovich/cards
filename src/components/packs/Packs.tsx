@@ -43,11 +43,11 @@ export const Packs = React.memo(() => {
         if (data) {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
         }
-    }, [dispatch])
-    console.log(data)
-    // if (!isLoggedIn) {
-    //     return <Navigate to='/login'/>
-    // }
+    }, [dispatch, data])
+
+    if (!isLoggedIn) {
+        return <Navigate to='/login'/>
+    }
 
     if (!data) {
         return <Preloader/>

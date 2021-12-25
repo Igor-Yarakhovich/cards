@@ -79,15 +79,13 @@ export const addPacksTC = (): ThunkAction<void, AppRootStateType, unknown, Actio
         })
 }
 
-export const deleteMyPacksTC = (packId: string) => (dispatch: Dispatch) => {
+export const deleteMyPacksTC = (packId: string):ThunkAction<void, AppRootStateType, unknown, ActionType> => (dispatch) => {
     dispatch(setStatusAC('loading'))
     packAPI.deletePack(packId)
         .then(res => {
-            // console.log(res)
-
             dispatch(setStatusAC('succeeded'))
-            // dispatch(setPacksDataAC(res.data))
             dispatch(deletePackUserIdAC(packId))
+            dispatch(getMyPacksTC(''))
         })
         .catch(err => console.log(err))
         .finally(() => {
