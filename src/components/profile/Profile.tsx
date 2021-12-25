@@ -106,7 +106,6 @@ export const Profile: React.FC = () => {
             {/*        <button className={style.profileBtnCancel}>Cancel</button>*/}
             {/*        <button className={style.profileBtnSave}>Save</button>*/}
             {/*    </div>*/}
-            {/*    <button onClick={logOutHandler}>LogOut</button>*/}
             {/*</section>*/}
 
 
