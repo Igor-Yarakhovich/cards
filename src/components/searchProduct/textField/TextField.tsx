@@ -7,9 +7,10 @@ export default function FullWidthTextField() {
         <Box
             sx={{
 
+
             }}
         >
-            <TextField label="Search" placeholder="Product name" focused size="small"/>
+            <TextField  label="Search" placeholder="Product name" focused size="small"/>
         </Box>
     );
 }

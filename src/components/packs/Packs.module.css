@@ -1,11 +1,14 @@
 
 .main{
       width: 1280px;
+      margin: 0 auto;
+
 }
 
 
+
 .header {
-    border: 1px solid red;
+    border: 3px solid #1976d2;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -13,10 +16,17 @@
     padding: 20px;
 
 }
+.sort{
+    cursor: pointer;
 
+}
+.sortBlock{
+    display: flex;
+    align-items: center;
+}
 .table {
 
-    border: 1px solid green;
+    border: 1px solid grey;
     display: flex;
     flex-flow: row;
     align-items: inherit;

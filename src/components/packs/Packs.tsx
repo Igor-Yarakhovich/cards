@@ -8,6 +8,8 @@ import s from "./Packs.module.css"
 import SearchProduct from "../searchProduct/SearchProduct";
 import TablePaginationDemo from "../pagination/Pagination";
 import {Navigate} from 'react-router-dom'
+import {SortButton} from '../sortButton/SortButton';
+import {Button} from '@mui/material';
 
 
 export const Packs = React.memo(() => {
@@ -51,12 +53,12 @@ export const Packs = React.memo(() => {
         <input type="checkbox"
                onChange={addCardsPacKHandler}/> My packs
         <div className={s.header}>
-            <div>name</div>
-            <div>cardsCount</div>
-            <div>created</div>
-            <div>updated</div>
+            <div className={s.sortBlock}>name <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock} >cardsCount <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock} >created <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock} >updated <span className={s.sort}><SortButton/></span></div>
             <div>
-                <button onClick={addCardsPacKHandler}>add</button>
+                <button onClick={addCardsPacKHandler} >add</button>
             </div>
         </div>
 
@@ -69,8 +71,10 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
                         <div>
+
                             <button>del</button>
-                            <button>update</button>
+                            <button  >update</button>
+
                         </div>
 
                     </div>
