@@ -17,9 +17,9 @@ export default function RangeSlider() {
     return (
         <div className={style.sliderWrapper}>
 
-            <h3 className={style.sliderTitle}>Number of cards</h3>
+           <h3 className={style.sliderTitle}>Number of cards</h3>
 
-            <Box sx={{ width: 196, paddingLeft:3, paddingRight:3}}>
+            <Box sx={{ width: 300, paddingLeft:1, paddingRight:3}}>
                 <Slider
                 getAriaLabel={() => 'Temperature range'}
                 value={value}
