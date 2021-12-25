@@ -33,7 +33,7 @@ const Modal: React.FC<IModal> = (
 
     if (!show) return null;
 
-    return (
+    return(
         <>
             {enableBackground && <div
                 style={{
