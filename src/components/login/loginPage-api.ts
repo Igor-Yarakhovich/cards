@@ -1,11 +1,9 @@
-import axios, {AxiosResponse} from 'axios'
+import {instance} from "../../app/instance";
+import {AxiosResponse} from "axios";
 
-const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0/',
-    withCredentials: true,
-})
 
 // api
+
 export const authAPI = {
     login(dat: FormikErrorType) {
         return instance.post <FormikErrorType, AxiosResponse<ResponseType>>('auth/login', dat)

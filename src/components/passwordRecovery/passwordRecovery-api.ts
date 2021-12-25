@@ -1,9 +1,6 @@
 import axios from "axios";
+import {instance} from "../../app/instance";
 
-export const instance = axios.create({
-    baseURL: "https://neko-back.herokuapp.com/2.0/",
-    withCredentials: true,
-});
 
 // api
 export const recoveryAPI = {
