@@ -56,7 +56,6 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
         })
         .finally(() => {
                 dispatch(setStatusAC('idle'))
-
             }
         )
 }

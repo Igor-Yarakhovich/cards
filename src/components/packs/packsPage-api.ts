@@ -8,13 +8,14 @@ const instance = axios.create({
 // api
 
 export const packAPI = {
-    getPack(userId?: string) {
-        return instance.get<PacksResponseType>('cards/pack', {params: {user_id: (userId ? userId : '')}})
+    getPack(userId: string) {
+        return instance.get<PacksResponseType>('cards/pack', {params: {userId}})
     },
-
-
     createPack() {
         return instance.post<NewCardsPackType>('cards/pack', {cardsPack:{name:'4oKavoNaNa'}})
+    },
+    deletePack(packId: string){
+        return instance.delete<PacksResponseType>('cards/pack', {params: {id: packId}})
     }
 }
 
