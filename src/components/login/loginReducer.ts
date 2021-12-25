@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI, FormikErrorType, ResponseType} from "./loginPage-api";
-import {setDataAC, SetDataType} from "../profile/profileReducer";
+import {isInitialisedAC, setDataAC, SetDataType, SetInitialisedType} from "../profile/profileReducer";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded'
 
@@ -43,16 +43,17 @@ export type SetIsLoggedInType = ReturnType<typeof setIsLoggedInAC>
 export type SetStatusType = ReturnType<typeof setStatusAC>
 /*export type SetDataType = ReturnType<typeof setDataAC>*/
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export type ActionType = SetDataType | SetIsLoggedInType | SetStatusType | SetAppErrorActionType
+export type ActionType = SetDataType | SetIsLoggedInType | SetStatusType | SetAppErrorActionType | SetInitialisedType
 // thunks
 export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))
     authAPI.login(dat)
         .then(res => {
             if (res.data) {
-                dispatch(setIsLoggedInAC(true))
                 dispatch(setStatusAC('succeeded'))
+                dispatch(setIsLoggedInAC(true))
                 dispatch(setDataAC(res.data))
+                dispatch(isInitialisedAC(true))
             }
         })
         .catch(e => {
@@ -60,5 +61,8 @@ export const loginTC = (dat: FormikErrorType) => (dispatch: Dispatch<ActionType>
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             dispatch(setAppErrorAC(error))
+        })
+        .finally(()=>{
+            dispatch(setStatusAC('idle'))
         })
 }
