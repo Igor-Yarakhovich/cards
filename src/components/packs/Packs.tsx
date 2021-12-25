@@ -1,12 +1,12 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from "./packsReducer";
-import {AppRootStateType} from "../../app/store";
-import {PacksResponseType} from "./packsPage-api";
-import {Preloader} from "../../assets/Preloader/Preloader";
-import s from "./Packs.module.css"
-import SearchProduct from "../searchProduct/SearchProduct";
-import TablePaginationDemo from "../pagination/Pagination";
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from './packsReducer';
+import {AppRootStateType} from '../../app/store';
+import {PacksResponseType} from './packsPage-api';
+import {Preloader} from '../../assets/Preloader/Preloader';
+import s from './Packs.module.css'
+import SearchProduct from '../searchProduct/SearchProduct';
+import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
@@ -33,8 +33,8 @@ export const Packs = React.memo(() => {
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
-        dispatch(getMyPacksTC(myUserId ? "" : userId))
-        dispatch(setPackUserIdAC(myUserId ? "" : userId));
+        dispatch(getMyPacksTC(myUserId ? '' : userId))
+        dispatch(setPackUserIdAC(myUserId ? '' : userId));
     }, [dispatch, setMyUserId, myUserId, userId])
 
     const addNewPackHandler = useCallback(() => {
@@ -48,7 +48,7 @@ export const Packs = React.memo(() => {
     }, [dispatch, data])
 
     if (!isLoggedIn) {
-        return <Navigate to='/login'/>
+        return <Navigate to="/login"/>
     }
 
     if (!data) {
@@ -57,17 +57,15 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
-        <input type="checkbox"
-               onChange={addMyPacksHandler}/> My packs
+        <div><input type="checkbox"/> All packs</div>
+        <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
         <div className={s.header}>
-            <div className={s.sortBlock}>name <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock} >cardsCount <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock} >created <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock} >updated <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Name <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Cards <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Created by<span className={s.sort}><SortButton/></span></div>
             <div>
-
-                <button onClick={addNewPackHandler}>add</button>
-
+                <Button variant="contained" onClick={addNewPackHandler}>Add pack</Button>
             </div>
         </div>
 
@@ -80,10 +78,9 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].updated}</div>
                         <div>
-
-                            <button onClick={deleteMyPackHandler}>del</button>
-                            <button>update</button>
-
+                            <Button color={'success'} variant="contained"> Learn</Button>
+                            <Button  variant="contained"> Update</Button>
+                            <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>
 
                     </div>
