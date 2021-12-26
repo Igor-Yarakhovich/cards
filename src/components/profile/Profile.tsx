@@ -2,13 +2,10 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
-import {logOutTC, newNameTC} from "./profileReducer";
-
-import {Preloader} from "../../assets/Preloader/Preloader";
+import {newNameTC} from "./profileReducer";
 import {ErrorType, setAppErrorAC} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
-import {Login} from "../login/Login";
 
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
@@ -52,7 +49,6 @@ export const Profile: React.FC = () => {
         return <Navigate to='/login'/>
     }
 
-
     return (
         <section className={style.profile}>
             <div className={style.container}>
@@ -89,33 +85,12 @@ export const Profile: React.FC = () => {
                 </div>
 
             </div>
-
-            {/*<section className={style.profilePersonal}>*/}
-            {/*    <h2 className={style.profilePersonalTitle}>Personal information</h2>*/}
-
-            {/*    {error && initialised ? error : (status === 'loading')}*/}
-
-            {/*    <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>*/}
-
-
-            {/*    <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>*/}
-            {/*    <div>email: {email}  </div>*/}
-
-            {/*    <div className={style.profileBtnBox}>*/}
-            {/*        <button className={style.profileBtnCancel}>Cancel</button>*/}
-            {/*        <button className={style.profileBtnSave}>Save</button>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-
             <>
                 <Modal
                     enableBackground={true}
                     backgroundOnClick={() => setShow(false)}
-
-                    width={300}
+                    width={600}
                     height={200}
-                    modalOnClick={() => setShow(false)}
-
                     show={show}
                 >
                     <section className={style.profilePersonal}>
@@ -125,16 +100,14 @@ export const Profile: React.FC = () => {
 
                         <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
 
-
                         <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
                         <div>email: {email}  </div>
 
                         <div className={style.profileBtnBox}>
-                            <button className={style.profileBtnCancel}>Cancel</button>
-                            <button className={style.profileBtnSave}>Save</button>
+                            <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
+                            {/*<button className={style.profileBtnSave} >Save</button>*/}
                         </div>
                     </section>
-                    <button onClick={() => setShow(false)}>Close</button>
                 </Modal>
             </>
 
