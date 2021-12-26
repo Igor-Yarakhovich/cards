@@ -3,18 +3,23 @@
       width: 1280px;
       margin: 0 auto;
 
+
+}
+.search{
+    display: flex;
 }
 
-
-
 .header {
-    border: 3px solid #1976d2;
+    border: 8px solid transparent;
+    box-shadow: 0px 0px 8px rgba(25, 118, 210, 0.9);
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     padding: 20px;
     font-weight: bold;
+    border-radius: 8px;
+
 
 }
 .sort{
@@ -27,7 +32,7 @@
 }
 .table {
 
-    border: 1px solid grey;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-flow: row;
     align-items: inherit;

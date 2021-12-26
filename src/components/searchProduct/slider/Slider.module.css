@@ -1,10 +1,13 @@
 .sliderWrapper{
-    max-width: 200px;
+    max-width: 500px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 .sliderTitle{
-    margin: 17px 0 20px;
-    color:#2D2E46;
+    color:#1976d2;
     font-family: 'SFUIDisplaySemibold', sans-serif;
     font-weight: 600;
     font-size: 16px;
