@@ -7,7 +7,9 @@ import {ThunkAction} from 'redux-thunk';
 
 const initialState = {
     data: null as null | PacksResponseType,
-    packUserId: ''
+    packUserId: '',
+    page:1,
+    pageCount:10
 };
 
 type InitialStateType = typeof initialState;
@@ -16,6 +18,10 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
     switch (action.type) {
         case "packs/SET-PACK-USER-ID":
             return {...state, packUserId: action.packUserId}
+        case "packs/SET-PAGE":
+            return {...state, page: action.page}
+        case "packs/SET-PAGE-COUNT":
+            return {...state, pageCount: action.pageCount}
         case "packs/DELETE-PACK-USER-ID":
             return {
                 ...state,
@@ -34,6 +40,10 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
 
 export const setPacksDataAC = (data: PacksResponseType) =>
     ({type: 'packs/SET-DATA', data} as const)
+export const setPageAC = (page: number) =>
+    ({type: "packs/SET-PAGE", page} as const)
+export const setPageCountAC = (pageCount: number) =>
+    ({type: "packs/SET-PAGE-COUNT", pageCount} as const)
 
 export const setPackUserIdAC = (packUserId: string) =>
     ({type: "packs/SET-PACK-USER-ID", packUserId} as const)
@@ -50,11 +60,17 @@ export type ActionType = SetPacksDataType
     | SetStatusType
     | SetPackUserIdType
     | DeletePackUserIdType
+    |ReturnType<typeof setPageAC>
+    |ReturnType<typeof setPageCountAC>
 
 // thunks
-export const getMyPacksTC = (userId: string) => (dispatch: Dispatch) => {
+export const getMyPacksTC = (userId: string) => (dispatch: Dispatch,getState:() => AppRootStateType ) => {
+const packData = getState().packs
+const params ={page: packData.page,
+    pageCount:packData.pageCount,
+    userId:packData.packUserId}
     dispatch(setStatusAC('loading'))
-    packAPI.getPack(userId)
+    packAPI.getPack(params)
         .then(res => {
             dispatch(setStatusAC('succeeded'))
             dispatch(setPacksDataAC(res.data))

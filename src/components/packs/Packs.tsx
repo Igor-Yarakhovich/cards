@@ -1,8 +1,7 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from './packsReducer';
 import {AppRootStateType} from '../../app/store';
-import {PacksResponseType} from './packsPage-api';
 import {Preloader} from '../../assets/Preloader/Preloader';
 import s from './Packs.module.css'
 import SearchProduct from '../searchProduct/SearchProduct';
@@ -13,8 +12,8 @@ import {Button} from '@mui/material';
 
 
 export const Packs = React.memo(() => {
-
-    const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
+    const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
+    const {data,page,pageCount} = useAppSelector(state => state.packs)
     const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
@@ -25,7 +24,7 @@ export const Packs = React.memo(() => {
 
     useEffect(() => {
         dispatch(getMyPacksTC(''))
-    }, [dispatch])
+    }, [dispatch,page,pageCount])
 
     // const addCardsPacKHandler = useCallback(() => {
     //     dispatch(getMyPacksTC(''))
@@ -76,7 +75,7 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].name}</div>
                         <div>{data.cardPacks[index].cardsCount}</div>
                         <div>{data.cardPacks[index].created}</div>
-                        <div>{data.cardPacks[index].updated}</div>
+                        <div>{data.cardPacks[index].user_name}</div>
                         <div>
                             <Button color={'success'} variant="contained"> Learn</Button>
                             <Button  variant="contained"> Update</Button>
@@ -88,7 +87,7 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
-        <TablePaginationDemo/>
+        <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
     </div>
 })
 

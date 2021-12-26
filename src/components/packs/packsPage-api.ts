@@ -3,11 +3,11 @@ import {instance} from "../../app/instance";
 // api
 
 export const packAPI = {
-    getPack(userId: string) {
-        return instance.get<PacksResponseType>('cards/pack', {params: {userId}})
+    getPack(params:ParamsType) {
+        return instance.get<PacksResponseType>('cards/pack', {params})
     },
     createPack() {
-        return instance.post<NewCardsPackType>('cards/pack', {cardsPack: {name: '4oKavoNaNa'}})
+        return instance.post<NewCardsPackType>('cards/pack', {cardsPack: {name: '7777'}})
     },
     deletePack(packId: string) {
         return instance.delete<PacksResponseType>('cards/pack', {params: {id: packId}})
@@ -23,6 +23,7 @@ export type CardsPackType = {
     deckCover?: string // не обязателен
     private?: boolean // если не отправить будет такой
     type?: string // если не отправить будет таким
+
 }
 export type NewCardsPackType = {
     newCardsPack: PackUserType
@@ -42,6 +43,7 @@ export type PackUserType = {
     created: string
     updated: string
     __v: number
+    user_name:string
 }
 export type PacksResponseType = {
     cardPacks: Array<PackUserType>,
@@ -50,4 +52,10 @@ export type PacksResponseType = {
     minCardsCount: number
     page: number // выбранная страница
     pageCount: number // количество элементов на странице
+}
+export type ParamsType={
+    page:number
+    pageCount:number
+    userId:string
+
 }
