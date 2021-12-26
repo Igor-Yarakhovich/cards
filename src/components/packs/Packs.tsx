@@ -13,7 +13,7 @@ import {Button} from '@mui/material';
 
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
-    const {data,page,pageCount} = useAppSelector(state => state.packs)
+    const {data, page, pageCount, sortPacks} = useAppSelector(state => state.packs)
     const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
@@ -24,7 +24,7 @@ export const Packs = React.memo(() => {
 
     useEffect(() => {
         dispatch(getMyPacksTC(''))
-    }, [dispatch,page,pageCount])
+    }, [dispatch, page, pageCount, sortPacks])
 
     // const addCardsPacKHandler = useCallback(() => {
     //     dispatch(getMyPacksTC(''))
@@ -59,10 +59,10 @@ export const Packs = React.memo(() => {
         <div><input type="checkbox"/> All packs</div>
         <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
         <div className={s.header}>
-            <div className={s.sortBlock}>Name <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Cards <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Created by<span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne ={ '1name'} valueTwo ={ '0name'}/> </span></div>
+            <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton valueOne ={ '1cardsCount'} valueTwo ={ '0cardsCount'}/> </span> </div>
+            <div className={s.sortBlock}>Updated<span className={s.sort}><SortButton valueOne ={ '1updated'} valueTwo ={ '0updated'}/></span> </div>
+            <div className={s.sortBlock}>Created by</div>
             <div>
                 <Button variant="contained" onClick={addNewPackHandler}>Add pack</Button>
             </div>
@@ -78,7 +78,7 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].user_name}</div>
                         <div>
                             <Button color={'success'} variant="contained"> Learn</Button>
-                            <Button  variant="contained"> Update</Button>
+                            <Button variant="contained"> Update</Button>
                             <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>
 

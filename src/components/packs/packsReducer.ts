@@ -9,7 +9,8 @@ const initialState = {
     data: null as null | PacksResponseType,
     packUserId: '',
     page:1,
-    pageCount:10
+    pageCount:10,
+    sortPacks:''
 };
 
 type InitialStateType = typeof initialState;
@@ -18,6 +19,8 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
     switch (action.type) {
         case "packs/SET-PACK-USER-ID":
             return {...state, packUserId: action.packUserId}
+        case "packs/SET-SORT-PACKS":
+            return {...state, sortPacks: action.sortPacks}
         case "packs/SET-PAGE":
             return {...state, page: action.page}
         case "packs/SET-PAGE-COUNT":
@@ -44,12 +47,15 @@ export const setPageAC = (page: number) =>
     ({type: "packs/SET-PAGE", page} as const)
 export const setPageCountAC = (pageCount: number) =>
     ({type: "packs/SET-PAGE-COUNT", pageCount} as const)
-
+export const setSortPacksCountAC = (sortPacks: string) =>
+    ({type: "packs/SET-SORT-PACKS", sortPacks} as const)
 export const setPackUserIdAC = (packUserId: string) =>
     ({type: "packs/SET-PACK-USER-ID", packUserId} as const)
 
 export const deletePackUserIdAC = (packId: string) =>
     ({type: "packs/DELETE-PACK-USER-ID", packId} as const)
+
+
 
 // types
 export type SetPacksDataType = ReturnType<typeof setPacksDataAC>
@@ -62,13 +68,16 @@ export type ActionType = SetPacksDataType
     | DeletePackUserIdType
     |ReturnType<typeof setPageAC>
     |ReturnType<typeof setPageCountAC>
+    |ReturnType<typeof setSortPacksCountAC>
 
 // thunks
 export const getMyPacksTC = (userId: string) => (dispatch: Dispatch,getState:() => AppRootStateType ) => {
 const packData = getState().packs
 const params ={page: packData.page,
     pageCount:packData.pageCount,
-    userId:packData.packUserId}
+    userId:packData.packUserId,
+    sortPacks:packData.sortPacks
+    }
     dispatch(setStatusAC('loading'))
     packAPI.getPack(params)
         .then(res => {
