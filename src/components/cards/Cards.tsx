@@ -82,6 +82,6 @@ export const Cards = React.memo(() => {
                 ))
             }
         </div>
-        <TablePaginationDemo/>
+        {/*<TablePaginationDemo />*/}
     </div>
 })
