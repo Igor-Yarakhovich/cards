@@ -54,10 +54,10 @@ export const Cards = React.memo(() => {
         <div><input type="checkbox"/> All packs</div>
         <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
         <div className={s.header}>
-            <div className={s.sortBlock}>Name <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Cards <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton/></span></div>
-            <div className={s.sortBlock}>Created by<span className={s.sort}><SortButton/></span></div>
+            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne ={ '1name'} valueTwo ={ '0name'}/> </span></div>
+            <div className={s.sortBlock}>Cards <span className={s.sort}><SortButton valueOne ={ '1cardsCount'} valueTwo ={ '0cardsCount'}/></span></div>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne ={ '1updated'} valueTwo ={ '0updated'}/></span></div>
+            <div className={s.sortBlock}>Created by</div>
             <div>
                 <Button variant="contained" onClick={addNewPackHandler}>Add pack</Button>
             </div>
