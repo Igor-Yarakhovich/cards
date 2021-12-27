@@ -6,7 +6,7 @@ import {Preloader} from '../../assets/Preloader/Preloader';
 import s from './Packs.module.css'
 import SearchProduct from '../searchProduct/SearchProduct';
 import TablePaginationDemo from '../pagination/Pagination';
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
 
@@ -18,7 +18,7 @@ export const Packs = React.memo(() => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
     const dispatch = useDispatch();
-
+    let navigate = useNavigate();
     const [myUserId, setMyUserId] = useState(false)
 
 
@@ -45,6 +45,10 @@ export const Packs = React.memo(() => {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
         }
     }, [dispatch, data])
+
+    function handleClick() {
+        navigate('/cards');
+    }
 
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
@@ -82,7 +86,7 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].user_name}</div>
                         <div>
-                            <Button color={'success'} variant="contained"> Learn</Button>
+                            <Button color={'success'} variant="contained" onClick={handleClick}> Learn</Button>
                             <Button variant="contained"> Update</Button>
                             <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>

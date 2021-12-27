@@ -105,7 +105,7 @@ export const Profile: React.FC = () => {
 
                         <div className={style.profileBtnBox}>
                             <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
-                            {/*<button className={style.profileBtnSave} >Save</button>*/}
+                            <button className={style.profileBtnSave} >Save</button>
                         </div>
                     </section>
                 </Modal>
