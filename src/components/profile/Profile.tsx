@@ -14,6 +14,7 @@ import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
 import { Style } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
@@ -57,6 +58,7 @@ export const Profile: React.FC = () => {
         return <Preloader/>
     }
 
+
     return (
         <section className={style.profile}>
             <div className={style.container}>
@@ -68,10 +70,14 @@ export const Profile: React.FC = () => {
                             </div>
                             <div className={style.profileNameUser}><EditableSpan value={name} onChange={startValueHandler}/></div>
                             <div className={style.profileUserProf}>Front-end developer</div>
+                            
+
+                            <Link to={"/test"}>Edit profile</Link>
                             <SuperButton
                                 className={style.profilePersonalBtn}
                                 color='white'
                                 type={"submit"}>
+                                
                                 Edit profile
                             </SuperButton>
                         </div>

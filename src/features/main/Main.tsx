@@ -17,7 +17,7 @@ export const Main: React.FC = () => {
             <Routes>
 
                 <Route path='/login' element={<Login/>}/>
-
+               
                 <Route path='/' element={<Navigate to='/profile'/>}/>
                 <Route path='/profile' element={<Profile/>}/>
 
