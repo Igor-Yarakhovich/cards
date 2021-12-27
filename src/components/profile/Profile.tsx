@@ -13,6 +13,7 @@ import Slider from '../searchProduct/slider/Slider';
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
 import { TextField } from "@mui/material";
+import CheckEmail from "../checkEmail/CheckEmail";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
@@ -94,6 +95,8 @@ export const Profile: React.FC = () => {
                                 focused size="small"/>
                             Таблица
                             Pagination
+
+                            {/* <CheckEmail/> */}
                         </div>
                         
                     </div>
