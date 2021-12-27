@@ -9,9 +9,12 @@ export default function SearchProduct() {
     return <div className={style.search}>
         <TextField/>
         <Slider/>
-        <Button variant="contained" size="medium">
-            Search
-        </Button>
+
+            <Button  variant='outlined' size="large" color={'primary'}>
+                Search
+            </Button>
+
+
     </div>
 
 

@@ -71,7 +71,7 @@ export const Profile: React.FC = () => {
                             </SuperButton>
                         </div>
                         <div className={style.profileLeftBottom}>
-                            <Slider/>
+                           {/*<Slider/>*/}
                         </div>
                     </div>
                     <div className={style.profileRightBox}>
