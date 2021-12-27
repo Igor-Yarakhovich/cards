@@ -1,31 +1,43 @@
 import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
+import {useDispatch} from 'react-redux';
+import {setPageAC, setPageCountAC} from '../packs/packsReducer';
 
-export default function TablePaginationDemo() {
-    const [page, setPage] = React.useState(2);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+type PageCountPropsType={
+    cardPacksTotalCount:number,
+    page:number,
+    pageCount:number
+}
 
+export default function TablePaginationDemo(props:PageCountPropsType) {
+
+const dispatch=useDispatch()
+    // const [page, setPage] = React.useState(1);
+    // const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
-        setPage(newPage);
+        dispatch(setPageAC(newPage))
+        //setPage(newPage);
     };
 
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
+        //setRowsPerPage();
+        dispatch(setPageCountAC(parseInt(event.target.value, 10)))
+        //dispatch(setPageCountAC(0))
+
     };
 
     return (
         <TablePagination
             component="div"
-            count={100}
-            page={page}
+            count={props.cardPacksTotalCount}
+            page={props.page}
             onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
+            rowsPerPage={props.pageCount}
             onRowsPerPageChange={handleChangeRowsPerPage}
 
 

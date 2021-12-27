@@ -8,7 +8,7 @@ function valuetext(value: number) {
 }
 
 export default function RangeSlider() {
-    const [value, setValue] = React.useState<number[]>([20, 37]);
+    const [value, setValue] = React.useState<number[]>([0, 100]);
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
@@ -17,11 +17,11 @@ export default function RangeSlider() {
     return (
         <div className={style.sliderWrapper}>
 
-            <h3 className={style.sliderTitle}>Number of cards</h3>
+           <h3 className={style.sliderTitle}>Number of cards</h3>
 
-            <Box sx={{ width: 196, paddingLeft:3, paddingRight:3}}>
+            <Box sx={{ width: 600}}>
                 <Slider
-
+                    color={'primary'}
                 getAriaLabel={() => 'Temperature range'}
                 value={value}
                 onChange={handleChange}

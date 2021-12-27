@@ -43,7 +43,6 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setStatusAC('succeeded'))
                 dispatch(setDataAC(res.data))
-                dispatch(isInitialisedAC(true))
                 dispatch(setAppErrorAC(null))
             }
         })
@@ -56,7 +55,7 @@ export const initialiseTC = () => (dispatch: Dispatch<ActionType>) => {
         })
         .finally(() => {
                 dispatch(setStatusAC('idle'))
-
+                dispatch(isInitialisedAC(true))
             }
         )
 }
@@ -84,9 +83,7 @@ export const logOutTC = () => (dispatch: Dispatch<ActionType>) => {
     dispatch(setStatusAC('loading'))
     meAPI.logOut()
         .then(res => {
-            if (res.data) {
                 dispatch(setIsLoggedInAC(false))
-            }
         })
         .catch(e => {
             const error = e.response

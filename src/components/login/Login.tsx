@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {FormikErrorType} from "./loginPage-api";
-import {ErrorType, loginTC} from "./loginReducer";
+import {ErrorType, loginTC, setHidePasswordAC} from './loginReducer';
 import {AppRootStateType} from "../../app/store";
 import {Preloader} from "../../assets/Preloader/Preloader";
 
@@ -13,7 +13,14 @@ export const Login: React.FC = () => {
     const status = useSelector<AppRootStateType, string>(state => state.login.status)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
+    const hidePassword = useSelector<AppRootStateType, string>(state => state.login.hidePassword)
     const dispatch = useDispatch()
+    const onClickHidePasswordHandler = () => {
+        if (hidePassword === 'password')
+            dispatch(setHidePasswordAC('text'))
+        else dispatch(setHidePasswordAC('password'))
+
+    }
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -59,9 +66,9 @@ export const Login: React.FC = () => {
                     formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     <div className={s.loginPasswordWrap}>
                         <label className={s.loginLabel}>Password</label>
-                        <input className={s.loginInput} type={"password"} placeholder={''}
+                        <input className={s.loginInput} type={hidePassword} placeholder={''}
                         {...formik.getFieldProps('password')}/>
-                        <button className={s.loginPasswordControl}></button>
+                        <button type={'button'} className={s.loginPasswordControl} onClick={onClickHidePasswordHandler}> </button>
 
                     </div>
                     {formik.touched.password &&

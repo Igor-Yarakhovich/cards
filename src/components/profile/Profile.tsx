@@ -1,29 +1,26 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
-import {initialiseTC, logOutTC, newNameTC} from "./profileReducer";
-
-import {Preloader} from "../../assets/Preloader/Preloader";
+import {newNameTC} from "./profileReducer";
 import {ErrorType, setAppErrorAC} from "../login/loginReducer";
 
 import {EditableSpan} from "./editableSpan";
-import {Login} from "../login/Login";
 
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
-import { Style } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import Modal from "../../assets/modal/Modal";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(initialiseTC())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(initialiseTC())
+    // }, [dispatch])
 
     const email = useSelector<AppRootStateType, string>(state => state.profile.data.email)
     const photo = useSelector<AppRootStateType, string | undefined>(state => state.profile.data.avatar)
@@ -32,6 +29,8 @@ export const Profile: React.FC = () => {
     const error = useSelector<AppRootStateType, ErrorType>(state => state.login.error)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const initialised = useSelector<AppRootStateType, boolean>(state => state.profile.initialised)
+
+    const [show, setShow] = useState(false);
 
     const startValueHandler = useCallback((title: string) => {
         dispatch(newNameTC(title))
@@ -45,17 +44,9 @@ export const Profile: React.FC = () => {
         }
     }, [error])
 
-    const logOutHandler = () => {
-        dispatch(logOutTC())
-    }
-    console.log('initialised: ', initialised )
 
     if (!isLoggedIn) {
-        return <Login/>
-    }
-
-    if (!initialised) {
-        return <Preloader/>
+        return <Navigate to='/login'/>
     }
 
 
@@ -66,59 +57,64 @@ export const Profile: React.FC = () => {
                     <div className={style.profileLeftBox}>
                         <div className={style.profileLeftTop}>
                             <div className={style.profileWrapImg}>
-                                <img className={style.profileAvatarImg} src={avatar} alt="" />
+                                <img className={style.profileAvatarImg} src={avatar} alt=""/>
                             </div>
-                            <div className={style.profileNameUser}><EditableSpan value={name} onChange={startValueHandler}/></div>
+                            <div className={style.profileNameUser}><EditableSpan value={name}
+                                onChange={startValueHandler}/></div>
                             <div className={style.profileUserProf}>Front-end developer</div>
                             
 
-                            <Link to={"/test"}>Edit profile</Link>
+                            {/* <Link to={"/test"}>Edit profile</Link> */}
                             <SuperButton
                                 className={style.profilePersonalBtn}
                                 color='white'
-                                type={"submit"}>
-                                
+                                type={"submit"}
+                                onClick={() => setShow(true)}
+                            >
                                 Edit profile
                             </SuperButton>
                         </div>
                         <div className={style.profileLeftBottom}>
-                        
-                            <Slider/> 
-
+                        {/*<Slider/>*/}
                         </div>
                     </div>
                     <div className={style.profileRightBox}>
                         <h2>My packs list</h2>
                         <form action="">
-                            <input type="search" name="" id="" />
+                            <input type="search" name="" id=""/>
                         </form>
                         Таблица
-                    Pagination
+                        Pagination
                     </div>
                 </div>
 
             </div>
-           
-                <section className={style.profilePersonal}>
-                    <h2 className={style.profilePersonalTitle}>Personal information</h2>
+            <>
+                <Modal
+                    enableBackground={true}
+                    backgroundOnClick={() => setShow(false)}
+                    width={600}
+                    height={200}
+                    show={show}
+                >
+                    <section className={style.profilePersonal}>
+                        <h2 className={style.profilePersonalTitle}>Personal information</h2>
 
-                    {error && initialised ? error : (status === 'loading')}
-                    
-                    <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
+                        {error && initialised ? error : (status === 'loading')}
 
+                        <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
 
-                    <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
-                    <div>email: {email}  </div>
+                        <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
+                        <div>email: {email}  </div>
 
-                    <div className={style.profileBtnBox}>
-                        <button className={style.profileBtnCancel}>Cancel</button>
-                        <button className={style.profileBtnSave}>Save</button>
-                    </div>
-                    <button onClick={logOutHandler}>LogOut</button>
-                </section>
-                
-            
-            
+                        <div className={style.profileBtnBox}>
+                            <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
+                            {/*<button className={style.profileBtnSave} >Save</button>*/}
+                        </div>
+                    </section>
+                </Modal>
+            </>
+
         </section>
     )
 }
