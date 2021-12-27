@@ -12,6 +12,7 @@ import SuperButton from "../superComponents/superButton/SuperButton";
 import Slider from '../searchProduct/slider/Slider';
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
+import { TextField } from "@mui/material";
 // import { Pagination } from "../pagination/Pagination";
 
 export const Profile: React.FC = () => {
@@ -70,8 +71,6 @@ export const Profile: React.FC = () => {
                                 onChange={startValueHandler}/></div>
                             <div className={style.profileUserProf}>Front-end developer</div>
                             
-
-                            {/* <Link to={"/test"}>Edit profile</Link> */}
                             <SuperButton
                                 className={style.profilePersonalBtn}
                                 color='white'
@@ -86,12 +85,17 @@ export const Profile: React.FC = () => {
                         </div>
                     </div>
                     <div className={style.profileRightBox}>
-                        <h2>My packs list</h2>
-                        <form action="">
-                            <input type="search" name="" id=""/>
-                        </form>
-                        Таблица
-                        Pagination
+                        <div className={style.profileRightBoxWrapper}>
+                            <h2 className={style.profileRightBoxTitle}>My packs list</h2>
+                           <TextField 
+                                fullWidth sx={{ m: 5}} 
+                                placeholder="Search..."
+                                style={{margin:0}}
+                                focused size="small"/>
+                            Таблица
+                            Pagination
+                        </div>
+                        
                     </div>
                 </div>
 

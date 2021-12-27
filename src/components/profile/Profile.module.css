@@ -9,8 +9,8 @@
 .profileWrapper{
     background:#FEFEFF;
     border-radius:8px;
-    /* min-height: 565px; */
-    min-height: 490px;
+    min-height: 600px;
+    /* min-height: 490px; */
     display: grid;
     grid-template-columns: 243px 1fr;
     -webkit-border-radius:8px;
@@ -89,7 +89,21 @@
 
 .profileRightBox{}  
 
+.profileRightBoxWrapper{
+    border: 1px solid rgb(39, 243, 216);
+    max-width: 670px;
+    margin: 24px auto;
+}
 
+.profileRightBoxTitle{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    color:#2D2E46;
+    margin-bottom:15px;
+    text-align: left;
+}
 
 .profilePersonal{
     background:#F9F9FE;
