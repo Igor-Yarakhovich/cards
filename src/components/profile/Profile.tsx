@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
@@ -32,6 +32,14 @@ export const Profile: React.FC = () => {
 
     const [show, setShow] = useState(false);
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handlerUploadClick = () => {
+        if (inputRef.current) {
+            inputRef.current.click();
+        }
+    };
+
     const startValueHandler = useCallback((title: string) => {
         dispatch(newNameTC(title))
     }, [dispatch])
@@ -48,7 +56,6 @@ export const Profile: React.FC = () => {
     if (!isLoggedIn) {
         return <Navigate to='/login'/>
     }
-
 
     return (
         <section className={style.profile}>
@@ -102,10 +109,21 @@ export const Profile: React.FC = () => {
 
                         {error && initialised ? error : (status === 'loading')}
 
-                        <div> {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}</div>
+                        <div className={style.profilePersonalPhotoWrapper}>
+                            {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}
+                        </div>
+                        
+                        <input type="file" hidden={true} ref={inputRef} /> 
+                        <button className={style.profilePersonalSelectPhoto} onClick={handlerUploadClick}></button>
 
-                        <div>name: <EditableSpan value={name} onChange={startValueHandler}/></div>
-                        <div>email: {email}  </div>
+                        <div className={style.profilePersonalNameRow}>
+                           <span className={style.profilePersonalRowTitle}>Nickname:</span> <br/>
+                           <EditableSpan value={name} onChange={startValueHandler}/>
+                        </div>
+                        <div className={style.profilePersonalEmailRow}>
+                            <span className={style.profilePersonalRowTitle}>Email:</span><br/>
+                            {email}
+                        </div>
 
                         <div className={style.profileBtnBox}>
                             <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
