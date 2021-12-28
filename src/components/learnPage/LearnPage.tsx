@@ -69,7 +69,7 @@ const LearnPage = () => {
             dispatch(getAllCardsTC(id));
             setFirst(false);
         }
-        //@ts-ignore
+
         if (cards.length > 0) setCard(getCard(cards));
 
         return () => {
@@ -82,7 +82,6 @@ const LearnPage = () => {
 
         if (cards.length > 0) {
             // dispatch
-            //@ts-ignore
             setCard(getCard(cards));
         } else {
 

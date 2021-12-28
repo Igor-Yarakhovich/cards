@@ -9,8 +9,6 @@ import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
-import Modal from "../../assets/modal/Modal";
-import LearnPage from "../learnPage/LearnPage";
 
 
 export const Packs = React.memo(() => {

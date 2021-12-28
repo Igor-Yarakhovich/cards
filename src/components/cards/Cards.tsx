@@ -8,7 +8,7 @@ import s from "../packs/Packs.module.css";
 import SearchProduct from "../searchProduct/SearchProduct";
 import {SortButton} from "../sortButton/SortButton";
 import {Button} from "@mui/material";
-import {createNewCardTC, getAllCardsTC, setCardAnswerAC, setPageAC, setPageCountAC} from "./cardsReducer";
+import {getAllCardsTC, setCardAnswerAC} from "./cardsReducer";
 import TablePaginationDemo from "../pagination/Pagination";
 import LearnPage from "../learnPage/LearnPage";
 import Modal from "../../assets/modal/Modal";
@@ -29,32 +29,6 @@ export const Cards = React.memo(() => {
 
     const [searchValue, setSearchValue] = useState("")
 
-    const [showCreatePopup, setShowCreatePopup] = useState(false);
-    const onClickShowCreate = () => setShowCreatePopup(true)
-    const onClickHideCreate = () => setShowCreatePopup(false)
-
-    const [showUpdatePopup, setShowUpdatePopup] = useState(false);
-    const onClickHideUpdate = () => setShowUpdatePopup(false)
-
-    const [showDeletePopup, setShowDeletePopup] = useState(false);
-    const onClickHideDelete = () => setShowDeletePopup(false)
-
-    const deleteCard = (id: string) => {
-        setCardId(id)
-        setShowDeletePopup(true)
-    }
-
-    const updateCard = (id: string) => {
-        setShowUpdatePopup(true)
-        setCardId(id)
-    }
-
-    const setPage = (value: number) => {
-        dispatch(setPageAC(value))
-    }
-    const setPageCount = (pageCount: number) => {
-        dispatch(setPageCountAC(pageCount))
-    }
 
     useEffect(() => {
         let timer = setTimeout(() => {
