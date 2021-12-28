@@ -64,11 +64,11 @@ export const Cards = React.memo(() => {
             dispatch(setCardAnswerAC(searchValue))
         }, 500)
         return () => clearTimeout(timer)
-    }, [searchValue])
+    }, [searchValue, dispatch])
 
     useEffect(() => {
         id && dispatch(getAllCardsTC(id))
-    }, [cardQuestion, cardAnswer, sortCards, page, pageCount])
+    }, [cardQuestion, cardAnswer, sortCards, page, pageCount, dispatch, id])
 
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
@@ -85,7 +85,8 @@ export const Cards = React.memo(() => {
                                                                                         valueTwo={''}/> </span></div>
             <div className={s.sortBlock}>Answer <span className={s.sort}><SortButton valueOne={''}
                                                                                      valueTwo={''}/></span></div>
-            <div className={s.sortBlock}>Grade <span className={s.sort}><SortButton valueOne={''} valueTwo={''}/></span>
+            <div className={s.sortBlock}>Grade <span className={s.sort}><SortButton valueOne={''}
+                                                                                    valueTwo={''}/></span>
             </div>
             <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={''}
                                                                                       valueTwo={''}/></span></div>
