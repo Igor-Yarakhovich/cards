@@ -91,7 +91,6 @@ export const Cards = React.memo(() => {
         </div>
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
         <>
-            <button onClick={() => setShow(true)}>show simple Modal</button>
             <Modal
                 enableBackground={true}
                 backgroundOnClick={() => setShow(false)}
