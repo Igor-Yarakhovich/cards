@@ -2,13 +2,16 @@ import React, {useEffect, useState} from "react";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {PacksResponseType} from "../packs/packsPage-api";
-import {Navigate, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "../packs/Packs.module.css";
 import SearchProduct from "../searchProduct/SearchProduct";
 import {SortButton} from "../sortButton/SortButton";
 import {Button} from "@mui/material";
-import {getAllCardsTC, setCardAnswerAC, setPageAC, setPageCountAC, setSortCardsAC} from "./cardsReducer";
+import {getAllCardsTC, setCardAnswerAC} from "./cardsReducer";
+import TablePaginationDemo from "../pagination/Pagination";
+import LearnPage from "../learnPage/LearnPage";
+import Modal from "../../assets/modal/Modal";
 
 export const Cards = React.memo(() => {
 
@@ -22,42 +25,10 @@ export const Cards = React.memo(() => {
     const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
 
     const dispatch = useDispatch()
-    let {id} = useParams<string>()
+    let {packId} = useParams<string>()
 
     const [searchValue, setSearchValue] = useState("")
 
-    const [showCreatePopup, setShowCreatePopup] = useState(false);
-    const onClickShowCreate = () => setShowCreatePopup(true)
-    const onClickHideCreate = () => setShowCreatePopup(false)
-
-    const [showUpdatePopup, setShowUpdatePopup] = useState(false);
-    const onClickHideUpdate = () => setShowUpdatePopup(false)
-
-    const [showDeletePopup, setShowDeletePopup] = useState(false);
-    const onClickHideDelete = () => setShowDeletePopup(false)
-
-    const deleteCard = (id: string) => {
-        setCardId(id)
-        setShowDeletePopup(true)
-    }
-
-    const updateCard = (id: string) => {
-        setShowUpdatePopup(true)
-        setCardId(id)
-    }
-
-    const sortCard = (param: string) => {
-        sortCards[0] === "1"
-            ? dispatch(setSortCardsAC(`0${param}`))
-            : dispatch(setSortCardsAC(`1${param}`))
-    }
-
-    const setPage = (value: number) => {
-        dispatch(setPageAC(value))
-    }
-    const setPageCount = (pageCount: number) => {
-        dispatch(setPageCountAC(pageCount))
-    }
 
     useEffect(() => {
         let timer = setTimeout(() => {
@@ -67,8 +38,14 @@ export const Cards = React.memo(() => {
     }, [searchValue, dispatch])
 
     useEffect(() => {
-        id && dispatch(getAllCardsTC(id))
-    }, [cardQuestion, cardAnswer, sortCards, page, pageCount, dispatch, id])
+        packId && dispatch(getAllCardsTC(packId))
+    }, [cardQuestion, cardAnswer, sortCards, page, pageCount, dispatch, packId])
+
+    // const createCardHandler = () => {
+    //     dispatch(createNewCardTC(cardsPack_id, cardQuestion, cardAnswer, grade, shots))
+    // }
+
+    const [show, setShow] = useState(false);
 
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
@@ -81,25 +58,29 @@ export const Cards = React.memo(() => {
     return <div className={s.main}>
         <SearchProduct/>
         <div className={s.header}>
-            <div className={s.sortBlock}>Question <span className={s.sort}> <SortButton valueOne={''}
-                                                                                        valueTwo={''}/> </span></div>
-            <div className={s.sortBlock}>Answer <span className={s.sort}><SortButton valueOne={''}
-                                                                                     valueTwo={''}/></span></div>
-            <div className={s.sortBlock}>Grade <span className={s.sort}><SortButton valueOne={''}
-                                                                                    valueTwo={''}/></span>
+            <div className={s.sortBlock}>Question <span className={s.sort}> <SortButton valueOne={'1question'}
+                                                                                        valueTwo={'0question'}/> </span>
             </div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={''}
-                                                                                      valueTwo={''}/></span></div>
+            <div className={s.sortBlock}>Answer <span className={s.sort}><SortButton valueOne={'1answer'}
+                                                                                     valueTwo={'0answer'}/></span></div>
+            <div className={s.sortBlock}>Grade <span className={s.sort}><SortButton valueOne={'1grade'}
+                                                                                    valueTwo={'0grade'}/></span>
+            </div>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
+                                                                                      valueTwo={'0updated'}/></span>
+            </div>
             <div>
                 <Button variant="contained" onClick={() => {
                 }}>Create card</Button>
+                <Button color={'success'} variant="contained" onClick={() => setShow(true)}> Learn</Button>
             </div>
         </div>
 
         <div className={s.table}>
             {
                 cards.map((value, index) => (
-                    <div key={cards[index].question} className={s.row}>
+                    <div key={cards[index]._id} className={s.row}>
+                        <div>{cards[index].question}</div>
                         <div>{cards[index].answer}</div>
                         <div>{cards[index].grade}</div>
                         <div>{cards[index].updated}</div>
@@ -108,6 +89,22 @@ export const Cards = React.memo(() => {
                 ))
             }
         </div>
-        {/*<TablePaginationDemo />*/}
+        <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
+        <>
+            <Modal
+                enableBackground={true}
+                backgroundOnClick={() => setShow(false)}
+
+                width={300}
+                height={200}
+                // modalOnClick={() => setShow(false)}
+
+                show={show}
+            >
+                <LearnPage/>
+                <button onClick={() => setShow(false)}>Close</button>
+            </Modal>
+        </>
+
     </div>
 })

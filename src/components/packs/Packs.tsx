@@ -46,8 +46,8 @@ export const Packs = React.memo(() => {
         }
     }, [dispatch, data])
 
-    function handleClick() {
-        navigate('/cards');
+    function handleClick(packId: string) {
+        navigate(`/cards/${packId}`, {replace: true});
     }
 
     if (!isLoggedIn) {
@@ -68,12 +68,12 @@ export const Packs = React.memo(() => {
             <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton valueOne={'1cardsCount'}
                                                                                      valueTwo={'0cardsCount'}/> </span>
             </div>
-            <div className={s.sortBlock}>Updated<span className={s.sort}><SortButton valueOne={'1updated'}
-                                                                                     valueTwo={'0updated'}/></span>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
+                                                                                      valueTwo={'0updated'}/></span>
             </div>
             <div className={s.sortBlock}>Created by</div>
             <div>
-                <Button variant="outlined" onClick={addNewPackHandler}>Add pack</Button>
+                <Button variant="outlined" onClick={addNewPackHandler}>Add pack </Button>
             </div>
         </div>
 
@@ -86,7 +86,9 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].user_name}</div>
                         <div>
-                            <Button color={'success'} variant="contained" onClick={handleClick}> Learn</Button>
+                            <Button color={'success'} variant="contained"
+                                    onClick={() => handleClick(data.cardPacks[index]._id)}
+                            > Cards</Button>
                             <Button variant="contained"> Update</Button>
                             <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>
@@ -96,6 +98,7 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
+
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
     </div>
 })
