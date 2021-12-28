@@ -4,6 +4,9 @@ import {useParams} from "react-router-dom";
 import {AppRootStateType} from "../../app/store";
 import {getAllCardsTC} from "../cards/cardsReducer";
 
+import style from './LearnPage.module.css';
+import RadioButton from "./radioButton/RadioButton";
+
 export type CardType = {
     _id: string;
     cardsPack_id: string;
@@ -90,12 +93,23 @@ const LearnPage = () => {
 
     console.log('render LearnPage');
     return (
-        <div>
-            LearnPage
+        <div className={style.learnPage}>             
+            <div className={style.learnPageWrapper}>
+                <h2 className={style.learnPageTitle}>Learn <q>Pack Name</q></h2>
 
-            <div>{card.question}</div>
-            <div>
-                <button onClick={() => setIsChecked(true)}>check</button>
+            <div className={style.learnPageRow}>
+                <b className={style.learnPageRowText}>Question:   </b>
+                <q>{card.question}</q>
+            </div>
+            <div className={style.learnPageRow}>
+                <b className={style.learnPageRowText}>Answer:   </b>
+                <q>{card.answer}</q>
+            </div>
+            
+            <div className={style.learnPageRadioWrap} >
+                <button onClick={() => setIsChecked(true)}>check</button>   
+
+                <RadioButton/>
             </div>
 
             {isChecked && (
@@ -106,10 +120,14 @@ const LearnPage = () => {
                         <button key={'grade-' + i} onClick={() => {
                         }}>{g}</button>
                     ))}
-
-                    <div><button onClick={onNext}>next</button></div>
+                    <div>
+                        <button onClick={onNext}>next</button></div>
+                        {/* <button>cancel</button> */}
                 </>
+
+                
             )}
+            </div>
         </div>
     );
 };

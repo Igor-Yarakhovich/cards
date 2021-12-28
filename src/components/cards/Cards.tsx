@@ -13,6 +13,8 @@ import TablePaginationDemo from "../pagination/Pagination";
 import LearnPage from "../learnPage/LearnPage";
 import Modal from "../../assets/modal/Modal";
 
+import style from './Cards.module.css';
+
 export const Cards = React.memo(() => {
 
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
@@ -63,8 +65,11 @@ export const Cards = React.memo(() => {
             </div>
             <div className={s.sortBlock}>Answer <span className={s.sort}><SortButton valueOne={'1answer'}
                                                                                      valueTwo={'0answer'}/></span></div>
-            <div className={s.sortBlock}>Grade <span className={s.sort}><SortButton valueOne={'1grade'}
-                                                                                    valueTwo={'0grade'}/></span>
+            <div className={s.sortBlock}>Grade 
+                <span className={s.sort}>
+                    <SortButton valueOne={'1grade'}
+                                valueTwo={'0grade'}/>
+                </span>
             </div>
             <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
                                                                                       valueTwo={'0updated'}/></span>
@@ -95,14 +100,19 @@ export const Cards = React.memo(() => {
                 enableBackground={true}
                 backgroundOnClick={() => setShow(false)}
 
-                width={300}
+                width={600}
                 height={200}
                 // modalOnClick={() => setShow(false)}
 
                 show={show}
             >
                 <LearnPage/>
-                <button onClick={() => setShow(false)}>Close</button>
+            <div className={style.cardLearnModalBtnBox}>
+                <button className={style.cardLearnModalBtnCancel} onClick={() => setShow(false)}>Cancel</button>
+                <button className={style.cardLearnModalBtnNext}>Next</button>
+            </div>
+                
+                
             </Modal>
         </>
 

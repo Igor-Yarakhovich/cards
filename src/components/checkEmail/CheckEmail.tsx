@@ -18,8 +18,8 @@ function CheckEmail() {
             <h3 className={style.checkEmailSubTitle}>Check Email</h3>
             <div className={style.checkEmailBottom}>
                 <span className={style.checkEmailText}>We’ve sent an Email with instructions to <br/></span>
-                <span className={style.checkEmailText}>example@mail.com</span>
-                {/* {email} */}
+                <span className={style.checkEmailText}>example@mail.com  {/* {email} */}</span>
+               
             </div>
         </div>
     
