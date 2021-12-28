@@ -46,8 +46,8 @@ export const Packs = React.memo(() => {
         }
     }, [dispatch, data])
 
-    function handleClick() {
-        navigate('/cards');
+    function handleClick(packId: string) {
+        navigate(`/cards/${packId}`, {replace: true});
     }
 
     if (!isLoggedIn) {
@@ -86,7 +86,9 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].user_name}</div>
                         <div>
-                            <Button color={'success'} variant="contained" onClick={handleClick}> Learn</Button>
+                            <Button color={'success'} variant="contained"
+                                    onClick={() => handleClick(data.cardPacks[index]._id)}
+                            > Learn</Button>
                             <Button variant="contained"> Update</Button>
                             <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>
