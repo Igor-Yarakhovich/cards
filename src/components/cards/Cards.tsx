@@ -8,8 +8,10 @@ import s from "../packs/Packs.module.css";
 import SearchProduct from "../searchProduct/SearchProduct";
 import {SortButton} from "../sortButton/SortButton";
 import {Button} from "@mui/material";
-import {getAllCardsTC, setCardAnswerAC, setPageAC, setPageCountAC} from "./cardsReducer";
+import {createNewCardTC, getAllCardsTC, setCardAnswerAC, setPageAC, setPageCountAC} from "./cardsReducer";
 import TablePaginationDemo from "../pagination/Pagination";
+import LearnPage from "../learnPage/LearnPage";
+import Modal from "../../assets/modal/Modal";
 
 export const Cards = React.memo(() => {
 
@@ -65,6 +67,12 @@ export const Cards = React.memo(() => {
         packId && dispatch(getAllCardsTC(packId))
     }, [cardQuestion, cardAnswer, sortCards, page, pageCount, dispatch, packId])
 
+    // const createCardHandler = () => {
+    //     dispatch(createNewCardTC(cardsPack_id, cardQuestion, cardAnswer, grade, shots))
+    // }
+
+    const [show, setShow] = useState(false);
+
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
     }
@@ -90,6 +98,7 @@ export const Cards = React.memo(() => {
             <div>
                 <Button variant="contained" onClick={() => {
                 }}>Create card</Button>
+                <Button color={'success'} variant="contained" onClick={() => setShow(true)}> Learn</Button>
             </div>
         </div>
 
@@ -107,5 +116,22 @@ export const Cards = React.memo(() => {
             }
         </div>
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
+        <>
+            <button onClick={() => setShow(true)}>show simple Modal</button>
+            <Modal
+                enableBackground={true}
+                backgroundOnClick={() => setShow(false)}
+
+                width={300}
+                height={200}
+                // modalOnClick={() => setShow(false)}
+
+                show={show}
+            >
+                <LearnPage/>
+                <button onClick={() => setShow(false)}>Close</button>
+            </Modal>
+        </>
+
     </div>
 })

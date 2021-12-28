@@ -9,6 +9,8 @@ import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
+import Modal from "../../assets/modal/Modal";
+import LearnPage from "../learnPage/LearnPage";
 
 
 export const Packs = React.memo(() => {
@@ -68,12 +70,12 @@ export const Packs = React.memo(() => {
             <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton valueOne={'1cardsCount'}
                                                                                      valueTwo={'0cardsCount'}/> </span>
             </div>
-            <div className={s.sortBlock}>Updated<span className={s.sort}><SortButton valueOne={'1updated'}
-                                                                                     valueTwo={'0updated'}/></span>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
+                                                                                      valueTwo={'0updated'}/></span>
             </div>
             <div className={s.sortBlock}>Created by</div>
             <div>
-                <Button variant="outlined" onClick={addNewPackHandler}>Add pack</Button>
+                <Button variant="outlined" onClick={addNewPackHandler}>Add pack </Button>
             </div>
         </div>
 
@@ -88,7 +90,7 @@ export const Packs = React.memo(() => {
                         <div>
                             <Button color={'success'} variant="contained"
                                     onClick={() => handleClick(data.cardPacks[index]._id)}
-                            > Learn</Button>
+                            > Cards</Button>
                             <Button variant="contained"> Update</Button>
                             <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
                         </div>
@@ -98,6 +100,7 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
+
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
     </div>
 })
