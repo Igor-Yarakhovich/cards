@@ -1,5 +1,6 @@
 .cardLearnModalBtnBox{
     display: flex;
+    margin-top: -60px;
 }
 .cardLearnModalBtnCancel{
     width: 124px;
