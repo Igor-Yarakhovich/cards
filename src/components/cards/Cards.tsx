@@ -108,8 +108,8 @@ export const Cards = React.memo(() => {
             >
                 <LearnPage/>
             <div className={style.cardLearnModalBtnBox}>
-                <button className={style.cardLearnModalBtnCancel} onClick={() => setShow(false)}>Cancel</button>
-                <button className={style.cardLearnModalBtnNext}>Next</button>
+                {/* <button className={style.cardLearnModalBtnCancel} onClick={() => setShow(false)}>Cancel</button>
+                <button className={style.cardLearnModalBtnNext}>Next</button> */}
             </div>
                 
                 
