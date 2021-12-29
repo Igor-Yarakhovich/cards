@@ -56,7 +56,7 @@ export type PacksResponseType = {
 export type ParamsType={
     page:number
     pageCount:number
-    userId:string
+    user_id:string
     sortPacks:string
 
 }

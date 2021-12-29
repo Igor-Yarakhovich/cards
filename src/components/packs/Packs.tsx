@@ -6,7 +6,7 @@ import {Preloader} from '../../assets/Preloader/Preloader';
 import s from './Packs.module.css'
 import SearchProduct from '../searchProduct/SearchProduct';
 import TablePaginationDemo from '../pagination/Pagination';
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
 
@@ -18,12 +18,14 @@ export const Packs = React.memo(() => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
     const dispatch = useDispatch();
-
-    const [myUserId, setMyUserId] = useState(false)
+    let navigate = useNavigate();
+    const [myUserId, setMyUserId] = useState(true)
 
 
     useEffect(() => {
-        dispatch(getMyPacksTC(''))
+        if (myUserId) {
+            dispatch(getMyPacksTC(''))
+        }
     }, [dispatch, page, pageCount, sortPacks])
 
     // const addCardsPacKHandler = useCallback(() => {
@@ -32,9 +34,9 @@ export const Packs = React.memo(() => {
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
-        dispatch(getMyPacksTC(myUserId ? '' : userId))
-        dispatch(setPackUserIdAC(myUserId ? '' : userId));
-    }, [dispatch, setMyUserId, myUserId, userId])
+        dispatch(getMyPacksTC(myUserId ? userId : ''))
+        dispatch(setPackUserIdAC(myUserId ? userId : ''));
+    }, [dispatch, setMyUserId, myUserId, userId, page, pageCount, sortPacks])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
@@ -45,6 +47,10 @@ export const Packs = React.memo(() => {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
         }
     }, [dispatch, data])
+
+    function handleClick(packId: string) {
+        navigate(`/cards/${packId}`, {replace: true});
+    }
 
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
@@ -57,19 +63,22 @@ export const Packs = React.memo(() => {
     return <div className={s.main}>
         <SearchProduct/>
 
-        <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
+        <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
+            {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
+        </div>
+
         <div className={s.header}>
             <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne={'1name'}
                                                                                     valueTwo={'0name'}/> </span></div>
             <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton valueOne={'1cardsCount'}
                                                                                      valueTwo={'0cardsCount'}/> </span>
             </div>
-            <div className={s.sortBlock}>Updated<span className={s.sort}><SortButton valueOne={'1updated'}
-                                                                                     valueTwo={'0updated'}/></span>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
+                                                                                      valueTwo={'0updated'}/></span>
             </div>
             <div className={s.sortBlock}>Created by</div>
             <div>
-                <Button variant="outlined" onClick={addNewPackHandler}>Add pack</Button>
+                <Button variant="outlined" onClick={addNewPackHandler}>Add pack </Button>
             </div>
         </div>
 
@@ -82,9 +91,16 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].user_name}</div>
                         <div>
-                            <Button color={'success'} variant="contained"> Learn</Button>
-                            <Button variant="contained"> Update</Button>
-                            <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+                            <Button color={'success'} variant="contained"
+                                    onClick={() => handleClick(data.cardPacks[index]._id)}
+                            > Cards</Button>
+                            {!myUserId ?
+                                <span>
+                                <Button variant="contained"> Update</Button>
+                                <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+                            </span>
+                                : ''
+                            }
                         </div>
 
                     </div>
@@ -92,6 +108,7 @@ export const Packs = React.memo(() => {
                 ))
             }
         </div>
+
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
     </div>
 })
