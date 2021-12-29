@@ -63,12 +63,12 @@ export const Navbar: React.FC = () => {
                     </div>
                     {/* <div className={styles.navTabsItem}>
                         <NavLink to='/registration'
-                                 className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
+                        className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
                         >Registration</NavLink>
                     </div> */}
                     {/* <div className={styles.navTabsItem}>
                         <NavLink to='/passwordRecovery'
-                                 className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
+                        className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
                         >PasswordRecovery</NavLink>
                     </div> */}
                 </div>
