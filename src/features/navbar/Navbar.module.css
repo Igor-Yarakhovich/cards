@@ -36,7 +36,7 @@
     letter-spacing: 0.40px;
     display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items:baseline;
 }
 
 .navTabsImg{
@@ -52,6 +52,10 @@
     text-decoration: none;
     margin-right: 50px;
     cursor: pointer;
+    display: flex;
+    align-items:center;
+    justify-content: baseline;
+
 }
 
 .activeStyle{

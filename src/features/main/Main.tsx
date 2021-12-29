@@ -18,7 +18,7 @@ export const Main: React.FC = () => {
             <Routes>
 
                 <Route path='/login' element={<Login/>}/>
-
+               
                 <Route path='/' element={<Navigate to='/profile'/>}/>
                 <Route path='/profile' element={<Profile/>}/>
                 <Route path='/registration' element={<Registration/>}/>
@@ -26,7 +26,7 @@ export const Main: React.FC = () => {
                 <Route path='/setPassword/:token/*' element={<SetPassword/>}/>
                 <Route path='/superComponents' element={<SuperComponents/>}/>
                 <Route path='/packs' element={<Packs/>}/>
-                <Route path='/cards' element={<Cards/>}/>
+                <Route path='/cards/:packId/*' element={<Cards/>}/>
                 <Route path='404' element={<Page404/>}/>
                 <Route path='*' element={<Navigate to='/404'/>}/>
 

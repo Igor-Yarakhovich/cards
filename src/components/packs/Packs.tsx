@@ -19,7 +19,9 @@ export const Packs = React.memo(() => {
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
+
     const [myUserId, setMyUserId] = useState(true)
+
 
 
     useEffect(() => {
@@ -94,6 +96,7 @@ export const Packs = React.memo(() => {
                             <Button color={'success'} variant="contained"
                                     onClick={() => handleClick(data.cardPacks[index]._id)}
                             > Cards</Button>
+
                             {!myUserId ?
                                 <span>
                                 <Button variant="contained"> Update</Button>
@@ -101,6 +104,7 @@ export const Packs = React.memo(() => {
                             </span>
                                 : ''
                             }
+
                         </div>
 
                     </div>

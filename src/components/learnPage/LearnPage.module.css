@@ -1,0 +1,121 @@
+.learnPage{
+    background:#F9F9FE;
+    border: 8px solid transparent;
+    padding: 0 33px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    width: 70%;
+    max-width: 413px;
+    /* position: fixed;
+    left: 34%;
+    top: 100%;  */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.learnPageWrapper{
+    max-width: 352px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.learnPageTitle{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    color:#2D2E46;
+    margin: 36px 0 33px;
+    text-align: center;
+}
+
+.learnPageRow{
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color:#2D2E46;
+    margin-bottom: 12px;
+}
+
+.learnPageRowText{
+    margin-right: 10px;
+}
+
+
+.learnPageBtnBox{
+    display: flex;
+    justify-content: space-between;
+    margin: 68px 0 60px;
+}
+
+.learnPageBtnCancel{
+    width: 124px;
+    height: 36px;
+    background-color: #D7D8EF;
+    border:none;
+    border-radius:30px;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    -ms-border-radius:30px;
+    -o-border-radius:30px;
+    font-family: 'SFUIDisplayMedium', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color:#21268F;
+    text-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 36px;
+    cursor: pointer;
+}
+.learnPageBtnCancel:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 4px 36px 0 rgba(33, 38, 143, 0.65);
+    transition: 0.5s ease-in-out;
+}
+
+.learnPageBtnShow{
+    width: 187px;
+    height: 36px;
+    background-color: #21268F;
+    border:none;
+    border-radius:30px;
+    font-family: 'SFUIDisplayMedium', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color:#ECECF9;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    -ms-border-radius:30px;
+    -o-border-radius:30px;
+    box-shadow: 0 4px 18px 0 rgba(33, 38, 143, 0.35);
+    cursor: pointer;
+    transition: 1s ease-in-out;
+}
+
+.learnPageBtnShow:hover{
+    box-shadow: 0 4px 36px 0 rgba(33, 38, 143, 0.65);
+    transition: 0.5s ease-in-out;
+    transform: translateY(-3px);
+}
+
+
+.learnPageRadioWrap{
+    margin: 48px 0 68px;
+}
+
+.learnPageRadioGroup{
+    border: none;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color:#2D2E46;
+    padding-left: 28px;
+}

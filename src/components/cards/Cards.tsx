@@ -1,45 +1,53 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {PacksResponseType} from "../packs/packsPage-api";
-import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from "../packs/packsReducer";
-import {Navigate} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {Preloader} from "../../assets/Preloader/Preloader";
 import s from "../packs/Packs.module.css";
 import SearchProduct from "../searchProduct/SearchProduct";
 import {SortButton} from "../sortButton/SortButton";
 import {Button} from "@mui/material";
+import {getAllCardsTC, setCardAnswerAC} from "./cardsReducer";
 import TablePaginationDemo from "../pagination/Pagination";
+import LearnPage from "../learnPage/LearnPage";
+import Modal from "../../assets/modal/Modal";
+
+import style from './Cards.module.css';
 
 export const Cards = React.memo(() => {
 
-    const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
-    const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
+    const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const [cardId, setCardId] = useState("")
+    const {
+        cards, page, pageCount, cardsTotalCount,
+        sortCards, cardAnswer, cardQuestion
+    } = useAppSelector(state => state.cards)
+    const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    let {packId} = useParams<string>()
 
-    const [myUserId, setMyUserId] = useState(false)
+    const [searchValue, setSearchValue] = useState("")
+
 
     useEffect(() => {
-        dispatch(getMyPacksTC(''))
-    }, [dispatch])
+        let timer = setTimeout(() => {
+            dispatch(setCardAnswerAC(searchValue))
+        }, 500)
+        return () => clearTimeout(timer)
+    }, [searchValue, dispatch])
 
-    const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setMyUserId(e.currentTarget.checked)
-        dispatch(getMyPacksTC(myUserId ? '' : userId))
-        dispatch(setPackUserIdAC(myUserId ? '' : userId));
-    }, [dispatch, setMyUserId, myUserId, userId])
+    useEffect(() => {
+        packId && dispatch(getAllCardsTC(packId))
+    }, [cardQuestion, cardAnswer, sortCards, page, pageCount, dispatch, packId])
 
-    const addNewPackHandler = useCallback(() => {
-        dispatch(addPacksTC())
-    }, [dispatch])
+    // const createCardHandler = () => {
+    //     dispatch(createNewCardTC(cardsPack_id, cardQuestion, cardAnswer, grade, shots))
+    // }
 
-    const deleteMyPackHandler = useCallback(() => {
-        if (data) {
-            dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
-        }
-    }, [dispatch, data])
+    const [show, setShow] = useState(false);
 
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
@@ -51,37 +59,62 @@ export const Cards = React.memo(() => {
 
     return <div className={s.main}>
         <SearchProduct/>
-        <div><input type="checkbox"/> All packs</div>
-        <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
         <div className={s.header}>
-            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne ={ '1name'} valueTwo ={ '0name'}/> </span></div>
-            <div className={s.sortBlock}>Cards <span className={s.sort}><SortButton valueOne ={ '1cardsCount'} valueTwo ={ '0cardsCount'}/></span></div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne ={ '1updated'} valueTwo ={ '0updated'}/></span></div>
-            <div className={s.sortBlock}>Created by</div>
+            <div className={s.sortBlock}>Question <span className={s.sort}> <SortButton valueOne={'1question'}
+                                                                                        valueTwo={'0question'}/> </span>
+            </div>
+            <div className={s.sortBlock}>Answer <span className={s.sort}><SortButton valueOne={'1answer'}
+                                                                                     valueTwo={'0answer'}/></span></div>
+            <div className={s.sortBlock}>Grade 
+                <span className={s.sort}>
+                    <SortButton valueOne={'1grade'}
+                                valueTwo={'0grade'}/>
+                </span>
+            </div>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
+                                                                                      valueTwo={'0updated'}/></span>
+            </div>
             <div>
-                <Button variant="contained" onClick={addNewPackHandler}>Add pack</Button>
+                <Button variant="contained" onClick={() => {
+                }}>Create card</Button>
+                <Button color={'success'} variant="contained" onClick={() => setShow(true)}> Learn</Button>
             </div>
         </div>
 
         <div className={s.table}>
             {
-                data.cardPacks.map((value, index) => (
-                    <div key={data.cardPacks[index]._id} className={s.row}>
-                        <div>{data.cardPacks[index].name}</div>
-                        <div>{data.cardPacks[index].cardsCount}</div>
-                        <div>{data.cardPacks[index].created}</div>
-                        <div>{data.cardPacks[index].updated}</div>
-                        <div>
-                            <Button color={'success'} variant="contained"> Learn</Button>
-                            <Button  variant="contained"> Update</Button>
-                            <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
-                        </div>
-
+                cards.map((value, index) => (
+                    <div key={cards[index]._id} className={s.row}>
+                        <div>{cards[index].question}</div>
+                        <div>{cards[index].answer}</div>
+                        <div>{cards[index].grade}</div>
+                        <div>{cards[index].updated}</div>
                     </div>
 
                 ))
             }
         </div>
-        {/*<TablePaginationDemo />*/}
+        <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
+        <>
+            <Modal
+                enableBackground={true}
+                backgroundOnClick={() => setShow(false)}
+
+                width={600}
+                height={200}
+                // modalOnClick={() => setShow(false)}
+
+                show={show}
+            >
+                <LearnPage/>
+            <div className={style.cardLearnModalBtnBox}>
+                {/* <button className={style.cardLearnModalBtnCancel} onClick={() => setShow(false)}>Cancel</button>
+                <button className={style.cardLearnModalBtnNext}>Next</button> */}
+            </div>
+                
+                
+            </Modal>
+        </>
+
     </div>
 })

@@ -41,7 +41,8 @@ export const Navbar: React.FC = () => {
                             to='/packs'
                             className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}>
                             <img className={styles.navTabsImg} src={img1} alt=""/>
-                            Packs list
+                            <span>Packs list</span>
+                            
                         </NavLink>
                     </div>
                     <div className={styles.navTabsItem}>
@@ -49,26 +50,27 @@ export const Navbar: React.FC = () => {
                             to='/profile'
                             className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}>
                             <img className={styles.navTabsImg} src={img2} alt=""/>
-                            Profile
+                            <span>Profile</span>
+                            
                         </NavLink>
                     </div>
                 </div>
 
                 <div className={styles.navRight}>
 
-                    <div className={styles.navTabsItem}>
+                    <div className={styles.navTabsItem1}>
                         {loginHandler}
                     </div>
-                    <div className={styles.navTabsItem}>
+                    {/* <div className={styles.navTabsItem}>
                         <NavLink to='/registration'
-                                 className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
+                        className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
                         >Registration</NavLink>
-                    </div>
-                    <div className={styles.navTabsItem}>
+                    </div> */}
+                    {/* <div className={styles.navTabsItem}>
                         <NavLink to='/passwordRecovery'
-                                 className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
+                        className={({isActive}) => (isActive ? styles.activeStyle : styles.item)}
                         >PasswordRecovery</NavLink>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
