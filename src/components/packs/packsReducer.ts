@@ -7,7 +7,7 @@ import {ThunkAction} from 'redux-thunk';
 
 const initialState = {
     data: null as null | PacksResponseType,
-    packUserId: '',
+    packUserId:'',
     page:1,
     pageCount:10,
     sortPacks:''
@@ -75,7 +75,7 @@ export const getMyPacksTC = (userId: string) => (dispatch: Dispatch,getState:() 
 const packData = getState().packs
 const params ={page: packData.page,
     pageCount:packData.pageCount,
-    userId:packData.packUserId,
+    user_id:userId,
     sortPacks:packData.sortPacks
     }
     dispatch(setStatusAC('loading'))

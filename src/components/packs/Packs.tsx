@@ -19,11 +19,15 @@ export const Packs = React.memo(() => {
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
-    const [myUserId, setMyUserId] = useState(false)
+
+    const [myUserId, setMyUserId] = useState(true)
+
 
 
     useEffect(() => {
-        dispatch(getMyPacksTC(''))
+        if (myUserId) {
+            dispatch(getMyPacksTC(''))
+        }
     }, [dispatch, page, pageCount, sortPacks])
 
     // const addCardsPacKHandler = useCallback(() => {
@@ -32,9 +36,9 @@ export const Packs = React.memo(() => {
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
-        dispatch(getMyPacksTC(myUserId ? '' : userId))
-        dispatch(setPackUserIdAC(myUserId ? '' : userId));
-    }, [dispatch, setMyUserId, myUserId, userId])
+        dispatch(getMyPacksTC(myUserId ? userId : ''))
+        dispatch(setPackUserIdAC(myUserId ? userId : ''));
+    }, [dispatch, setMyUserId, myUserId, userId, page, pageCount, sortPacks])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
@@ -61,7 +65,10 @@ export const Packs = React.memo(() => {
     return <div className={s.main}>
         <SearchProduct/>
 
-        <div><input type="checkbox" onChange={addMyPacksHandler}/> My packs</div>
+        <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
+            {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
+        </div>
+
         <div className={s.header}>
             <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne={'1name'}
                                                                                     valueTwo={'0name'}/> </span></div>
@@ -89,8 +96,15 @@ export const Packs = React.memo(() => {
                             <Button color={'success'} variant="contained"
                                     onClick={() => handleClick(data.cardPacks[index]._id)}
                             > Cards</Button>
-                            <Button variant="contained"> Update</Button>
-                            <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+
+                            {!myUserId ?
+                                <span>
+                                <Button variant="contained"> Update</Button>
+                                <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+                            </span>
+                                : ''
+                            }
+
                         </div>
 
                     </div>
