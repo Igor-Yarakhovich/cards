@@ -11,7 +11,7 @@ type PageCountPropsType={
 
 export default function TablePaginationDemo(props:PageCountPropsType) {
 
-const dispatch=useDispatch()
+    const dispatch=useDispatch()
     // const [page, setPage] = React.useState(1);
     // const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (
@@ -19,6 +19,7 @@ const dispatch=useDispatch()
         newPage: number,
     ) => {
         dispatch(setPageAC(newPage))
+
         //setPage(newPage);
     };
 
@@ -26,10 +27,12 @@ const dispatch=useDispatch()
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
         //setRowsPerPage();
+
         dispatch(setPageCountAC(parseInt(event.target.value, 10)))
         //dispatch(setPageCountAC(0))
 
     };
+    console.log(props.page)
 
     return (
         <TablePagination

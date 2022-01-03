@@ -23,7 +23,6 @@ export const Packs = React.memo(() => {
     const [myUserId, setMyUserId] = useState(true)
 
 
-
     useEffect(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
@@ -61,7 +60,7 @@ export const Packs = React.memo(() => {
     if (!data) {
         return <Preloader/>
     }
-
+    console.log(data.cardPacks)
     return <div className={s.main}>
         <SearchProduct/>
 
