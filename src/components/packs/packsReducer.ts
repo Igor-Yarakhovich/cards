@@ -8,7 +8,7 @@ import {ThunkAction} from 'redux-thunk';
 const initialState = {
     data: null as null | PacksResponseType,
     packUserId:'',
-    page:1,
+    page:0,
     pageCount:10,
     sortPacks:''
 };
@@ -73,7 +73,7 @@ export type ActionType = SetPacksDataType
 // thunks
 export const getMyPacksTC = (userId: string) => (dispatch: Dispatch,getState:() => AppRootStateType ) => {
 const packData = getState().packs
-const params ={page: packData.page,
+const params ={page: packData.page + 1,
     pageCount:packData.pageCount,
     user_id:userId,
     sortPacks:packData.sortPacks

@@ -22,23 +22,17 @@ export const Packs = React.memo(() => {
 
     const [myUserId, setMyUserId] = useState(true)
 
-
-
     useEffect(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
         }
-    }, [dispatch, page, pageCount, sortPacks])
-
-    // const addCardsPacKHandler = useCallback(() => {
-    //     dispatch(getMyPacksTC(''))
-    // }, [dispatch])
+    }, [dispatch, myUserId])
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? userId : ''))
         dispatch(setPackUserIdAC(myUserId ? userId : ''));
-    }, [dispatch, setMyUserId, myUserId, userId, page, pageCount, sortPacks])
+    }, [dispatch, setMyUserId, myUserId, userId])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
@@ -61,7 +55,7 @@ export const Packs = React.memo(() => {
     if (!data) {
         return <Preloader/>
     }
-
+    console.log(data.cardPacks)
     return <div className={s.main}>
         <SearchProduct/>
 
