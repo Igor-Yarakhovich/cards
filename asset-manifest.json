@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.e7b08b41.chunk.css",
-    "main.js": "/cards/static/js/main.cd7c883c.chunk.js",
-    "main.js.map": "/cards/static/js/main.cd7c883c.chunk.js.map",
-    "runtime-main.js": "/cards/static/js/runtime-main.b348e4a8.js",
-    "runtime-main.js.map": "/cards/static/js/runtime-main.b348e4a8.js.map",
-    "static/js/2.e9f88230.chunk.js": "/cards/static/js/2.e9f88230.chunk.js",
-    "static/js/2.e9f88230.chunk.js.map": "/cards/static/js/2.e9f88230.chunk.js.map",
-    "static/js/3.d93ea928.chunk.js": "/cards/static/js/3.d93ea928.chunk.js",
-    "static/js/3.d93ea928.chunk.js.map": "/cards/static/js/3.d93ea928.chunk.js.map",
+    "main.css": "/cards/static/css/main.d78e6ffd.chunk.css",
+    "main.js": "/cards/static/js/main.8125c293.chunk.js",
+    "main.js.map": "/cards/static/js/main.8125c293.chunk.js.map",
+    "runtime-main.js": "/cards/static/js/runtime-main.4aea4d62.js",
+    "runtime-main.js.map": "/cards/static/js/runtime-main.4aea4d62.js.map",
+    "static/js/2.c3e2165f.chunk.js": "/cards/static/js/2.c3e2165f.chunk.js",
+    "static/js/2.c3e2165f.chunk.js.map": "/cards/static/js/2.c3e2165f.chunk.js.map",
+    "static/js/3.234d37ae.chunk.js": "/cards/static/js/3.234d37ae.chunk.js",
+    "static/js/3.234d37ae.chunk.js.map": "/cards/static/js/3.234d37ae.chunk.js.map",
     "index.html": "/cards/index.html",
-    "static/css/main.e7b08b41.chunk.css.map": "/cards/static/css/main.e7b08b41.chunk.css.map",
-    "static/js/2.e9f88230.chunk.js.LICENSE.txt": "/cards/static/js/2.e9f88230.chunk.js.LICENSE.txt",
+    "static/css/main.d78e6ffd.chunk.css.map": "/cards/static/css/main.d78e6ffd.chunk.css.map",
+    "static/js/2.c3e2165f.chunk.js.LICENSE.txt": "/cards/static/js/2.c3e2165f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/cards/static/media/SFUIDisplay-Semibold.cb4925c9.ttf",
     "static/media/avatar.ae88cd5b.png": "/cards/static/media/avatar.ae88cd5b.png",
     "static/media/email.2c4865f1.png": "/cards/static/media/email.2c4865f1.png",
@@ -21,9 +21,9 @@
     "static/media/profileIcon.36eee9e3.svg": "/cards/static/media/profileIcon.36eee9e3.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b348e4a8.js",
-    "static/js/2.e9f88230.chunk.js",
-    "static/css/main.e7b08b41.chunk.css",
-    "static/js/main.cd7c883c.chunk.js"
+    "static/js/runtime-main.4aea4d62.js",
+    "static/js/2.c3e2165f.chunk.js",
+    "static/css/main.d78e6ffd.chunk.css",
+    "static/js/main.8125c293.chunk.js"
   ]
 }
