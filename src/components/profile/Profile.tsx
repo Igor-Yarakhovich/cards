@@ -13,8 +13,9 @@ import Slider from '../searchProduct/slider/Slider';
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
 import { TextField } from "@mui/material";
-import CheckEmail from "../checkEmail/CheckEmail";
+// import CheckEmail from "../checkEmail/CheckEmail";
 // import { Pagination } from "../pagination/Pagination";
+import StarRating from '../starRating/StarRating';
 
 export const Profile: React.FC = () => {
 
@@ -95,7 +96,7 @@ export const Profile: React.FC = () => {
                                 focused size="small"/>
                             Таблица
                             Pagination
-
+                            <StarRating/>
                             {/* <CheckEmail/> */}
                         </div>
                         
@@ -131,7 +132,7 @@ export const Profile: React.FC = () => {
                             <span className={style.profilePersonalRowTitle}>Email:</span><br/>
                             {email}
                         </div>
-
+                            
                         <div className={style.profileBtnBox}>
                             <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
                             <button className={style.profileBtnSave} >Save</button>
