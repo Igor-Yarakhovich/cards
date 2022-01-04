@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPackUserIdAC} from './packsReducer';
+import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPacksNameAC, setPackUserIdAC} from './packsReducer';
 import {AppRootStateType} from '../../app/store';
 import {Preloader} from '../../assets/Preloader/Preloader';
 import s from './Packs.module.css'
@@ -9,11 +9,12 @@ import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
+import SuperInputText from "../superComponents/superInputText/SuperInputText";
 
 
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
-    const {data, page, pageCount, sortPacks} = useAppSelector(state => state.packs)
+    const {data, page, pageCount, packName} = useAppSelector(state => state.packs)
     const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
@@ -21,43 +22,49 @@ export const Packs = React.memo(() => {
     let navigate = useNavigate();
 
     const [myUserId, setMyUserId] = useState(true)
+    const [searchValue, setSearchValue] = useState("")
 
     useEffect(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
         }
-    }, [dispatch, myUserId, page, pageCount])
+    }, [dispatch, myUserId, page, pageCount, packName])
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? userId : ''))
         dispatch(setPackUserIdAC(myUserId ? userId : ''));
-    }, [dispatch, setMyUserId, myUserId, userId, page, pageCount])
+    }, [dispatch, setMyUserId, myUserId, userId])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
-    }, [dispatch, page, pageCount])
+    }, [dispatch])
 
     const deleteMyPackHandler = useCallback(() => {
         if (data) {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
         }
-    }, [dispatch, data, page, pageCount])
+    }, [dispatch, data])
 
     function handleClick(packId: string) {
         navigate(`/cards/${packId}`, {replace: true});
     }
 
+    useEffect(() => {
+        let timer = setTimeout(() => dispatch(setPacksNameAC(searchValue)), 500)
+        return () => clearTimeout(timer)
+    }, [searchValue, dispatch])
+
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
     }
-
+    console.log(searchValue)
     if (!data) {
         return <Preloader/>
     }
 
     return <div className={s.main}>
-        <SearchProduct/>
+        <SuperInputText type="text" required onChangeText={setSearchValue} name={"Search"}/>
 
         <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
             {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
