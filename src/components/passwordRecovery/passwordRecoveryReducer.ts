@@ -3,8 +3,7 @@ import {recoveryAPI} from "./passwordRecovery-api";
 
 const initialState = {
     passwordRecoveryError: '',
-    status: 'idle',
-    emailValidate: ''
+    status: 'idle'
 } as passwordRecoveryType
 
 export const passwordRecoveryReducer = (state: InitialStateType = initialState, action: AppActionType): InitialStateType => {
@@ -13,8 +12,6 @@ export const passwordRecoveryReducer = (state: InitialStateType = initialState, 
             return {...state, passwordRecoveryError: action.value};
         case "PASSWORD_RECOVERY/RECOVERY_STATUS":
             return {...state, status: action.value};
-        case "PASSWORD_RECOVERY/EMAIL_VALIDATE":
-            return {...state, emailValidate: action.value};
         default:
             return state;
     }
@@ -28,11 +25,6 @@ export const passwordRecoveryError = (value: string) => ({
 
 export const passwordRecoveryStatus = (value: recoveryStatusType) => ({
     type: "PASSWORD_RECOVERY/RECOVERY_STATUS",
-    value
-} as const)
-
-export const passwordRecoveryEmailValidate = (value: string) => ({
-    type: "PASSWORD_RECOVERY/EMAIL_VALIDATE",
     value
 } as const)
 
@@ -64,6 +56,5 @@ export type passwordRecoveryType = {
 
 export type AppActionType = ReturnType<typeof passwordRecoveryError>
     | ReturnType<typeof passwordRecoveryStatus>
-    | ReturnType<typeof passwordRecoveryEmailValidate>
 
 export type recoveryStatusType = "idle" | "loading" | "succeeded" | "failed";
