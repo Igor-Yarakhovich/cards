@@ -13,8 +13,8 @@ import {
     recoveryStatusType
 } from "./passwordRecoveryReducer";
 import {NavLink} from "react-router-dom";
-import email from './../../assets/images/email.png'
 import {Preloader} from "../../assets/Preloader/Preloader";
+import CheckEmail from "../checkEmail/CheckEmail";
 
 
 export const PasswordRecovery: React.FC = () => {
@@ -77,12 +77,8 @@ export const PasswordRecovery: React.FC = () => {
     }
 
     if (status === "succeeded") {
-
         dispatch(passwordRecoveryError(''))
-        return <div className={styles.email}>
-            <h2>Check your email and follow the link</h2>
-            <img alt='' className={styles.emailPhoto} src={email}/>
-        </div>
+        return <CheckEmail email={data.email}/>
     }
 
     if (status === "loading") {
@@ -98,22 +94,22 @@ export const PasswordRecovery: React.FC = () => {
                     <SuperInputText
                         className={style.passwordRecoveryEmail}
                         type="email"
-
                         id="email"
                         placeholder="Email"
                         value={data.email}
                         onChange={setDataHandler}/>
                     <p className={style.passwordRecoveryText}>Enter your email address and we will send you further
                         instructions</p>
-
-                </form>
-                <div className={style.passwordRecoveryBottom}>
                     <SuperButton
                         className={style.passwordRecoveryButton}
                         color='dark-blue'
-                        type={"submit"}>
+                        type={"submit"}
+                    >
                         Send Instructions
                     </SuperButton>
+                </form>
+                <div className={style.passwordRecoveryBottom}>
+
                     <p className={style.passwordRecoveryTextButton}>Did you remember your password?</p>
                     <div>{error}</div>
                     <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
