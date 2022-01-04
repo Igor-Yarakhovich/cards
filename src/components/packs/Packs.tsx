@@ -65,7 +65,6 @@ export const Packs = React.memo(() => {
 
     return <div className={s.main}>
         <SuperInputText type="text" required onChangeText={setSearchValue} name={"Search"}/>
-        <SearchProduct/>
 
         <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
             {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
