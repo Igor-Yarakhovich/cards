@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState, useRef} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import avatar from "../../assets/images/avatar.png"
@@ -9,10 +9,9 @@ import {EditableSpan} from "./editableSpan";
 
 import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
-import Slider from '../searchProduct/slider/Slider';
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
-import { TextField } from "@mui/material";
+import {TextField} from "@mui/material";
 // import CheckEmail from "../checkEmail/CheckEmail";
 // import { Pagination } from "../pagination/Pagination";
 import StarRating from '../starRating/StarRating';
@@ -20,10 +19,6 @@ import StarRating from '../starRating/StarRating';
 export const Profile: React.FC = () => {
 
     const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     dispatch(initialiseTC())
-    // }, [dispatch])
 
     const email = useSelector<AppRootStateType, string>(state => state.profile.data.email)
     const photo = useSelector<AppRootStateType, string | undefined>(state => state.profile.data.avatar)
@@ -55,7 +50,6 @@ export const Profile: React.FC = () => {
         }
     }, [error])
 
-
     if (!isLoggedIn) {
         return <Navigate to='/login'/>
     }
@@ -70,9 +64,9 @@ export const Profile: React.FC = () => {
                                 <img className={style.profileAvatarImg} src={avatar} alt=""/>
                             </div>
                             <div className={style.profileNameUser}><EditableSpan value={name}
-                                onChange={startValueHandler}/></div>
+                                                                                 onChange={startValueHandler}/></div>
                             <div className={style.profileUserProf}>Front-end developer</div>
-                            
+
                             <SuperButton
                                 className={style.profilePersonalBtn}
                                 color='white'
@@ -83,23 +77,23 @@ export const Profile: React.FC = () => {
                             </SuperButton>
                         </div>
                         <div className={style.profileLeftBottom}>
-                        {/*<Slider/>*/}
+                            {/*<Slider/>*/}
                         </div>
                     </div>
                     <div className={style.profileRightBox}>
                         <div className={style.profileRightBoxWrapper}>
                             <h2 className={style.profileRightBoxTitle}>My packs list</h2>
-                           <TextField 
-                                fullWidth sx={{ m: 5}} 
+                            <TextField
+                                fullWidth sx={{m: 5}}
                                 placeholder="Search..."
-                                style={{margin:0}}
+                                style={{margin: 0}}
                                 focused size="small"/>
                             Таблица
                             Pagination
                             <StarRating/>
                             {/* <CheckEmail/> */}
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -120,22 +114,22 @@ export const Profile: React.FC = () => {
                         <div className={style.profilePersonalPhotoWrapper}>
                             {photo ? <img alt='' src={photo}/> : <img alt='' src={avatar}/>}
                         </div>
-                        
-                        <input type="file" hidden={true} ref={inputRef} /> 
+
+                        <input type="file" hidden={true} ref={inputRef}/>
                         <button className={style.profilePersonalSelectPhoto} onClick={handlerUploadClick}></button>
 
                         <div className={style.profilePersonalNameRow}>
-                           <span className={style.profilePersonalRowTitle}>Nickname:</span> <br/>
-                           <EditableSpan value={name} onChange={startValueHandler}/>
+                            <span className={style.profilePersonalRowTitle}>Nickname:</span> <br/>
+                            <EditableSpan value={name} onChange={startValueHandler}/>
                         </div>
                         <div className={style.profilePersonalEmailRow}>
                             <span className={style.profilePersonalRowTitle}>Email:</span><br/>
                             {email}
                         </div>
-                            
+
                         <div className={style.profileBtnBox}>
                             <button className={style.profileBtnCancel} onClick={() => setShow(false)}>Cancel</button>
-                            <button className={style.profileBtnSave} >Save</button>
+                            <button className={style.profileBtnSave}>Save</button>
                         </div>
                     </section>
                 </Modal>
