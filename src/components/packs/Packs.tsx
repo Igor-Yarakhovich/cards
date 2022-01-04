@@ -26,23 +26,23 @@ export const Packs = React.memo(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
         }
-    }, [dispatch, myUserId])
+    }, [dispatch, myUserId, page, pageCount])
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? userId : ''))
         dispatch(setPackUserIdAC(myUserId ? userId : ''));
-    }, [dispatch, setMyUserId, myUserId, userId])
+    }, [dispatch, setMyUserId, myUserId, userId, page, pageCount])
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
-    }, [dispatch])
+    }, [dispatch, page, pageCount])
 
     const deleteMyPackHandler = useCallback(() => {
         if (data) {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
         }
-    }, [dispatch, data])
+    }, [dispatch, data, page, pageCount])
 
     function handleClick(packId: string) {
         navigate(`/cards/${packId}`, {replace: true});
@@ -55,7 +55,7 @@ export const Packs = React.memo(() => {
     if (!data) {
         return <Preloader/>
     }
-    console.log(data.cardPacks)
+
     return <div className={s.main}>
         <SearchProduct/>
 

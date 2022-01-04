@@ -22,8 +22,10 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
         case "packs/SET-SORT-PACKS":
             return {...state, sortPacks: action.sortPacks}
         case "packs/SET-PAGE":
+            debugger
             return {...state, page: action.page}
         case "packs/SET-PAGE-COUNT":
+            debugger
             return {...state, pageCount: action.pageCount}
         case "packs/DELETE-PACK-USER-ID":
             return {
