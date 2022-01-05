@@ -7,10 +7,11 @@ import {ThunkAction} from 'redux-thunk';
 
 const initialState = {
     data: null as null | PacksResponseType,
-    packUserId:'',
-    page:1,
-    pageCount:10,
-    sortPacks:''
+    packUserId: '',
+    page: 0,
+    pageCount: 10,
+    sortPacks: '',
+    packName: ''
 };
 
 type InitialStateType = typeof initialState;
@@ -34,6 +35,8 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
             }
         case "packs/SET-DATA":
             return {...state, data: action.data}
+        case "packs/SET-PACKS-NAME":
+            return {...state, ...action.payload}
         default:
             return state;
     }
@@ -43,17 +46,24 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
 
 export const setPacksDataAC = (data: PacksResponseType) =>
     ({type: 'packs/SET-DATA', data} as const)
+
 export const setPageAC = (page: number) =>
     ({type: "packs/SET-PAGE", page} as const)
+
 export const setPageCountAC = (pageCount: number) =>
     ({type: "packs/SET-PAGE-COUNT", pageCount} as const)
+
 export const setSortPacksCountAC = (sortPacks: string) =>
     ({type: "packs/SET-SORT-PACKS", sortPacks} as const)
+
 export const setPackUserIdAC = (packUserId: string) =>
     ({type: "packs/SET-PACK-USER-ID", packUserId} as const)
 
 export const deletePackUserIdAC = (packId: string) =>
     ({type: "packs/DELETE-PACK-USER-ID", packId} as const)
+
+export const setPacksNameAC = (packName: string) =>
+    ({type: "packs/SET-PACKS-NAME", payload: {packName}} as const)
 
 
 
@@ -66,17 +76,23 @@ export type ActionType = SetPacksDataType
     | SetStatusType
     | SetPackUserIdType
     | DeletePackUserIdType
-    |ReturnType<typeof setPageAC>
-    |ReturnType<typeof setPageCountAC>
-    |ReturnType<typeof setSortPacksCountAC>
+    | ReturnType<typeof setPageAC>
+    | ReturnType<typeof setPageCountAC>
+    | ReturnType<typeof setSortPacksCountAC>
+    | ReturnType<typeof setPacksNameAC>
+
 
 // thunks
-export const getMyPacksTC = (userId: string) => (dispatch: Dispatch,getState:() => AppRootStateType ) => {
-const packData = getState().packs
-const params ={page: packData.page,
-    pageCount:packData.pageCount,
-    user_id:userId,
-    sortPacks:packData.sortPacks
+
+export const getMyPacksTC = (userId: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+    const packData = getState().packs
+
+    const params = {
+        page: packData.page + 1,
+        pageCount: packData.pageCount,
+        user_id: userId,
+        sortPacks: packData.sortPacks,
+        packName: packData.packName
     }
     dispatch(setStatusAC('loading'))
     packAPI.getPack(params)
@@ -104,7 +120,7 @@ export const addPacksTC = (): ThunkAction<void, AppRootStateType, unknown, Actio
         })
 }
 
-export const deleteMyPacksTC = (packId: string):ThunkAction<void, AppRootStateType, unknown, ActionType> => (dispatch) => {
+export const deleteMyPacksTC = (packId: string): ThunkAction<void, AppRootStateType, unknown, ActionType> => (dispatch) => {
     dispatch(setStatusAC('loading'))
     packAPI.deletePack(packId)
         .then(res => {
