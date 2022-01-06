@@ -5,7 +5,6 @@ import {PacksResponseType} from '../packs/packsPage-api';
 import {Navigate, useParams} from 'react-router-dom';
 import {Preloader} from '../../assets/Preloader/Preloader';
 import s from '../packs/Packs.module.css';
-import SearchProduct from '../searchProduct/SearchProduct';
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
 import {getAllCardsTC, setCardAnswerAC, setSortCardsAC} from './cardsReducer';
@@ -14,12 +13,14 @@ import LearnPage from '../learnPage/LearnPage';
 import Modal from '../../assets/modal/Modal';
 
 import style from './Cards.module.css';
+import SuperInputText from "../superComponents/superInputText/SuperInputText";
+import icon from "../../assets/images/searchIcon.svg";
 
 export const Cards = React.memo(() => {
 
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-    const [cardId, setCardId] = useState('')
+    // const [cardId, setCardId] = useState('')
     const {
         cards, page, pageCount, cardsTotalCount,
         sortCards, cardAnswer, cardQuestion
@@ -69,7 +70,16 @@ export const Cards = React.memo(() => {
     }
 
     return <div className={s.main}>
-        <SearchProduct/>
+        <div className={s.mainSearchWrapper} >
+            <SuperInputText
+                className={s.mainSearchForm}
+                type="text"
+                required
+                onChangeText={setSearchValue}
+                placeholder='Search...'
+                name={"Search"}/>
+            {!searchValue && <img className={s.mainSearchIcon} src={icon} alt="search"/>}
+        </div>
         <div className={s.header}>
             <div className={s.sortBlock}>Question <span className={s.sort}> <SortButton
                 funOne={onClickSortCardsQuestionUpHandler} funTwo={onClickSortCardsQuestionDownHandler}/> </span>
