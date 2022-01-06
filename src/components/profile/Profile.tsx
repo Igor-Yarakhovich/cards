@@ -13,7 +13,7 @@ import Slider from '../searchProduct/slider/Slider';
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
 import { TextField } from "@mui/material";
-// import CheckEmail from "../checkEmail/CheckEmail";
+
 // import { Pagination } from "../pagination/Pagination";
 import StarRating from '../starRating/StarRating';
 
@@ -97,7 +97,7 @@ export const Profile: React.FC = () => {
                             Таблица
                             Pagination
                             <StarRating/>
-                            {/* <CheckEmail/> */}
+                           
                         </div>
                         
                     </div>
