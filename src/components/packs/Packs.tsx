@@ -11,13 +11,18 @@ import {
 
 import {AppRootStateType} from '../../app/store';
 import {Preloader} from '../../assets/Preloader/Preloader';
+
 import s from './Packs.module.css';
+
 import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
+
 import icon from './../../assets/images/searchIcon.svg';
+
+import Modal from "../../assets/modal/Modal";
 
 
 
@@ -33,6 +38,7 @@ export const Packs = React.memo(() => {
 
     const [myUserId, setMyUserId] = useState(true)
     const [searchValue, setSearchValue] = useState("")
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         if (myUserId) {
@@ -73,7 +79,7 @@ export const Packs = React.memo(() => {
     if (!isLoggedIn) {
         return <Navigate to="/login"/>
     }
-    console.log(searchValue)
+
     if (!data) {
         return <Preloader/>
     }
@@ -111,7 +117,8 @@ export const Packs = React.memo(() => {
             </div>
             <div className={s.sortBlock}>Created by</div>
             <div>
-                <Button variant="outlined" onClick={addNewPackHandler}>Add pack </Button>
+                {/*onClick={addNewPackHandler}*/}
+                <Button variant="outlined" onClick={() => setShow(true)}  >Add pack </Button>
             </div>
         </div>
 
@@ -142,6 +149,18 @@ export const Packs = React.memo(() => {
 
                 ))
             }
+            <Modal
+                enableBackground={true}
+                backgroundOnClick={() => setShow(false)}
+                width={300}
+                height={200}
+                // modalOnClick={() => setShow(false)}
+                show={show}
+            >
+                <SuperInputText/>
+                <button onClick={() => setShow(false)}>Cancel</button>
+                <button onClick={addNewPackHandler}>Apply</button>
+            </Modal>
         </div>
 
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
