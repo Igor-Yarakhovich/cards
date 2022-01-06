@@ -128,7 +128,7 @@ export const deleteMyPacksTC = (packId: string): ThunkAction<void, AppRootStateT
         .then(res => {
             dispatch(setStatusAC('succeeded'))
             dispatch(deletePackUserIdAC(packId))
-            dispatch(getMyPacksTC(''))
+            // dispatch(getMyPacksTC(''))
         })
         .catch(err => console.log(err))
         .finally(() => {

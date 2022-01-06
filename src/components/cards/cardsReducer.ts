@@ -6,7 +6,7 @@ import {AppThunk} from "../../app/store";
 const initialState = {
     data: null,
     packUserId: '',
-    page: 1,
+    page: 0,
     pageCount: 10,
     sortPacks: '',
     cards: [] as Array<CardsType>,

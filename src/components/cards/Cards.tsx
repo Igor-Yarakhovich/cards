@@ -26,7 +26,6 @@ export const Cards = React.memo(() => {
         sortCards, cardAnswer, cardQuestion
     } = useAppSelector(state => state.cards)
     const data = useSelector<AppRootStateType, null | PacksResponseType>(state => state.packs.data)
-
     const dispatch = useDispatch()
     let {packId} = useParams<string>()
 
@@ -68,6 +67,7 @@ export const Cards = React.memo(() => {
     if (!data) {
         return <Preloader/>
     }
+    console.log(data)
 
     return <div className={s.main}>
         <div className={s.mainSearchWrapper} >
