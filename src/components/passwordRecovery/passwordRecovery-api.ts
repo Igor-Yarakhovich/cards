@@ -1,4 +1,3 @@
-import axios from "axios";
 import {instance} from "../../app/instance";
 
 
@@ -24,7 +23,7 @@ export type ResponseType = {
     error: string
 }
 
-export type ForgotResponseType =ResponseType & {
+export type ForgotResponseType = ResponseType & {
     answer: boolean
     html: boolean
     success: boolean

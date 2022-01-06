@@ -58,5 +58,4 @@ export type ParamsType={
     pageCount:number
     user_id:string
     sortPacks:string
-
 }

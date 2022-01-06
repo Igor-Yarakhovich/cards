@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+
 import {
     addPacksTC,
     deleteMyPacksTC,
@@ -8,6 +9,7 @@ import {
     setPackUserIdAC,
     setSortPacksCountAC
 } from './packsReducer';
+
 import {AppRootStateType} from '../../app/store';
 import {Preloader} from '../../assets/Preloader/Preloader';
 import s from './Packs.module.css';
@@ -18,9 +20,11 @@ import {Button} from '@mui/material';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 
 
+
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
     const {data, page, pageCount, packName,sortPacks} = useAppSelector(state => state.packs)
+
     const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
@@ -34,13 +38,17 @@ export const Packs = React.memo(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
         }
+
     }, [dispatch, page, pageCount, packName,sortPacks])
+
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? userId : ''))
+
         //dispatch(setPackUserIdAC(myUserId ? userId : ''));
     }, [dispatch, setMyUserId, myUserId])
+
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
@@ -80,7 +88,9 @@ export const Packs = React.memo(() => {
     const onClickSortPacksCardsUpdateDownHandler =()=>dispatch(setSortPacksCountAC('0updated'))
 
     return <div className={s.main}>
+
         <SuperInputText type="text" required onChangeText={setSearchValue} name={"Search"}/>
+
 
         <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
             {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}

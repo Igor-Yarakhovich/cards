@@ -7,14 +7,13 @@ import SuperButton from "../superComponents/superButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {
-    passwordRecoveryEmailValidate,
     passwordRecoveryError,
     recoveryPassword,
     recoveryStatusType
 } from "./passwordRecoveryReducer";
 import {NavLink} from "react-router-dom";
-import email from './../../assets/images/email.png'
 import {Preloader} from "../../assets/Preloader/Preloader";
+import CheckEmail from "../checkEmail/CheckEmail";
 
 
 export const PasswordRecovery: React.FC = () => {
@@ -31,7 +30,6 @@ export const PasswordRecovery: React.FC = () => {
 
     const status = useSelector<AppRootStateType, recoveryStatusType>(state => state.passwordRecovery.status)
     const error = useSelector<AppRootStateType, string>(state => state.passwordRecovery.passwordRecoveryError)
-    const emailValidate = useSelector<AppRootStateType, string>(state => state.passwordRecovery.emailValidate)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -40,15 +38,12 @@ export const PasswordRecovery: React.FC = () => {
                 dispatch(passwordRecoveryError(''))
             }, 4000)
         }
-        if (emailValidate) {
-            setTimeout(() => {
-                dispatch(passwordRecoveryEmailValidate(''))
-            }, 4000)
-        }
-    }, [emailValidate, error, dispatch])
+    }, [error, dispatch])
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
         const isValidate = validateEmail()
+
         if (isValidate) {
             dispatch(recoveryPassword(data));
             e.preventDefault();
@@ -59,36 +54,28 @@ export const PasswordRecovery: React.FC = () => {
 
     const validateEmail = () => {
         if (!data.email) {
-            dispatch(passwordRecoveryEmailValidate('Required email'))
+            dispatch(passwordRecoveryError('Required email'))
             return false
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-            dispatch(passwordRecoveryEmailValidate('Invalid email address'))
+            dispatch(passwordRecoveryError('Invalid email address'))
             return false
         } else {
-            dispatch(passwordRecoveryEmailValidate(''))
+            dispatch(passwordRecoveryError(''))
             return true
         }
     }
-
-    const errorClass = error ? styles.error : '' || emailValidate ? styles.error : ''
 
     const setDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setData({...data, email: e.target.value})
     }
 
     if (status === "succeeded") {
-
-        dispatch(passwordRecoveryError(''))
-        return <div className={styles.email}>
-            <h2>Check your email and follow the link</h2>
-            <img alt='' className={styles.emailPhoto} src={email}/>
-        </div>
+        return <CheckEmail email={data.email}/>
     }
 
     if (status === "loading") {
         return <Preloader/>
     }
-
     return (
         <div className={style.passwordRecovery}>
             <div className={style.passwordRecoveryWrapper}>
@@ -97,25 +84,26 @@ export const PasswordRecovery: React.FC = () => {
                 <form onSubmit={handleSubmit}>
                     <SuperInputText
                         className={style.passwordRecoveryEmail}
-                        type="email"
-
+                        type="text"
                         id="email"
                         placeholder="Email"
                         value={data.email}
-                        onChange={setDataHandler}/>
+                        onChange={setDataHandler}
+                    />
                     <p className={style.passwordRecoveryText}>Enter your email address and we will send you further
                         instructions</p>
-
-                </form>
-                <div className={style.passwordRecoveryBottom}>
                     <SuperButton
                         className={style.passwordRecoveryButton}
                         color='dark-blue'
-                        type={"submit"}>
+                        type={"submit"}
+                    >
                         Send Instructions
                     </SuperButton>
+                </form>
+                <div className={style.passwordRecoveryBottom}>
+
                     <p className={style.passwordRecoveryTextButton}>Did you remember your password?</p>
-                    <div>{error}</div>
+                    <div className={styles.error}>{error}</div>
                     <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
                 </div>
 
