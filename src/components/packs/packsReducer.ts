@@ -86,6 +86,9 @@ export type ActionType = SetPacksDataType
 
 export const getMyPacksTC = (userId: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const packData = getState().packs
+
+
+
     const params = {
         page: packData.page + 1,
         pageCount: packData.pageCount,

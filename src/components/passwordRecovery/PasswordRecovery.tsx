@@ -92,6 +92,7 @@ export const PasswordRecovery: React.FC = () => {
                     />
                     <p className={style.passwordRecoveryText}>Enter your email address and we will send you further
                         instructions</p>
+                    <div className={styles.error}>{error}</div>
                     <SuperButton
                         className={style.passwordRecoveryButton}
                         color='dark-blue'
@@ -103,7 +104,7 @@ export const PasswordRecovery: React.FC = () => {
                 <div className={style.passwordRecoveryBottom}>
 
                     <p className={style.passwordRecoveryTextButton}>Did you remember your password?</p>
-                    <div className={styles.error}>{error}</div>
+
                     <NavLink className={style.passwordRecoveryLink} to={'/login'}>Try logging in</NavLink>
                 </div>
 
