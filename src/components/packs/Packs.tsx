@@ -1,20 +1,35 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {addPacksTC, deleteMyPacksTC, getMyPacksTC, setPacksNameAC, setPackUserIdAC} from './packsReducer';
+
+import {
+    addPacksTC,
+    deleteMyPacksTC,
+    getMyPacksTC,
+    setPacksNameAC,
+    setSortPacksCountAC
+} from './packsReducer';
+
 import {AppRootStateType} from '../../app/store';
 import {Preloader} from '../../assets/Preloader/Preloader';
-import s from './Packs.module.css'
+
+import s from './Packs.module.css';
+
 import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
 import {Button} from '@mui/material';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
+
+import icon from './../../assets/images/searchIcon.svg';
+
 import Modal from "../../assets/modal/Modal";
+
 
 
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
-    const {data, page, pageCount, packName} = useAppSelector(state => state.packs)
+    const {data, page, pageCount, packName,sortPacks} = useAppSelector(state => state.packs)
+
     const userId = useSelector<AppRootStateType, string>(state => state.profile.data._id)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
@@ -29,13 +44,17 @@ export const Packs = React.memo(() => {
         if (myUserId) {
             dispatch(getMyPacksTC(''))
         }
-    }, [dispatch, myUserId, page, pageCount, packName])
+
+    }, [dispatch, page, pageCount, packName,sortPacks])
+
 
     const addMyPacksHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMyUserId(e.currentTarget.checked)
         dispatch(getMyPacksTC(myUserId ? userId : ''))
-        dispatch(setPackUserIdAC(myUserId ? userId : ''));
-    }, [dispatch, setMyUserId, myUserId, userId])
+
+        //dispatch(setPackUserIdAC(myUserId ? userId : ''));
+    }, [dispatch, setMyUserId, myUserId])
+
 
     const addNewPackHandler = useCallback(() => {
         dispatch(addPacksTC())
@@ -44,6 +63,7 @@ export const Packs = React.memo(() => {
     const deleteMyPackHandler = useCallback(() => {
         if (data) {
             dispatch(deleteMyPacksTC(data.cardPacks[0]._id))
+
         }
     }, [dispatch, data])
 
@@ -64,21 +84,36 @@ export const Packs = React.memo(() => {
         return <Preloader/>
     }
 
+    const onClickSortPacksNameUpHandler =()=>dispatch(setSortPacksCountAC('1name'))
+    const onClickSortPacksNameDownHandler =()=>dispatch(setSortPacksCountAC('0name'))
+
+    const onClickSortPacksCardsCountUpHandler =()=>dispatch(setSortPacksCountAC('1cardsCount'))
+    const onClickSortPacksCardsCountDownHandler =()=>dispatch(setSortPacksCountAC('0cardsCount'))
+
+    const onClickSortPacksCardsUpdateUpHandler =()=>dispatch(setSortPacksCountAC('1updated'))
+    const onClickSortPacksCardsUpdateDownHandler =()=>dispatch(setSortPacksCountAC('0updated'))
+
     return <div className={s.main}>
-        <SuperInputText type="text" required onChangeText={setSearchValue} name={"Search"}/>
+        <div className={s.mainSearchWrapper} >
+            <SuperInputText
+                className={s.mainSearchForm}
+                type="text"
+                required
+                onChangeText={setSearchValue}
+                placeholder='Search...'
+                name={"Search"}/>
+            {!searchValue && <img className={s.mainSearchIcon} src={icon} alt="search"/>}
+        </div>
 
         <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
             {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
         </div>
 
         <div className={s.header}>
-            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton valueOne={'1name'}
-                                                                                    valueTwo={'0name'}/> </span></div>
-            <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton valueOne={'1cardsCount'}
-                                                                                     valueTwo={'0cardsCount'}/> </span>
+            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton funOne={onClickSortPacksNameUpHandler} funTwo={onClickSortPacksNameDownHandler}/> </span></div>
+            <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton funOne={onClickSortPacksCardsCountUpHandler} funTwo={onClickSortPacksCardsCountDownHandler}/> </span>
             </div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton valueOne={'1updated'}
-                                                                                      valueTwo={'0updated'}/></span>
+            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton funOne={onClickSortPacksCardsUpdateUpHandler} funTwo={onClickSortPacksCardsUpdateDownHandler}/></span>
             </div>
             <div className={s.sortBlock}>Created by</div>
             <div>

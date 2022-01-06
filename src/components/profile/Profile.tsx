@@ -11,8 +11,10 @@ import style from './Profile.module.css';
 import SuperButton from "../superComponents/superButton/SuperButton";
 import {Navigate} from "react-router-dom";
 import Modal from "../../assets/modal/Modal";
-import {TextField} from "@mui/material";
-// import CheckEmail from "../checkEmail/CheckEmail";
+
+import { TextField } from "@mui/material";
+
+
 // import { Pagination } from "../pagination/Pagination";
 import StarRating from '../starRating/StarRating';
 
@@ -91,7 +93,7 @@ export const Profile: React.FC = () => {
                             Таблица
                             Pagination
                             <StarRating/>
-                            {/* <CheckEmail/> */}
+                           
                         </div>
 
                     </div>
