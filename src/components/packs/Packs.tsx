@@ -21,10 +21,21 @@ import {Button} from '@mui/material';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 
 import icon from './../../assets/images/searchIcon.svg';
-
+import { styled } from '@mui/material/styles';
 import Modal from "../../assets/modal/Modal";
 
 
+
+const SearchButton = styled(Button)({
+    '&.MuiButton-root': {
+        height: 36,
+        width: 184,
+        backgroundColor: '#21268F',
+        color: '#FEFEFF',
+        borderRadius: 18,
+        textTransform: 'inherit',
+    },
+});
 
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
@@ -120,7 +131,7 @@ export const Packs = React.memo(() => {
                                         {!searchValue && <img className={s.mainSearchIcon} src={icon} alt="search"/>}
                                     </div>
                                     {/*onClick={addNewPackHandler}*/}
-                                    <Button variant="outlined" onClick={() => setShow(true)}  >Add pack </Button>
+                                    <SearchButton variant="outlined" onClick={() => setShow(true)}  >Add new pack</SearchButton>
 
                                 </div>
                                 <div className={s.header}>
