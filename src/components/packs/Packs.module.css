@@ -1,7 +1,51 @@
 
 .main{
-    width: 1280px;
+    margin-top: 10px;
+}
+
+.container{
+    max-width: 1008px;
+    margin: 0 auto
+}
+
+.packsWrapper{
+    background:#FEFEFF;
+    border-radius:8px;
+    min-height: 600px;
+    /* min-height: 490px; */
+    display: grid;
+    grid-template-columns: 243px 1fr;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+}
+
+.packsLeftBox{
+    background:#ECECF9;
+}
+.packsRightBox{
+    overflow: hidden;
+}
+
+.packsRightWrapper{
+    max-width: 669px;
     margin: 0 auto;
+}
+
+.packsTitle{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    margin: 24px 0 15px;
+}
+
+.packsRightTopBlock{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    align-items:baseline;
 }
 
 .mainSearchWrapper{
@@ -19,6 +63,7 @@
     -o-border-radius:5px;
     padding-left: 20px;
     outline: none;
+    margin: 0;
 
 }
 
@@ -32,22 +77,10 @@
 }
 .mainSearchIcon{
     position: absolute;
-    top: 21px;
-    left: 32px;
+    top: 11px;
+    left: 22px;
     opacity: 0.5;
 }
-/* .mainSearchWrapper::before{
-    content:"";
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url(./../../assets/images/searchIcon.svg);
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 21px;
-    left: 32px;
-    opacity: 0.5;
-} */
 
 .mainSearchForm:focus{
     border: 1px solid rgba(99, 93, 128, 0.5);
@@ -72,15 +105,19 @@
 
 }
 .header {
-    border: 8px solid transparent;
+    /* border: 8px solid transparent; 
     box-shadow: 0 0 8px rgba(25, 118, 210, 0.9);
-    width: 100%;
+    width: 100%;*/
+    background-color:#ECECF9;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 185px 77px 135px 110px 162px;
     justify-items: center;
-    padding: 20px;
-    font-weight: bold;
-    border-radius: 8px;
+    /* padding: 20px; */
+    color:#2D2E46;
+    font-family: 'SFUIDisplayBold', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 15px;
 
 
 }
@@ -100,14 +137,18 @@
     align-items: inherit;
     justify-content: space-between;
     flex-direction: column;
-
+    color:#000000;
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
 }
 
 .row {
 
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    padding: 20px;
+    grid-template-columns: 185px 77px 135px 110px 162px;;
+    justify-items:flex-start;
+    padding-bottom: 5px;
 }
 

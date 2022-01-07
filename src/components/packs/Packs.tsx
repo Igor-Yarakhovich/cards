@@ -93,77 +93,107 @@ export const Packs = React.memo(() => {
     const onClickSortPacksCardsUpdateUpHandler =()=>dispatch(setSortPacksCountAC('1updated'))
     const onClickSortPacksCardsUpdateDownHandler =()=>dispatch(setSortPacksCountAC('0updated'))
 
-    return <div className={s.main}>
-        <div className={s.mainSearchWrapper} >
-            <SuperInputText
-                className={s.mainSearchForm}
-                type="text"
-                required
-                onChangeText={setSearchValue}
-                placeholder='Search...'
-                name={"Search"}/>
-            {!searchValue && <img className={s.mainSearchIcon} src={icon} alt="search"/>}
-        </div>
 
-        <div><input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
-            {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
-        </div>
-
-        <div className={s.header}>
-            <div className={s.sortBlock}>Name <span className={s.sort}> <SortButton funOne={onClickSortPacksNameUpHandler} funTwo={onClickSortPacksNameDownHandler}/> </span></div>
-            <div className={s.sortBlock}>Cards <span className={s.sort}> <SortButton funOne={onClickSortPacksCardsCountUpHandler} funTwo={onClickSortPacksCardsCountDownHandler}/> </span>
-            </div>
-            <div className={s.sortBlock}>Updated <span className={s.sort}><SortButton funOne={onClickSortPacksCardsUpdateUpHandler} funTwo={onClickSortPacksCardsUpdateDownHandler}/></span>
-            </div>
-            <div className={s.sortBlock}>Created by</div>
-            <div>
-                {/*onClick={addNewPackHandler}*/}
-                <Button variant="outlined" onClick={() => setShow(true)}  >Add pack </Button>
-            </div>
-        </div>
-
-        <div className={s.table}>
-            {
-                data.cardPacks.map((value, index) => (
-                    <div key={data.cardPacks[index]._id} className={s.row}>
-                        <div>{data.cardPacks[index].name}</div>
-                        <div>{data.cardPacks[index].cardsCount}</div>
-                        <div>{data.cardPacks[index].created}</div>
-                        <div>{data.cardPacks[index].user_name}</div>
-                        <div>
-                            <Button color={'success'} variant="contained"
-                                    onClick={() => handleClick(data.cardPacks[index]._id)}
-                            > Cards</Button>
-
-                            {!myUserId ?
-                                <span>
-                                <Button variant="contained"> Update</Button>
-                                <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
-                            </span>
-                                : ''
-                            }
-
+    return <div className={s.main}> 
+                <div className={s.container}>
+                    <div className={s.packsWrapper}>
+                        <div className={s.packsLeftBox}>
+                            <div>
+                                <input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
+                                {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
+                            </div>
                         </div>
+                        <div className={s.packsRightBox}>
+                            <div className={s.packsRightWrapper}>
 
+                                <h2 className={s.packsTitle}>Packs list</h2>
+
+                                <div className={s.packsRightTopBlock}>
+                                    <div className={s.mainSearchWrapper} >
+                                        <SuperInputText
+                                            className={s.mainSearchForm}
+                                            type="text"
+                                            required
+                                            onChangeText={setSearchValue}
+                                            placeholder='Search...'
+                                            name={"Search"}/>
+                                        {!searchValue && <img className={s.mainSearchIcon} src={icon} alt="search"/>}
+                                    </div>
+                                    {/*onClick={addNewPackHandler}*/}
+                                    <Button variant="outlined" onClick={() => setShow(true)}  >Add pack </Button>
+
+                                </div>
+                                <div className={s.header}>
+                                    <div className={s.sortBlock}>Name
+                                        <span className={s.sort}>
+                                            <SortButton funOne={onClickSortPacksNameUpHandler} funTwo={onClickSortPacksNameDownHandler}/> 
+                                        </span>
+                                    </div>
+                                    <div className={s.sortBlock}>Cards 
+                                        <span className={s.sort}> 
+                                            <SortButton funOne={onClickSortPacksCardsCountUpHandler} funTwo={onClickSortPacksCardsCountDownHandler}/> 
+                                        </span>
+                                    </div>
+                                    <div className={s.sortBlock}>Updated 
+                                        <span className={s.sort}>
+                                            <SortButton funOne={onClickSortPacksCardsUpdateUpHandler} funTwo={onClickSortPacksCardsUpdateDownHandler}/>
+                                        </span>
+                                    </div>
+                                    <div className={s.sortBlock}>Created by</div>
+                                    <div className={s.sortBlock}>Actions</div>
+                                </div>
+
+                                <div className={s.table}>
+                                    {
+                                        data.cardPacks.map((value, index) => (
+                                            <div key={data.cardPacks[index]._id} className={s.row}>
+                                                <div>{data.cardPacks[index].name}</div>
+                                                <div>{data.cardPacks[index].cardsCount}</div>
+                                                <div>{data.cardPacks[index].created}</div>
+                                                <div>{data.cardPacks[index].user_name}</div>
+                                                <div>
+                                                    <Button color={'success'} variant="contained"
+                                                            onClick={() => handleClick(data.cardPacks[index]._id)}
+                                                    > Cards</Button>
+
+                                                    {!myUserId ?
+                                                        <span>
+                                                        <Button variant="contained"> Update</Button>
+                                                        <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+                                                    </span>
+                                                        : ''
+                                                    }
+
+                                                </div>
+
+                                            </div>
+
+                                        ))
+                                    }
+                                    <Modal
+                                        enableBackground={true}
+                                        backgroundOnClick={() => setShow(false)}
+                                        width={300}
+                                        height={200}
+                                        // modalOnClick={() => setShow(false)}
+                                        show={show}
+                                    >
+                                        <SuperInputText/>
+                                        <button onClick={() => setShow(false)}>Cancel</button>
+                                        <button onClick={addNewPackHandler}>Apply</button>
+                                    </Modal>
+                                </div>
+                                <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                ))
-            }
-            <Modal
-                enableBackground={true}
-                backgroundOnClick={() => setShow(false)}
-                width={300}
-                height={200}
-                // modalOnClick={() => setShow(false)}
-                show={show}
-            >
-                <SuperInputText/>
-                <button onClick={() => setShow(false)}>Cancel</button>
-                <button onClick={addNewPackHandler}>Apply</button>
-            </Modal>
-        </div>
+        
+       
 
-        <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
+        
+       
     </div>
 })
 
