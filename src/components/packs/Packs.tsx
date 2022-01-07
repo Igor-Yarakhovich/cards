@@ -17,55 +17,15 @@ import s from './Packs.module.css';
 import TablePaginationDemo from '../pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom'
 import {SortButton} from '../sortButton/SortButton';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import {Button} from '@mui/material';
 import SuperInputText from "../superComponents/superInputText/SuperInputText";
 
 import icon from './../../assets/images/searchIcon.svg';
 
-<<<<<<< HEAD
-const SearchButton = styled(Button)({
-    "&.MuiButton-root": {
-        color: '#FEFEFF',
-        backgroundColor: '#21268F',
-        borderRadius: '18px',
-        textTransform: 'inherit',
-        width: '184px',
-        height: '36px',
-
-    },
-});
-
-
-
-// import { withStyles } from '@mui/styles';
-
-
-// const useStyles = makeStyles({
-//     root: {
-//         background:'#21268F',
-//         color:'#FEFEFF',
-//         borderRadius:'18',
-//     }, // a style rule
-//   });
-
-//   const SearchButton = withStyles({
-//     root: {
-//         color: '#000',
-//         backgroundColor: '#000',
-//     }
-//     // rail: {
-//     //     height: 1,
-//     //     backgroundColor:'#E0E0E0',
-//     //   },
-// })(Button);
-
-=======
 import Modal from "../../assets/modal/Modal";
 
 
 
->>>>>>> master
 export const Packs = React.memo(() => {
     const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
     const {data, page, pageCount, packName,sortPacks} = useAppSelector(state => state.packs)
@@ -124,62 +84,6 @@ export const Packs = React.memo(() => {
         return <Preloader/>
     }
 
-<<<<<<< HEAD
-
-    return <div className={s.main}>
-        <div className={s.container}>
-            <div className={s.packsWrapper}>
-                <div className={s.packsLeftBox}>
-                    <div>
-                        <input type="checkbox" checked={myUserId} onChange={addMyPacksHandler}/> All packs / My packs
-                                {myUserId ? <span className={s.showAll}>ALL PACKS</span> : <span className={s.showMy}>MY PACKS</span>}
-                    </div>
-                </div>
-                <div className={s.packsRightBox}>
-                    <div className={s.packsRightWrapper}>
-
-                        <h2 className={s.packsTitle}>Packs list</h2>
-
-                        <div className={s.packsRightTopBlock}>
-                            <div className={s.packsSearchWrapper} >
-                                <SuperInputText 
-                                        className={s.packsSearchForm} 
-                                        type="text" 
-                                        required 
-                                        onChangeText={setSearchValue} 
-                                        placeholder='Search...'
-                                        name={"Search"}/>
-                                <img className={s.packsSearchIcon} src={icon} alt="search"/>
-                            </div>
-                            <SearchButton
-                                
-                                onClick={addNewPackHandler}>Add new pack </SearchButton>
-                            
-                        </div>
-                        
-
-                        <div className={s.header}>
-                            <div className={s.sortBlock}>Name
-                                <span className={s.sort}>
-                                    <SortButton valueOne={'1name'}
-                                                valueTwo={'0name'}/>
-                                </span>
-                            </div>
-                            <div className={s.sortBlock}>Cards
-                                <span className={s.sort}>
-                                    <SortButton valueOne={'1cardsCount'}
-                                                valueTwo={'0cardsCount'}/>
-                                </span>
-                            </div>
-                            <div className={s.sortBlock}>Updated
-                                <span className={s.sort}>
-                                    <SortButton valueOne={'1updated'}
-                                                valueTwo={'0updated'}/>
-                                </span>
-                            </div>
-                            <div className={s.sortBlock}>Created by</div>
-                            <div className={s.sortBlock}>Actions</div>
-=======
     const onClickSortPacksNameUpHandler =()=>dispatch(setSortPacksCountAC('1name'))
     const onClickSortPacksNameDownHandler =()=>dispatch(setSortPacksCountAC('0name'))
 
@@ -226,54 +130,23 @@ export const Packs = React.memo(() => {
                         <div>{data.cardPacks[index].cardsCount}</div>
                         <div>{data.cardPacks[index].created}</div>
                         <div>{data.cardPacks[index].user_name}</div>
->>>>>>> master
                         <div>
-                    
-                </div>
-                        </div>
+                            <Button color={'success'} variant="contained"
+                                    onClick={() => handleClick(data.cardPacks[index]._id)}
+                            > Cards</Button>
 
-                        <div className={s.table}>
-                            {
-                                data.cardPacks.map((value, index) => (
-                                    <div key={data.cardPacks[index]._id} className={s.row}>
-                                        <div>{data.cardPacks[index].name}</div>
-                                        <div>{data.cardPacks[index].cardsCount}</div>
-                                        <div>{data.cardPacks[index].created}</div>
-                                        <div>{data.cardPacks[index].user_name}</div>
-                                        <div>
-                                            <Button color={'success'} variant="contained"
-                                                    onClick={() => handleClick(data.cardPacks[index]._id)}
-                                            > Cards</Button>
-
-                                            {!myUserId ?
-                                                <span>
-                                                <Button variant="contained"> Update</Button>
-                                                <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
-                                            </span>
-                                                : ''
-                                            }
-
-                                        </div>
-
-                                    </div>
-
-                                ))
+                            {!myUserId ?
+                                <span>
+                                <Button variant="contained"> Update</Button>
+                                <Button color={'error'} variant="contained" onClick={deleteMyPackHandler}> del</Button>
+                            </span>
+                                : ''
                             }
+
                         </div>
 
-            <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
                     </div>
-                </div>
-            </div>
-                
-        
-                    </div>
-                   
-        
 
-<<<<<<< HEAD
-        
-=======
                 ))
             }
             <Modal
@@ -291,7 +164,6 @@ export const Packs = React.memo(() => {
         </div>
 
         <TablePaginationDemo cardPacksTotalCount={data.cardPacksTotalCount} page={page} pageCount={pageCount}/>
->>>>>>> master
     </div>
 })
 
