@@ -63,7 +63,7 @@ const Modal: React.FC<IModal> = (
                     alignItems: 'center',
                     justifyContent: 'center',
 
-                    background: '#9890C7',
+                    // background: '#9890C7',
                     zIndex: 21,
 
                     ...modalStyle,
