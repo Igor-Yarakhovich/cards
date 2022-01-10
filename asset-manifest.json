@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.a517130a.chunk.css",
-    "main.js": "/cards/static/js/main.33f84e49.chunk.js",
-    "main.js.map": "/cards/static/js/main.33f84e49.chunk.js.map",
+    "main.css": "/cards/static/css/main.d219a49c.chunk.css",
+    "main.js": "/cards/static/js/main.c8afd703.chunk.js",
+    "main.js.map": "/cards/static/js/main.c8afd703.chunk.js.map",
     "runtime-main.js": "/cards/static/js/runtime-main.5e3011dc.js",
     "runtime-main.js.map": "/cards/static/js/runtime-main.5e3011dc.js.map",
-    "static/js/2.9e7d905c.chunk.js": "/cards/static/js/2.9e7d905c.chunk.js",
-    "static/js/2.9e7d905c.chunk.js.map": "/cards/static/js/2.9e7d905c.chunk.js.map",
+    "static/js/2.c009bbca.chunk.js": "/cards/static/js/2.c009bbca.chunk.js",
+    "static/js/2.c009bbca.chunk.js.map": "/cards/static/js/2.c009bbca.chunk.js.map",
     "static/js/3.af3b128d.chunk.js": "/cards/static/js/3.af3b128d.chunk.js",
     "static/js/3.af3b128d.chunk.js.map": "/cards/static/js/3.af3b128d.chunk.js.map",
     "index.html": "/cards/index.html",
-    "static/css/main.a517130a.chunk.css.map": "/cards/static/css/main.a517130a.chunk.css.map",
-    "static/js/2.9e7d905c.chunk.js.LICENSE.txt": "/cards/static/js/2.9e7d905c.chunk.js.LICENSE.txt",
+    "static/css/main.d219a49c.chunk.css.map": "/cards/static/css/main.d219a49c.chunk.css.map",
+    "static/js/2.c009bbca.chunk.js.LICENSE.txt": "/cards/static/js/2.c009bbca.chunk.js.LICENSE.txt",
     "static/media/index.css": "/cards/static/media/SFUIDisplay-Semibold.cb4925c9.ttf",
     "static/media/avatar.ae88cd5b.png": "/cards/static/media/avatar.ae88cd5b.png",
     "static/media/Login.module.css": "/cards/static/media/no-view.e40bc5a6.svg",
     "static/media/letter.bc3a4042.svg": "/cards/static/media/letter.bc3a4042.svg",
     "static/media/packsList.b2280a70.svg": "/cards/static/media/packsList.b2280a70.svg",
     "static/media/preloader.d8baec16.gif": "/cards/static/media/preloader.d8baec16.gif",
-    "static/media/profileIcon.36eee9e3.svg": "/cards/static/media/profileIcon.36eee9e3.svg"
+    "static/media/profileIcon.36eee9e3.svg": "/cards/static/media/profileIcon.36eee9e3.svg",
+    "static/media/searchIcon.4e9697bd.svg": "/cards/static/media/searchIcon.4e9697bd.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5e3011dc.js",
-    "static/js/2.9e7d905c.chunk.js",
-    "static/css/main.a517130a.chunk.css",
-    "static/js/main.33f84e49.chunk.js"
+    "static/js/2.c009bbca.chunk.js",
+    "static/css/main.d219a49c.chunk.css",
+    "static/js/main.c8afd703.chunk.js"
   ]
 }
